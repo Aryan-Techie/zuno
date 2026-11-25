@@ -14,18 +14,30 @@ import { Avatar3D } from "@/components/Avatar3D";
 import { Brief } from "@/components/Brief";
 import { FieldCursor } from "@/components/FieldCursor";
 import { useFieldCursor } from "@/lib/useFieldCursor";
-import { DoodleWave, DoodleSpark, DoodleArrow, DoodleCircle, DoodleUnderline, DoodleLoop } from "@/components/Doodles";
+import { DoodleUnderline } from "@/components/Doodles";
+import { ModeSwitch, Toast, type ToastMessage } from "@/components/ModeSwitch";
+import { ProductSpotlight } from "@/components/ProductSpotlight";
+import { NavLinks } from "@/components/NavLinks";
 import { AgoraCallClient, type RtmCustomEvent } from "@/lib/agoraClient";
 import {
   endCall,
   fetchCapacity,
   fetchSessionEvents,
   fetchSummary,
+  isMissing,
+  isMode,
+  parseModeChanged,
+  parseSpotlight,
+  setSessionMode,
   startCall,
   type CallSummary,
+  type CatalogProduct,
   type LeftBrain,
+  type Mode,
   type RightBrain,
 } from "@/lib/api";
+import { applyMode, MODE_LABEL, readSavedMode, saveMode } from "@/lib/mode";
+import { productMode } from "@/lib/catalog";
 import { toolBusy } from "@/lib/vocab";
 
 type CallStatus = "idle" | "connecting" | "active" | "ending" | "ended";
@@ -38,6 +50,9 @@ function fmt(seconds: number): string {
 
 let seq = 0;
 const nextId = (prefix: string) => `${prefix}-${++seq}`;
+
+/** How many recently spotlighted products the strip keeps within reach. */
+const RECENT_MAX = 4;
 
 export default function Home() {
   const [status, setStatus] = useState<CallStatus>("idle");
@@ -72,6 +87,16 @@ export default function Home() {
   // Live-calls badge - proof this isn't a single-call toy, sourced from the
   // same endpoint the /dashboard page polls. Failures just hide the badge.
   const [callsLiveNow, setCallsLiveNow] = useState<number | null>(null);
+  // Which shop Zuno works in. Picked before the call, switchable during it
+  // from here or by the caller's voice; the backend's answer always wins.
+  const [mode, setMode] = useState<Mode>("apple");
+  const [modeBusy, setModeBusy] = useState(false);
+  const [toast, setToast] = useState<ToastMessage | null>(null);
+  // The product on screen, the few before it, and whether the operator has
+  // tucked the card away until the next product is named.
+  const [spotlight, setSpotlight] = useState<CatalogProduct | null>(null);
+  const [recent, setRecent] = useState<CatalogProduct[]>([]);
+  const [spotHidden, setSpotHidden] = useState(false);
 
   const sessionIdRef = useRef<string | null>(null);
   const leadCardWrapRef = useRef<HTMLDivElement | null>(null);
@@ -81,13 +106,45 @@ export default function Home() {
   // tool_call_started and tool_call_finished carry no shared id, only the
   // tool name, so in-flight calls are matched first-in first-out per name.
   const inFlightRef = useRef<Map<string, { id: string; startedMs: number }[]>>(new Map());
+  const modeRef = useRef<Mode>("apple");
+  // A console switch toasts on the click; its echo on the event stream
+  // (by: "console") must not toast a second time.
+  const consoleSwitchRef = useRef<Mode | null>(null);
 
   const phase: Phase = status === "idle" ? "idle" : status === "ended" ? "ended" : "live";
   const fieldCursor = useFieldCursor(leftBrain, status === "active", leadCardWrapRef);
 
-  /* ---------------- theme ---------------- */
+  /* ---------------- theme and mode ---------------- */
   useEffect(() => {
     setDark(document.documentElement.dataset.theme === "dark");
+    const saved = readSavedMode();
+    modeRef.current = saved;
+    setMode(saved);
+    applyMode(saved);
+  }, []);
+
+  const showToast = useCallback((text: string, detail?: string) => {
+    setToast({ id: Date.now(), text, detail });
+  }, []);
+
+  /** Applies a mode the backend has confirmed (or, before a call, the pick). */
+  const adoptMode = useCallback((next: Mode) => {
+    modeRef.current = next;
+    setMode(next);
+    applyMode(next);
+    saveMode(next);
+  }, []);
+
+  /** A spotlighted product from the other catalog has no place on screen. */
+  const dropOtherModeSpotlight = useCallback((next: Mode) => {
+    setSpotlight((cur) => (cur && productMode(cur) !== next ? null : cur));
+    setRecent((prev) => prev.filter((p) => productMode(p) === next));
+  }, []);
+
+  const showProduct = useCallback((product: CatalogProduct) => {
+    setSpotlight(product);
+    setSpotHidden(false);
+    setRecent((prev) => [product, ...prev.filter((p) => p.id !== product.id)].slice(0, RECENT_MAX));
   }, []);
   const toggleTheme = () => {
     const next = !dark;
@@ -283,9 +340,32 @@ export default function Home() {
         case "objection_logged":
           // Reflected in right_brain on the next poll; nothing to print.
           break;
+        case "mode_changed": {
+          const change = parseModeChanged(p);
+          if (!change) break;
+          const echo = change.by === "console" && consoleSwitchRef.current === change.mode;
+          if (echo) consoleSwitchRef.current = null;
+          if (change.mode !== modeRef.current) {
+            adoptMode(change.mode);
+            dropOtherModeSpotlight(change.mode);
+          }
+          if (!echo) {
+            showToast(
+              change.by === "voice" ? `The caller switched to ${MODE_LABEL[change.mode]}` : `Switched to ${MODE_LABEL[change.mode]}`,
+              change.by === "voice" ? "by voice" : "from a console"
+            );
+          }
+          pushNote("info", `${MODE_LABEL[change.mode]} mode, ${change.by === "voice" ? "asked for by the caller" : "set from the console"}`);
+          break;
+        }
+        case "product_spotlight": {
+          const spot = parseSpotlight(p);
+          if (spot) showProduct(spot.product);
+          break;
+        }
       }
     },
-    [pushNote, upsertTurn]
+    [pushNote, upsertTurn, adoptMode, dropOtherModeSpotlight, showToast, showProduct]
   );
 
   /* ---------------- poll the backend for envelopes + brains ---------------- */
@@ -306,6 +386,12 @@ export default function Home() {
         }
         if (data.left_brain) setLeftBrain(data.left_brain);
         if (data.right_brain) setRightBrain(data.right_brain);
+        // The event stream carries every switch, but the snapshot is the
+        // truth: if an event was missed, follow the session quietly.
+        if (isMode(data.mode) && data.mode !== modeRef.current && !consoleSwitchRef.current) {
+          adoptMode(data.mode);
+          dropOtherModeSpotlight(data.mode);
+        }
       } catch {
         // transient - the next tick retries
       }
@@ -316,7 +402,7 @@ export default function Home() {
       cancelled = true;
       clearInterval(timer);
     };
-  }, [status, handleCustomEvent]);
+  }, [status, handleCustomEvent, adoptMode, dropOtherModeSpotlight]);
 
   /* ---------------- the brief, once the backend has written it ---------------- */
   useEffect(() => {
@@ -369,7 +455,11 @@ export default function Home() {
     setAgentState("idle");
     setTab("brief");
     setElapsed(0);
+    setSpotlight(null);
+    setRecent([]);
+    setSpotHidden(false);
     inFlightRef.current = new Map();
+    consoleSwitchRef.current = null;
     try {
       // An RTM client left connected from a prior attempt logs in twice
       // under the same uid - Agora's own warning calls this a "mutual kick"
@@ -378,8 +468,9 @@ export default function Home() {
         await clientRef.current.leave().catch(() => {});
         clientRef.current = null;
       }
-      const session = await startCall();
+      const session = await startCall(modeRef.current);
       sessionIdRef.current = session.session_id;
+      if (isMode(session.mode) && session.mode !== modeRef.current) adoptMode(session.mode);
       startedAtRef.current = Date.now();
       endedAtRef.current = null;
 
@@ -402,7 +493,7 @@ export default function Home() {
       setError(text);
       setStatus("idle");
     }
-  }, [handleCustomEvent, pushNote]);
+  }, [handleCustomEvent, pushNote, adoptMode]);
 
   const handleEnd = useCallback(async () => {
     setStatus("ending");
@@ -449,6 +540,39 @@ export default function Home() {
     }
   }, [hold]);
 
+  /* ---------------- mode ---------------- */
+  // Before a call the pick is local; during one it goes through the API and
+  // the theme moves at once, rolling back if the backend says no.
+  const changeMode = useCallback(
+    async (next: Mode) => {
+      const sessionId = sessionIdRef.current;
+      const live = status === "active" && sessionId;
+      if (!live) {
+        adoptMode(next);
+        return;
+      }
+      const previous = modeRef.current;
+      setModeBusy(true);
+      consoleSwitchRef.current = next;
+      adoptMode(next);
+      dropOtherModeSpotlight(next);
+      try {
+        await setSessionMode(sessionId, next);
+        showToast(`Switched to ${MODE_LABEL[next]}`, "Zuno changes on her next turn");
+      } catch (e) {
+        consoleSwitchRef.current = null;
+        adoptMode(previous);
+        showToast(
+          isMissing(e) ? "This backend can’t switch modes mid-call yet" : "The switch didn’t go through",
+          `Still ${MODE_LABEL[previous]}`
+        );
+      } finally {
+        setModeBusy(false);
+      }
+    },
+    [status, adoptMode, dropOtherModeSpotlight, showToast]
+  );
+
   /* ---------------- captions ---------------- */
   const durationSeconds =
     startedAtRef.current === null
@@ -480,44 +604,44 @@ export default function Home() {
   const statusLabel =
     status === "idle" ? "Standby" : status === "connecting" ? "Connecting" : status === "ended" ? "Ended" : "Live";
 
+  const live = status === "connecting" || status === "active" || status === "ending";
+  const spotOn = live && spotlight !== null && !spotHidden;
+
   return (
     <div className="app">
       <header className="top">
-        <div className="brand">
-          <Logo size={24} />
-          <span>Zuno</span>
-          <span className="sub">Console</span>
-          <DoodleSpark className="doodle faint" size={13} />
+        <div className="top-left">
+          <div className="brand">
+            <Logo size={24} />
+            <span className="wordmark">Zuno</span>
+            <span className="sub">Console</span>
+          </div>
+          <div className={`status ${phase}${status === "connecting" ? " connecting" : ""}`} role="status">
+            <span className="dot" />
+            <span>{statusLabel}</span>
+            {status !== "idle" && <span className="time">{fmt(status === "ended" ? durationSeconds : elapsed)}</span>}
+          </div>
+          {callsLiveNow != null && callsLiveNow > 0 && (
+            <span className="live-count" title="Calls live across the whole backend right now">
+              {callsLiveNow} live
+            </span>
+          )}
         </div>
-        <div className={`status ${phase}${status === "connecting" ? " connecting" : ""}`} role="status">
-          <span className="dot" />
-          <span>{statusLabel}</span>
-          {status === "idle" && <DoodleLoop className="doodle faint" size={14} />}
-          {status !== "idle" && <span className="time">{fmt(status === "ended" ? durationSeconds : elapsed)}</span>}
-        </div>
-        {callsLiveNow != null && callsLiveNow > 0 && (
-          <span className="pill info" title="Calls live across the whole backend right now">
-            <DoodleWave className="doodle" width={16} />
-            {callsLiveNow} live
-          </span>
-        )}
         <div className="actions">
-          <a href="/about" className="ghost">
-            Story
-          </a>
-          <a href="/dashboard" className="ghost">
-            Dashboard
-          </a>
-          <button className="ghost" onClick={() => setUse3D((v) => !v)} aria-pressed={use3D}>
-            {use3D ? "2D orb" : "3D face"}
+          {live && <ModeSwitch mode={mode} onChange={changeMode} busy={modeBusy} disabled={status !== "active"} />}
+          <NavLinks current="/" />
+          <button className="ghost" onClick={() => setUse3D((v) => !v)} aria-pressed={use3D} title="Show Zuno as an orb or a face">
+            {use3D ? "Orb" : "Face"}
           </button>
-          <button className="ghost" onClick={toggleTheme}>
-            {dark ? "Light" : "Dark"}
+          <button className="ghost icon" onClick={toggleTheme} title={dark ? "Light appearance" : "Dark appearance"} aria-label="Toggle dark mode">
+            {dark ? <SunIcon /> : <MoonIcon />}
           </button>
         </div>
       </header>
 
-      <main className="stage" data-phase={phase}>
+      <Toast toast={toast} />
+
+      <main className="stage" data-phase={phase} data-spot={spotOn ? "on" : undefined}>
         <section className="left">
           <div className={`voice${hold ? " hold" : ""}`}>
             {use3D ? (
@@ -532,35 +656,22 @@ export default function Home() {
               <Orb phase={phase} speaker={speaker} hold={hold} getLevel={getLevel} />
             )}
             <ToolPopup tools={tools} />
+            {mode === "perfume" && <p className="mode-fineprint">Demo. Not affiliated with Dior.</p>}
             <div className="caption">
               {caption}
-              {status === "idle" && !error && (
-                <DoodleUnderline className="doodle" style={{ display: "block", margin: "4px auto 0" }} />
-              )}
+              {status === "idle" && !error && <DoodleUnderline className="doodle" style={{ display: "block", margin: "4px auto 0" }} />}
             </div>
             <div className="controls">
               {(status === "idle" || status === "ended") && (
-                <span style={{ position: "relative", display: "inline-flex" }}>
-                  {status === "idle" && (
-                    <DoodleWave
-                      className="doodle doodle-spin faint"
-                      style={{ position: "absolute", right: "calc(100% + 10px)", top: "50%", marginTop: -8 }}
-                    />
-                  )}
+                <>
+                  {status === "idle" && <ModeSwitch mode={mode} onChange={changeMode} size="large" />}
                   <button className="primary" onClick={handleStart}>
                     {status === "ended" ? "New call" : "Start call"}
                   </button>
-                </span>
+                </>
               )}
-              {(status === "connecting" || status === "active" || status === "ending") && (
-                <span style={{ position: "relative", display: "inline-flex", alignItems: "center", gap: 14 }}>
-                  {status === "active" && !hold && !micMuted && (
-                    <DoodleArrow
-                      className="doodle faint"
-                      size={30}
-                      style={{ position: "absolute", left: "50%", bottom: "calc(100% + 6px)", transform: "translateX(-50%) rotate(90deg)" }}
-                    />
-                  )}
+              {live && (
+                <span className="call-buttons">
                   <button
                     className={`round${micMuted ? " on" : ""}`}
                     onClick={toggleMute}
@@ -587,6 +698,15 @@ export default function Home() {
             </div>
           </div>
 
+          {live && spotlight && !spotHidden && (
+            <ProductSpotlight product={spotlight} recent={recent} onPick={showProduct} onClose={() => setSpotHidden(true)} />
+          )}
+          {live && spotlight && spotHidden && (
+            <button className="spot-restore" onClick={() => setSpotHidden(false)}>
+              Show {spotlight.name} again
+            </button>
+          )}
+
           {status === "ended" && (
             <div className="tabs" role="tablist">
               <button role="tab" aria-selected={tab === "brief"} className={tab === "brief" ? "on" : ""} onClick={() => setTab("brief")}>
@@ -599,7 +719,6 @@ export default function Home() {
                 onClick={() => setTab("transcript")}
               >
                 Transcript
-                <DoodleWave className="doodle faint" width={18} style={{ marginLeft: 5, verticalAlign: "middle" }} />
               </button>
             </div>
           )}
@@ -608,16 +727,7 @@ export default function Home() {
             <Transcript
               items={feed}
               hidden={status === "ended" && tab !== "transcript"}
-              emptyText={
-                status === "connecting" ? (
-                  "Joining the channel…"
-                ) : (
-                  <>
-                    <DoodleWave className="doodle faint" width={32} style={{ display: "block", margin: "0 auto 8px" }} />
-                    Say hello. Every turn and every tool call prints here as it happens.
-                  </>
-                )
-              }
+              emptyText={status === "connecting" ? "Joining the channel…" : "Say hello. Every turn and every tool call prints here as it happens."}
             />
           )}
 
@@ -683,6 +793,21 @@ function PlayIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path d="M7 4.5v15l12-7.5z" />
+    </svg>
+  );
+}
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" {...icon}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4" />
+    </svg>
+  );
+}
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" {...icon}>
+      <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" />
     </svg>
   );
 }

@@ -1,0 +1,2973 @@
+[
+  {
+    "id": "dior-jadore-eau-de-parfum",
+    "brand": "Dior",
+    "name": "J'adore Eau de Parfum",
+    "line": "J'adore",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "women",
+    "family": "Solar Floral",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Ylang-Ylang",
+        "Rose",
+        "Jasmine"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "J'adore Eau de Parfum, the undisupted icon of women's fragrance from the House of Dior, is revealed in a bottle adorned with a reinvented collar. The emblematic J'adore amphora bottle is rediscovered through a new silhouette, more precious than ever.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 860
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1160
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1645
+      },
+      {
+        "label": "150 ml",
+        "price_hkd": 2055
+      }
+    ],
+    "price_hkd_from": 860,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwf6de1a6f/Y0998031/Y0998031_C099800245_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/jadore-eau-de-parfum-Y0998031.html",
+    "color_hex": "#e9c489",
+    "aliases": [
+      "jadore eau de parfum",
+      "jadore edp",
+      "j adore eau de parfum",
+      "j adore edp",
+      "jadore"
+    ],
+    "stock": 11
+  },
+  {
+    "id": "dior-jadore-eau-de-toilette",
+    "brand": "Dior",
+    "name": "J'adore Eau de Toilette",
+    "line": "J'adore",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "women",
+    "family": "Floral Citrusy",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Blood Orange",
+        "Neroli",
+        "Rose"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "J'adore Eau de Toilette is an interpretation of J'adore Eau de Parfum, an olfactory composition bathed in light.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 965
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1370
+      }
+    ],
+    "price_hkd_from": 965,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwbb6fb49d/Y0615246/Y0615246_F361524609_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/jadore-eau-de-toilette-Y0615246.html",
+    "color_hex": "#d5a88f",
+    "aliases": [
+      "jadore eau de toilette",
+      "jadore edt",
+      "j adore eau de toilette",
+      "j adore edt"
+    ],
+    "stock": 19
+  },
+  {
+    "id": "dior-jadore-intense",
+    "brand": "Dior",
+    "name": "J'adore Intense",
+    "line": "J'adore",
+    "category": "fragrance",
+    "subcategory": "parfum",
+    "gender": "women",
+    "family": "Floral Honeyed",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Ylang-Ylang",
+        "Rose",
+        "Jasmine",
+        "Vanilla"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "J'adore Intense leaves on the skin a gourmand trail of sensual, luscious flowers at their olfactory peak. Concentrated in this floral nectar, all the flowers gain intensity and volume. Jasmine, the ultimate sensual flower, is tinged with apricot accents, while the rose becomes full-bodied and addictive.",
+    "sizes": [
+      {
+        "label": "35 ml",
+        "price_hkd": 955
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1210
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1680
+      }
+    ],
+    "price_hkd_from": 955,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwd94bc530/Y0000179/Y0000179_E000000713_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/jadore-intense-Y0000179.html",
+    "color_hex": "#e9b77f",
+    "aliases": [
+      "jadore intense",
+      "j adore intense"
+    ],
+    "stock": 22
+  },
+  {
+    "id": "dior-jadore-lor",
+    "brand": "Dior",
+    "name": "J'adore l'Or",
+    "line": "J'adore",
+    "category": "fragrance",
+    "subcategory": "essence de parfum",
+    "gender": "women",
+    "family": "Solar Intense Floral",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Orange Blossom",
+        "Jasmine",
+        "Rose"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "All the gold of J'adore in an essential, pure concentrate. For L'Or de J'adore, Director of Dior Fragrance Creation Francis Kurkdjian showcases the beauty of the J'adore flowers by heightening their nuances and accentuating their colors.",
+    "sizes": [
+      {
+        "label": "35 ml",
+        "price_hkd": 1345
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1745
+      },
+      {
+        "label": "80 ml",
+        "price_hkd": 2375
+      }
+    ],
+    "price_hkd_from": 1345,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwb68fcbc5/Y0997096/Y0997096_C099700827_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/jadore-lor-Y0997096.html",
+    "color_hex": "#e5be50",
+    "aliases": [
+      "jadore lor",
+      "j adore lor"
+    ],
+    "stock": 5
+  },
+  {
+    "id": "dior-jadore-parfum-deau",
+    "brand": "Dior",
+    "name": "J'adore Parfum d'eau",
+    "line": "J'adore",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "women",
+    "family": "Floral",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Neroli",
+        "Jasmine",
+        "Magnolia"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "The concentrated fragrance of water and flowers: J'adore Parfum d'eau reinvents the promise of pleasure that J'adore has upheld since 1999.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 860
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1160
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1645
+      }
+    ],
+    "price_hkd_from": 860,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/en_HK/dw117d7109/Y0996491/Y0996491_C099600981_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/jadore-parfum-deau-Y0996491.html",
+    "color_hex": "#c8a674",
+    "aliases": [
+      "jadore parfum deau",
+      "j adore parfum deau"
+    ],
+    "stock": 20
+  },
+  {
+    "id": "dior-miss-dior-eau-de-parfum",
+    "brand": "Dior",
+    "name": "Miss Dior Eau de Parfum",
+    "line": "Miss Dior",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "women",
+    "family": "Floral Vanilla Sensual",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Rose",
+        "Sandalwood",
+        "Patchouli",
+        "Rosewood",
+        "Almond",
+        "Vanilla"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "\"Make me a fragrance that smells like love.\" In 1947, Miss Dior was born from Christian Dior's dream to re-enchant the lives of all women around the world and to dress them in a trail of desire.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 860
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1160
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1645
+      },
+      {
+        "label": "150 ml",
+        "price_hkd": 2055
+      }
+    ],
+    "price_hkd_from": 860,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw4dfba263/Y0000393/Y0000393_E000001556_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/miss-dior-eau-de-parfum-Y0000393.html",
+    "color_hex": "#f9a3a1",
+    "aliases": [
+      "miss dior eau de parfum",
+      "miss dior edp",
+      "miss dior"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "dior-miss-dior-blooming-bouquet",
+    "brand": "Dior",
+    "name": "Miss Dior Blooming Bouquet",
+    "line": "Miss Dior",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "women",
+    "family": "Fresh Tender",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Bergamot",
+        "Rose",
+        "Peony",
+        "Musk"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Miss Dior Blooming Bouquet is an instant pleasure, a declaration of love for life that draws you in. Bursting forth in 1947, Miss Dior is Christian Dior's dream come true of an antidote to dreariness. Since then, it has remained untouched, essential to his aim of beauty and happiness.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 680
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 965
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1370
+      },
+      {
+        "label": "150 ml",
+        "price_hkd": 1725
+      }
+    ],
+    "price_hkd_from": 680,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw73279557/Y0996612/Y0996612_C099700102_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/miss-dior-blooming-bouquet-Y0996612.html",
+    "color_hex": "#dba0bd",
+    "aliases": [
+      "miss dior blooming bouquet",
+      "miss dior blooming bouquet eau de toilette",
+      "miss dior blooming bouquet edt"
+    ],
+    "stock": 13
+  },
+  {
+    "id": "dior-miss-dior-parfum",
+    "brand": "Dior",
+    "name": "Miss Dior Parfum",
+    "line": "Miss Dior",
+    "category": "fragrance",
+    "subcategory": "parfum",
+    "gender": "women",
+    "family": "Intense Floral Fruity Woody",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Mandarin",
+        "Jasmine",
+        "Amber",
+        "Woods"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Between strength and grace, boldness and elegance. Miss Dior Parfum is the breath of femininity and youth according to Dior. Francis Kurkdjian, Dior Perfume Creative Director, reappropriates the initial olfactory inspiration of Miss Dior, infusing it with the spirit of contemporary youth.",
+    "sizes": [
+      {
+        "label": "35 ml",
+        "price_hkd": 955
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1210
+      },
+      {
+        "label": "80 ml",
+        "price_hkd": 1645
+      }
+    ],
+    "price_hkd_from": 955,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwa3935fd0/Y0997166/Y0997166_C099700897_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/miss-dior-parfum-Y0997166.html",
+    "color_hex": "#f3a6ab",
+    "aliases": [
+      "miss dior parfum"
+    ],
+    "stock": 29
+  },
+  {
+    "id": "dior-miss-dior-essence",
+    "brand": "Dior",
+    "name": "Miss Dior Essence",
+    "line": "Miss Dior",
+    "category": "fragrance",
+    "subcategory": "essence de parfum",
+    "gender": "women",
+    "family": "Jammy Floral Woody",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Elderflower",
+        "Blackberry",
+        "Jasmine",
+        "Oak"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "A symbol of confident, liberated femininity imagined by Francis Kurkdjian, Dior Perfume Creative Director, the Miss Dior essence de parfum expresses its intensity in a high concentration through a trail saturated with colors, with gourmand and sensual accords.",
+    "sizes": [
+      {
+        "label": "35 ml",
+        "price_hkd": 1050
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1330
+      },
+      {
+        "label": "80 ml",
+        "price_hkd": 1810
+      }
+    ],
+    "price_hkd_from": 1050,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/en_HK/dw7db91aac/Y0000088/Y0000088_E000000262_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/miss-dior-essence-Y0000088.html",
+    "color_hex": "#eb8393",
+    "aliases": [
+      "miss dior essence"
+    ],
+    "stock": 13
+  },
+  {
+    "id": "dior-miss-dior-rose-nroses",
+    "brand": "Dior",
+    "name": "Miss Dior Rose N'Roses",
+    "line": "Miss Dior",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "women",
+    "family": "Floral Sparkling",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Rose",
+        "Mandarin",
+        "Bergamot",
+        "Geranium",
+        "Musk",
+        "Patchouli"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Miss Dior Rose N'Roses, the eau de toilette with a trail that embodies the floral abundance of fields of roses in Grasse.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 680
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 965
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1370
+      },
+      {
+        "label": "150 ml",
+        "price_hkd": 1725
+      }
+    ],
+    "price_hkd_from": 680,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwd7db8779/Y0996086/Y0996086_C099600486_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/miss-dior-rose-nroses-Y0996086.html",
+    "color_hex": "#e098af",
+    "aliases": [
+      "miss dior rose nroses",
+      "miss dior rose nroses eau de toilette",
+      "miss dior rose nroses edt"
+    ],
+    "stock": 23
+  },
+  {
+    "id": "dior-hypnotic-poison",
+    "brand": "Dior",
+    "name": "Hypnotic Poison",
+    "line": "Poison",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "women",
+    "family": null,
+    "notes": {
+      "top": [],
+      "heart": [
+        "Almond",
+        "Jasmine",
+        "Vanilla"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Hypnotic Poison isn't a fragrance you wear, it's a fragrance that wears you. Hypnotic Poison Eau de Toilette is a magnetic scent, a heady oriental fragrance with carnal Vanilla notes that meld with an Almond and Jasmine accord. A terribly sensual fragrance.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 680
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 965
+      }
+    ],
+    "price_hkd_from": 680,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw26526182/Y0063401/Y0063401_F006344009_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/hypnotic-poison-Y0063401.html",
+    "color_hex": "#b40209",
+    "aliases": [
+      "hypnotic poison",
+      "hypnotic poison eau de toilette",
+      "hypnotic poison edt"
+    ],
+    "stock": 40
+  },
+  {
+    "id": "dior-poison-girl",
+    "brand": "Dior",
+    "name": "Poison Girl",
+    "line": "Poison",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "women",
+    "family": null,
+    "notes": {
+      "top": [],
+      "heart": [
+        "Orange",
+        "Neroli",
+        "Vanilla",
+        "Tonka Bean"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Poison Girl Eau de Toilette is an olfactory composition with a distinctive beat. An appeal to the senses in three movements that plays with a bold encounter between contrasting raw materials. A duo of Frosted Orange engaged in a dialogue, juicy non-identical twins with complementary accents.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 680
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 965
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1370
+      }
+    ],
+    "price_hkd_from": 680,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwb087ea7f/Y0263210/Y0263210_F026324009_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/poison-girl-Y0263210.html",
+    "color_hex": "#c26686",
+    "aliases": [
+      "poison girl",
+      "poison girl eau de toilette",
+      "poison girl edt"
+    ],
+    "stock": 22
+  },
+  {
+    "id": "dior-pure-poison",
+    "brand": "Dior",
+    "name": "Pure Poison",
+    "line": "Poison",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "women",
+    "family": null,
+    "notes": {
+      "top": [],
+      "heart": [
+        "Bergamot",
+        "Orange Blossom",
+        "Musk"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Once upon a time there was an ingenuous and captivating, sincere and mysterious fragrance… Pure Poison is the fragrance that celebrates the purest form of seduction, exploring its duality and irresistible alchemy.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 860
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1160
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1645
+      }
+    ],
+    "price_hkd_from": 860,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw08e1c397/Y0083201/Y0083201_F008324609_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/pure-poison-Y0083201.html",
+    "color_hex": "#4f2d36",
+    "aliases": [
+      "pure poison",
+      "pure poison eau de parfum",
+      "pure poison edp"
+    ],
+    "stock": 35
+  },
+  {
+    "id": "dior-poison",
+    "brand": "Dior",
+    "name": "Poison",
+    "line": "Poison",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "women",
+    "family": null,
+    "notes": {
+      "top": [],
+      "heart": [
+        "Coriander",
+        "Tuberose",
+        "Opoponax"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Poison, sultry elixir. Some fragrances are born legendary. Provocative and mysterious from its creation, Poison is the ultimate fragrant weapon of heightened seduction by Dior.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 965
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1370
+      }
+    ],
+    "price_hkd_from": 965,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw8c90b940/Y0063201/Y0063201_F006324009_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/poison-Y0063201.html",
+    "color_hex": "#4d0b2a",
+    "aliases": [
+      "poison eau de toilette",
+      "poison edt",
+      "dior poison"
+    ],
+    "stock": 37
+  },
+  {
+    "id": "dior-dior-addict-eau-de-parfum",
+    "brand": "Dior",
+    "name": "Dior Addict Eau de Parfum",
+    "line": "Dior Addict",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "women",
+    "family": "Jasmine Vanilla",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Orange Blossom",
+        "Jasmine",
+        "Vanilla"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Dior Addict Eau de Parfum unleashes fresh and captivating top notes that blend Mandarin Leaf with Tunisian Orange Blossom. Intense and vibrant, it reveals a powerful heart of Jasmine Sambac Absolute that blossoms with soft femininity and sensuality. The base unfurls in the deep and exquisite warmth of Bourbon Vanilla.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1160
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1645
+      }
+    ],
+    "price_hkd_from": 1160,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0d81fa5c/Y0072844/Y0072844_F007284409_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-addict-eau-de-parfum-Y0072844.html",
+    "color_hex": "#212b4a",
+    "aliases": [
+      "dior addict eau de parfum",
+      "addict eau de parfum",
+      "dior addict edp",
+      "dior addict perfume"
+    ],
+    "stock": 21
+  },
+  {
+    "id": "dior-joy-by-dior-eau-de-parfum",
+    "brand": "Dior",
+    "name": "JOY by Dior Eau de Parfum",
+    "line": "JOY by Dior",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "women",
+    "family": null,
+    "notes": {
+      "top": [],
+      "heart": [
+        "Musk"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "A pure concentration of joy in a bottle. JOY by Dior Eau de Parfum is a bright smile. A juicy, vibrant top note gives way to an enveloping white heart of flowers and musks, like a soft caress.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1160
+      },
+      {
+        "label": "90 ml",
+        "price_hkd": 1645
+      }
+    ],
+    "price_hkd_from": 1160,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw092b83e4/Y0996027/Y0996027_C099600151_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/joy-by-dior-Y0996027.html",
+    "color_hex": "#dd99b1",
+    "aliases": [
+      "joy by dior eau de parfum",
+      "joy by dior edp",
+      "dior joy"
+    ],
+    "stock": 36
+  },
+  {
+    "id": "dior-joy-by-dior-eau-de-parfum-intense",
+    "brand": "Dior",
+    "name": "JOY by Dior Eau de Parfum Intense",
+    "line": "JOY by Dior",
+    "category": "fragrance",
+    "subcategory": "eau de parfum intense",
+    "gender": "women",
+    "family": null,
+    "notes": {
+      "top": [],
+      "heart": [
+        "Neroli",
+        "Rose",
+        "Jasmine",
+        "Sandalwood"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "JOY by Dior Eau de Parfum Intense is a new olfactory burst, a scent of joy wherein flowers celebrate, exploding with all their faceted beauty. The dazzling light of juicy Citrus blends with the colorful shine of Rose and Grasse Jasmine, heightened by an enveloping woody echo of Sandalwood tinged with Vanilla.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 870
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1210
+      },
+      {
+        "label": "90 ml",
+        "price_hkd": 1745
+      }
+    ],
+    "price_hkd_from": 870,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwc02aba80/Y0997004/Y0997004_C099600457_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/joy-by-dior-Y0997004.html",
+    "color_hex": "#e892b0",
+    "aliases": [
+      "joy by dior eau de parfum intense",
+      "joy by dior edp intense"
+    ],
+    "stock": 31
+  },
+  {
+    "id": "dior-sauvage-eau-de-toilette",
+    "brand": "Dior",
+    "name": "Sauvage Eau de Toilette",
+    "line": "Sauvage",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "men",
+    "family": "Citrus Peppery",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Bergamot",
+        "Ambroxan"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Sauvage is an act of creation inspired by wide-open spaces. An ozone blue sky that dominates a white-hot rocky landscape. The strong gust of citrus in Sauvage Eau de Toilette is powerfully anchored by the ambery nobleness of ambroxan, resinous elemi and woods.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 645
+      },
+      {
+        "label": "60 ml",
+        "price_hkd": 760
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1035
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 1555
+      }
+    ],
+    "price_hkd_from": 645,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0149ba1a/Y0685240/Y0685240_F068524009_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/sauvage-eau-de-toilette-Y0685240.html",
+    "color_hex": "#25364c",
+    "aliases": [
+      "sauvage eau de toilette",
+      "sauvage edt"
+    ],
+    "stock": 13
+  },
+  {
+    "id": "dior-sauvage-eau-de-parfum",
+    "brand": "Dior",
+    "name": "Sauvage Eau de Parfum",
+    "line": "Sauvage",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "men",
+    "family": "Citrus Vanilla",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Bergamot",
+        "Vanilla"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Inspiration for the creation of Sauvage Eau de Parfum was taken from the desert in the magical hour of twilight: mixed with the coolness of the night, the burning desert air exudes profound scents.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 750
+      },
+      {
+        "label": "60 ml",
+        "price_hkd": 880
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1225
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 1840
+      }
+    ],
+    "price_hkd_from": 750,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw9763bedf/Y0785220/Y0785220_F078524009_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/sauvage-eau-de-parfum-Y0785220.html",
+    "color_hex": "#365876",
+    "aliases": [
+      "sauvage eau de parfum",
+      "sauvage edp",
+      "sauvage",
+      "dior sauvage"
+    ],
+    "stock": 39
+  },
+  {
+    "id": "dior-sauvage-parfum",
+    "brand": "Dior",
+    "name": "Sauvage Parfum",
+    "line": "Sauvage",
+    "category": "fragrance",
+    "subcategory": "parfum",
+    "gender": "men",
+    "family": "Citrus Woody",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Mandarin",
+        "Bergamot",
+        "Sandalwood",
+        "Cedarwood",
+        "Vanilla",
+        "Tonka Bean"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Sauvage Parfum is a highly concentrated interpretation of Sauvage, melding extreme freshness with warm ambery tones and an animal beauty that begs to come alive on the skin.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 895
+      },
+      {
+        "label": "60 ml",
+        "price_hkd": 1050
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1470
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 2115
+      }
+    ],
+    "price_hkd_from": 895,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwdbfeb808/Y0998004/Y0998004_C099600455_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/sauvage-parfum-Y0998004.html",
+    "color_hex": "#2f4358",
+    "aliases": [
+      "sauvage parfum"
+    ],
+    "stock": 16
+  },
+  {
+    "id": "dior-sauvage-elixir",
+    "brand": "Dior",
+    "name": "Sauvage Elixir",
+    "line": "Sauvage",
+    "category": "fragrance",
+    "subcategory": "elixir",
+    "gender": "men",
+    "family": "Spicy Woody",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Grapefruit",
+        "Spices",
+        "Lavender",
+        "Woods"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Sauvage Elixir is an extraordinarily concentrated fragrance steeped in the emblematic freshness of Sauvage with an intoxicating heart of spices, a \"tailor-made\" lavender essence and a blend of rich woods forming the signature of its powerful, lavish and captivating trail.",
+    "sizes": [
+      {
+        "label": "60 ml",
+        "price_hkd": 1470
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2060
+      },
+      {
+        "label": "150 ml",
+        "price_hkd": 2575
+      }
+    ],
+    "price_hkd_from": 1470,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0a9edc36/Y0996460/Y0996460_C099600755_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/sauvage-elixir-Y0996460.html",
+    "color_hex": "#163148",
+    "aliases": [
+      "sauvage elixir"
+    ],
+    "stock": 16
+  },
+  {
+    "id": "dior-sauvage-eau-forte",
+    "brand": "Dior",
+    "name": "Sauvage Eau Forte",
+    "line": "Sauvage",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "men",
+    "family": "Spicy Musky",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Spices",
+        "Lavender",
+        "Woods",
+        "Musk"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "The legendary freshness of Sauvage strengthened and prolonged by the power of water. A strength made possible by an innovative alcohol-free formula exclusive to Dior.",
+    "sizes": [
+      {
+        "label": "60 ml",
+        "price_hkd": 1050
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1470
+      }
+    ],
+    "price_hkd_from": 1050,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw92465e80/Y0998025/Y0998025_C099800170_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/sauvage-eau-forte-Y0998025.html",
+    "color_hex": "#2b415d",
+    "aliases": [
+      "sauvage eau forte"
+    ],
+    "stock": 9
+  },
+  {
+    "id": "dior-sauvage-extrait",
+    "brand": "Dior",
+    "name": "Sauvage Extrait",
+    "line": "Sauvage",
+    "category": "fragrance",
+    "subcategory": "extrait de parfum",
+    "gender": "men",
+    "family": "Woody",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Lavender",
+        "Bergamot",
+        "Oud",
+        "Patchouli",
+        "Vetiver",
+        "Cedarwood"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "In this denser and more woody interpretation of Sauvage, Francis Kurkdjian, Dior Perfume Creative Director, imagined an extrait de parfum for men. True to Sauvage's pioneering spirit, this intense trail with animalic accents pushes the limits of concentration.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1515
+      }
+    ],
+    "price_hkd_from": 1515,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwf522897c/Y0000281/Y0000281_E000001620_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/sauvage-extrait-Y0000281.html",
+    "color_hex": "#344053",
+    "aliases": [
+      "sauvage extrait"
+    ],
+    "stock": 30
+  },
+  {
+    "id": "dior-dior-homme-eau-de-toilette",
+    "brand": "Dior",
+    "name": "Dior Homme Eau de Toilette",
+    "line": "Dior Homme",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "men",
+    "family": "Woody Musky",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Cedarwood",
+        "Patchouli",
+        "Iso E Super"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Dior Homme Eau de Toilette is intriguingly powerful and appealingly fresh. Dior Homme redefines a new, masculine sensuality in a polyphony of smooth and raw wood. A heart of tender wood, in which the virility of Atlas Cedar embraces the enveloping warmth of Haitian Vetiver tinged with spice.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 760
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1035
+      },
+      {
+        "label": "150 ml",
+        "price_hkd": 1295
+      }
+    ],
+    "price_hkd_from": 760,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0f6d8639/Y0996157/Y0996157_C099600157_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-homme-eau-de-toilette-Y0996157.html",
+    "color_hex": "#d3a64a",
+    "aliases": [
+      "dior homme eau de toilette",
+      "homme eau de toilette",
+      "dior homme edt",
+      "dior homme"
+    ],
+    "stock": 35
+  },
+  {
+    "id": "dior-dior-homme-parfum",
+    "brand": "Dior",
+    "name": "Dior Homme Parfum",
+    "line": "Dior Homme",
+    "category": "fragrance",
+    "subcategory": "parfum",
+    "gender": "men",
+    "family": "Floral Woody",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Iris",
+        "Amber"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Discover Dior Homme Parfum reinvented by Francis Kurkdjian, Perfume Creative Director. A men's fragrance crafted around a dual iris note, both airy and intense. The olfactory interpretation of modern masculinity, a balance between strength and tenderness.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1050
+      },
+      {
+        "label": "75 ml",
+        "price_hkd": 1300
+      },
+      {
+        "label": "125 ml",
+        "price_hkd": 1690
+      }
+    ],
+    "price_hkd_from": 1050,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw838b78a6/Y0997193/Y0997193_C099700665_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-homme-parfum-Y0997193.html",
+    "color_hex": "#be7722",
+    "aliases": [
+      "dior homme parfum",
+      "homme parfum"
+    ],
+    "stock": 9
+  },
+  {
+    "id": "dior-dior-homme-sport",
+    "brand": "Dior",
+    "name": "Dior Homme Sport",
+    "line": "Dior Homme",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "men",
+    "family": "Woody Spicy",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Bergamot",
+        "Elemi",
+        "Pink Pepper",
+        "Incense",
+        "Woods"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Energetic and elegant, the new Dior Homme Sport eau de toilette combines fresh vivacity and charm with a hint of sensuality for a duo that packs the punch of a boxer's uppercut.",
+    "sizes": [
+      {
+        "label": "75 ml",
+        "price_hkd": 835
+      },
+      {
+        "label": "125 ml",
+        "price_hkd": 1140
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 1555
+      }
+    ],
+    "price_hkd_from": 835,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw2deb6659/Y0996476/Y0996476_C099600783_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-homme-sport-Y0996476.html",
+    "color_hex": "#c19a74",
+    "aliases": [
+      "dior homme sport",
+      "homme sport",
+      "dior homme sport eau de toilette",
+      "dior homme sport edt"
+    ],
+    "stock": 39
+  },
+  {
+    "id": "dior-dior-homme-cologne",
+    "brand": "Dior",
+    "name": "Dior Homme Cologne",
+    "line": "Dior Homme",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "men",
+    "family": "Citrus Musky",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Bergamot",
+        "Grapefruit",
+        "Musk"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "HK_Épuré et exigeant, le parfum Dior Homme Cologne reflète une quête de belles matières. Enveloppant, son sillage a le charme désinvolte d'une intemporelle chemise blanche : l'eau de Cologne Dior Homme représente l'élégance de la simplicité, c'est un parfum de peau, juste pour soi.",
+    "sizes": [
+      {
+        "label": "75 ml",
+        "price_hkd": 835
+      },
+      {
+        "label": "125 ml",
+        "price_hkd": 1140
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 1555
+      }
+    ],
+    "price_hkd_from": 835,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw7d5d77a2/Y9190300/Y9190300_C099700097_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/hk_dior-homme-cologne-Y9190300.html",
+    "color_hex": "#8eb3d6",
+    "aliases": [
+      "dior homme cologne",
+      "homme cologne"
+    ],
+    "stock": 7
+  },
+  {
+    "id": "dior-fahrenheit-eau-de-toilette",
+    "brand": "Dior",
+    "name": "Fahrenheit Eau de Toilette",
+    "line": "Fahrenheit",
+    "category": "fragrance",
+    "subcategory": "eau de toilette",
+    "gender": "men",
+    "family": "Woody Leathery",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Mandarin",
+        "Violet",
+        "Leather"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Alone in the face of the majestic elements, the Fahrenheit man incarnates a thirst for the absolute. Timeless and universal, Fahrenheit is a fragrance that transcends time and trends to forge its own territory. A unique, contrasting olfactory signature with a powerful, lingering trail.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 760
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 1035
+      }
+    ],
+    "price_hkd_from": 760,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwa1692323/Y0066001/Y0066001_F006624009_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/fahrenheit-eau-de-toilette-Y0066001.html",
+    "color_hex": "#7d1a0a",
+    "aliases": [
+      "fahrenheit eau de toilette",
+      "fahrenheit edt"
+    ],
+    "stock": 39
+  },
+  {
+    "id": "dior-gris-dior",
+    "brand": "Dior",
+    "name": "Gris Dior",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Chypre",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Woods",
+        "Citrus",
+        "Rose",
+        "Violet",
+        "Oakmoss"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Gris Dior eau de parfum is an olfactory enigma that forms an indivisible whole, a reflection of its namesake color. Like chypre-rosy pleats, Gris Dior unfolds its different floral and woody facets in turn.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwfc8990ea/Y0840550/Y0840550_C099700392_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/gris-dior-Y0840550.html",
+    "color_hex": "#bca4a6",
+    "aliases": [
+      "gris dior",
+      "gris dior eau de parfum",
+      "gris dior edp",
+      "gris dior la collection privee"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "dior-bois-dargent",
+    "brand": "Dior",
+    "name": "Bois d'Argent",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Ambery Floral",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Amber",
+        "Woods",
+        "Iris",
+        "Incense"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Bois d'Argent eau de parfum incarnates a floral and woody silhouette with universal olfactory elegance. Its trail is that of a wood accord pricked with a radiant and richly powdered iris note, entwined with an almost mystical frankincense note.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw98ec275e/Y0959160/Y0959160_C099700390_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/bois-dargent-Y0959160.html",
+    "color_hex": "#dcc677",
+    "aliases": [
+      "bois dargent",
+      "bois dargent eau de parfum",
+      "bois dargent edp",
+      "bois dargent la collection privee"
+    ],
+    "stock": 14
+  },
+  {
+    "id": "dior-oud-ispahan",
+    "brand": "Dior",
+    "name": "Oud Ispahan",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Woody Floral",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Oud",
+        "Rose"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Oud Ispahan eau de parfum outlines the seductively close contact of an oud wood note and a sensual, plump Damascus rose. Voluptuous, with an uncompromisingly daring structure, the woody and floral silhouette of this unisex eau de parfum paints a powerful, opulent trail.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwc5c22c4d/Y0909280/Y0909280_C099700397_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/oud-ispahan-Y0909280.html",
+    "color_hex": "#bf7d7d",
+    "aliases": [
+      "oud ispahan",
+      "oud ispahan eau de parfum",
+      "oud ispahan edp",
+      "oud ispahan la collection privee"
+    ],
+    "stock": 22
+  },
+  {
+    "id": "dior-ambre-nuit",
+    "brand": "Dior",
+    "name": "Ambre Nuit",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Ambery Floral",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Amber",
+        "Rose"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Ambre Nuit eau de parfum is a wave that is both warm and nocturnal, a contrasting olfactory silhouette, ambery and floral, that unfolds in shadow and light. It evokes a taffeta of amber with a rosy shimmer that changes with the light.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw25f75bfa/Y0958160/Y0958160_C099700388_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/ambre-nuit-Y0958160.html",
+    "color_hex": "#cda360",
+    "aliases": [
+      "ambre nuit",
+      "ambre nuit eau de parfum",
+      "ambre nuit edp",
+      "ambre nuit la collection privee"
+    ],
+    "stock": 32
+  },
+  {
+    "id": "dior-jasmin-des-anges",
+    "brand": "Dior",
+    "name": "Jasmin des Anges",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Floral Apricot Honey",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Apricot",
+        "Honey",
+        "Jasmine"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "The Jasmin des Anges eau de parfum is a solar and gourmand floral silhouette that embroiders lace with syrupy jasmine and apricot nectar with hints of honey. This joyful, sun-drenched unisex eau de parfum delivers a pure concentrate of hedonism.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw4dfd8c10/Y0742427/Y0742427_C099700394_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/jasmin-des-anges-Y0742427.html",
+    "color_hex": "#ddb197",
+    "aliases": [
+      "jasmin des anges",
+      "jasmin des anges eau de parfum",
+      "jasmin des anges edp",
+      "jasmin des anges la collection privee"
+    ],
+    "stock": 25
+  },
+  {
+    "id": "dior-dior-paradise",
+    "brand": "Dior",
+    "name": "Dior Paradise",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Almond",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Almond",
+        "Woods",
+        "Mandarin",
+        "Tonka Bean"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Christian Dior's ultimate dream, the Château de La Colle Noire was his Provençal haven of peace, the refuge where he rested far from the Parisian hustle and bustle, to design his future collections.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw6777b6e3/Y0000235/Y0000235_E000001579_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-paradise-Y0000235.html",
+    "color_hex": "#f0c36b",
+    "aliases": [
+      "dior paradise",
+      "dior paradise eau de parfum",
+      "dior paradise edp",
+      "dior paradise la collection privee"
+    ],
+    "stock": 22
+  },
+  {
+    "id": "dior-cuir-saddle",
+    "brand": "Dior",
+    "name": "Cuir Saddle",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Leathery Floral",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Leather",
+        "Woods"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Imagined by Francis Kurkdjian as a soft and sensual leather, Cuir Saddle disrupts the codes of the leather accord in perfumery, echoing the Dior It bag that reinterpreted leather in the 2000s. This fragrance reveals luminous facets of white flowers, elevated by light woods.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw275abee2/Y0000167/Y0000167_E000000840_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/cuir-saddle-Y0000167.html",
+    "color_hex": "#c5977e",
+    "aliases": [
+      "cuir saddle",
+      "cuir saddle eau de parfum",
+      "cuir saddle edp",
+      "cuir saddle la collection privee"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "dior-rose-star",
+    "brand": "Dior",
+    "name": "Rose Star",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Floral Ambery",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Pepper",
+        "Rose"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Rose Star pays homage to two eternal Christian Dior symbols: his lucky star and his iconic flower, the rose. Its fragrance unfurls into different facets of rose, imagined as the 5 points of the Dior guiding star. The top notes of the fragrance are zesty and fruity, blending with a note of Sichuan pepper.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw5f4da764/Y0000087/Y0000087_E000000232_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/rose-star-Y0000087.html",
+    "color_hex": "#ad545e",
+    "aliases": [
+      "rose star eau de parfum",
+      "rose star edp",
+      "rose star la collection privee"
+    ],
+    "stock": 30
+  },
+  {
+    "id": "dior-bois-talisman",
+    "brand": "Dior",
+    "name": "Bois Talisman",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Woody Vanilla",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Cedarwood",
+        "Vanilla"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "Francis Kurkdjian, Dior Perfume Creative Director, someone also attentive to signs, has a habit of slipping a protective sugar cube into the lapel of his jacket.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwa675c2ad/Y0998027/Y0998027_C099800296_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/bois-talisman-Y0998027.html",
+    "color_hex": "#bb6239",
+    "aliases": [
+      "bois talisman",
+      "bois talisman eau de parfum",
+      "bois talisman edp",
+      "bois talisman la collection privee"
+    ],
+    "stock": 11
+  },
+  {
+    "id": "dior-dioriviera",
+    "brand": "Dior",
+    "name": "Dioriviera",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "eau de parfum",
+    "gender": "unisex",
+    "family": "Fig Rose",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Fig",
+        "Rose",
+        "Honey",
+        "Carnation"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "This eau de parfum composed by Francis Kurkdjian combines two concepts in one name: the south of France, his source of inspiration, and Paris, the city where Dioriviera was created. A fragrance that conveys the love story between Christian Dior and the French Riviera, and draws inspiration from its solar beauty.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1815
+      },
+      {
+        "label": "100 ml",
+        "price_hkd": 2750
+      },
+      {
+        "label": "200 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 1815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwa9abdbf8/Y0997094/Y0997094_C099800164_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dioriviera-Y0997094.html",
+    "color_hex": "#d7ca95",
+    "aliases": [
+      "dioriviera",
+      "dioriviera eau de parfum",
+      "dioriviera edp",
+      "dioriviera la collection privee"
+    ],
+    "stock": 23
+  },
+  {
+    "id": "dior-rouge-trafalgar-esprit-de-parfum",
+    "brand": "Dior",
+    "name": "Rouge Trafalgar Esprit de Parfum",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "extrait de parfum",
+    "gender": "unisex",
+    "family": "Intense Fruity",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Cherry",
+        "Pink Pepper",
+        "Rose"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "The House of Dior has created highly concentrated parfume extract for La Collection Privée Christian Dior: Esprit de Parfum. With a bold, modern touch, Francis Kurkdjian, Perfume Creative Director, revisits the silhouettes of the original fragrances to reveal intense and radical facets.",
+    "sizes": [
+      {
+        "label": "80 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 4050,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwf4639b25/Y0997184/Y0997184_C099800161_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/rouge-trafalgar-esprit-de-parfum-Y0997184.html",
+    "color_hex": "#694535",
+    "aliases": [
+      "rouge trafalgar esprit de parfum",
+      "rouge trafalgar esprit de parfum la collection privee"
+    ],
+    "stock": 7
+  },
+  {
+    "id": "dior-jasmin-des-anges-esprit-de-parfum",
+    "brand": "Dior",
+    "name": "Jasmin des Anges Esprit de Parfum",
+    "line": "La Collection Privée",
+    "category": "fragrance",
+    "subcategory": "extrait de parfum",
+    "gender": "unisex",
+    "family": "Intense Floral",
+    "notes": {
+      "top": [],
+      "heart": [
+        "Jasmine"
+      ],
+      "base": []
+    },
+    "key_ingredients": [],
+    "description": "La Collection Privée Christian Dior has created highly concentrated extraits de parfum: the Esprits de Parfum. With a bold, modern touch, Francis Kurkdjian, Perfume Creative Director, reinterprets the silhouettes of the iconic fragrances to reveal intense and radical facets.",
+    "sizes": [
+      {
+        "label": "80 ml",
+        "price_hkd": 4050
+      }
+    ],
+    "price_hkd_from": 4050,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwa7792ef4/Y0000268/Y0000268_E000001785_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/jasmin-des-anges-esprit-de-parfum-Y0000268.html",
+    "color_hex": "#6b5640",
+    "aliases": [
+      "jasmin des anges esprit de parfum",
+      "jasmin des anges esprit de parfum la collection privee"
+    ],
+    "stock": 32
+  },
+  {
+    "id": "dior-rouge-dior",
+    "brand": "Dior",
+    "name": "Rouge Dior",
+    "line": "Rouge Dior",
+    "category": "makeup",
+    "subcategory": "lipstick",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Rouge Dior, the Dior makeup icon, reveals a wide range of shades with 3 unique finishes. The longwear lipstick offers 24 hours of comfort thanks to its formula infused with hydrating floral lip care and a texture that leaves lips feeling soft. The lipstick is housed in an elegant case with a contemporary design.",
+    "sizes": [
+      {
+        "label": "3.5 g",
+        "price_hkd": 400
+      }
+    ],
+    "price_hkd_from": 400,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw98703630/Y0356009/Y0356009_C035600999_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/rouge-dior-Y0356009.html",
+    "color_hex": "#c31417",
+    "aliases": [
+      "rouge dior",
+      "rouge dior 999",
+      "dior lipstick",
+      "rouge dior lipstick"
+    ],
+    "stock": 15
+  },
+  {
+    "id": "dior-dior-addict",
+    "brand": "Dior",
+    "name": "Dior Addict",
+    "line": "Dior Addict",
+    "category": "makeup",
+    "subcategory": "lipstick",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Jasmine Floral Wax"
+    ],
+    "description": "Dior Addict is the Dior shine lipstick designed like a fashion accessory, with a formula now composed of 90%* natural-origin ingredients, housed in an ultra-couture and refillable case.",
+    "sizes": [
+      {
+        "label": "3.2 g",
+        "price_hkd": 370
+      }
+    ],
+    "price_hkd_from": 370,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw8e532e69/Y0291000/Y0291000_C029100008_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-addict-Y0291000.html",
+    "color_hex": "#a42819",
+    "aliases": [
+      "dior addict"
+    ],
+    "stock": 13
+  },
+  {
+    "id": "dior-dior-addict-lip-glow",
+    "brand": "Dior",
+    "name": "Dior Addict Lip Glow",
+    "line": "Dior Addict",
+    "category": "makeup",
+    "subcategory": "lip balm",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Cherry Extract",
+      "Shea Butter"
+    ],
+    "description": "Dior Addict Lip Glow is the Dior lip balm that is the perfect combination of lip care and makeup. Thanks to its unique technology, the formula reacts with the pH level of lips to reveal a \"custom\" color that instantly enhances their glow. The balm hydrates lips for 48 hours and protects them from drying.",
+    "sizes": [
+      {
+        "label": "3.2 g",
+        "price_hkd": 360
+      }
+    ],
+    "price_hkd_from": 360,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwd07b0966/Y0457000/Y0457000_C045700001_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-addict-lip-glow-Y0457000.html",
+    "color_hex": "#eea4b1",
+    "aliases": [
+      "dior addict lip glow",
+      "addict lip glow"
+    ],
+    "stock": 23
+  },
+  {
+    "id": "dior-dior-addict-lip-maximizer",
+    "brand": "Dior",
+    "name": "Dior Addict Lip Maximizer",
+    "line": "Dior Addict",
+    "category": "makeup",
+    "subcategory": "lip gloss",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Cherry Oil",
+      "Hyaluronic Acid"
+    ],
+    "description": "Dior Addict Lip Maximizer is the iconic Dior gloss, genuine hydrating and plumping lip care with a maximum volume effect. Infused with cherry oil and hyaluronic acid, its formula is composed of 90%* natural-origin ingredients.",
+    "sizes": [
+      {
+        "label": "6 ml",
+        "price_hkd": 360
+      }
+    ],
+    "price_hkd_from": 360,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwe7239b13/Y0319000/Y0319000_C031900009_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-addict-lip-maximizer-Y0319000.html",
+    "color_hex": "#c46b6f",
+    "aliases": [
+      "dior addict lip maximizer",
+      "addict lip maximizer"
+    ],
+    "stock": 8
+  },
+  {
+    "id": "dior-dior-addict-lip-glow-oil",
+    "brand": "Dior",
+    "name": "Dior Addict Lip Glow Oil",
+    "line": "Dior Addict",
+    "category": "makeup",
+    "subcategory": "lip oil",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Cherry Oil"
+    ],
+    "description": "Combining lip care and makeup, Dior Addict Lip Glow Oil gives an instant mirror-shine gloss effect, without compromising on comfort. Its innovative formula reacts to the lips' pH level and reveals a \"custom\" color, while instantly enhancing their glow with a luscious finish.",
+    "sizes": [
+      {
+        "label": "6 ml",
+        "price_hkd": 360
+      }
+    ],
+    "price_hkd_from": 360,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwb4adbe70/Y0000163/Y0000163_E000001060_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-addict-lip-glow-oil-Y0000163.html",
+    "color_hex": "#f59c95",
+    "aliases": [
+      "dior addict lip glow oil",
+      "addict lip glow oil"
+    ],
+    "stock": 33
+  },
+  {
+    "id": "dior-rouge-dior-on-stage",
+    "brand": "Dior",
+    "name": "Rouge Dior On Stage",
+    "line": "Rouge Dior",
+    "category": "makeup",
+    "subcategory": "lipstick",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Peony Extract",
+      "Pomegranate Flower Extract"
+    ],
+    "description": "Rouge Dior On Stage, Dior's lipstick innovation, offers a blurring matte finish that guarantees 24 hours of no transfer and intense comfort. Its soft, melting texture feels weightless on the lips, while the color stays put, doesn't migrate, and withstands all challenges.",
+    "sizes": [
+      {
+        "label": "2.2 g",
+        "price_hkd": 400
+      }
+    ],
+    "price_hkd_from": 400,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw5ea76b3e/Y0000265/Y0000265_E000000803_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/rouge-dior-on-stage-Y0000265.html",
+    "color_hex": "#585257",
+    "aliases": [
+      "rouge dior on stage"
+    ],
+    "stock": 40
+  },
+  {
+    "id": "dior-dior-forever-skin-glow",
+    "brand": "Dior",
+    "name": "Dior Forever Skin Glow",
+    "line": "Dior Forever",
+    "category": "makeup",
+    "subcategory": "foundation",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Hyaluronic Acid",
+      "Niacinamide",
+      "Peptides"
+    ],
+    "description": "Dior Forever Skin Glow is the 24h wear natural glow foundation that combines flawless makeup with skincare benefits, for perfect skin with or without makeup. Designed to deliver perfect skin even in front of the cameras, its formula combines natural glow with medium-to-high buildable coverage.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 600
+      }
+    ],
+    "price_hkd_from": 600,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/en_HK/dwad3b5d36/Y0000149/Y0000149_E000001358_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-forever-skin-glow-Y0000149.html",
+    "color_hex": "#e7c3aa",
+    "aliases": [
+      "dior forever skin glow",
+      "forever skin glow"
+    ],
+    "stock": 38
+  },
+  {
+    "id": "dior-dior-forever-skin-wear",
+    "brand": "Dior",
+    "name": "Dior Forever Skin Wear",
+    "line": "Dior Forever",
+    "category": "makeup",
+    "subcategory": "foundation",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Hyaluronic Acid",
+      "Niacinamide",
+      "Peptides"
+    ],
+    "description": "Dior Forever Skin Wear is the blurring natural matte foundation with 24h ultra wear that combines flawless makeup perfection with skincare benefits, for perfect skin with or without makeup.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 600
+      }
+    ],
+    "price_hkd_from": 600,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwda18039c/Y0000150/Y0000150_E000001106_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-forever-skin-wear-Y0000150.html",
+    "color_hex": "#e8c4aa",
+    "aliases": [
+      "dior forever skin wear",
+      "forever skin wear"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "dior-dior-forever-skin-correct",
+    "brand": "Dior",
+    "name": "Dior Forever Skin Correct",
+    "line": "Dior Forever",
+    "category": "makeup",
+    "subcategory": "concealer",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Iris Extract",
+      "Wild Pansy Extract",
+      "Yarrow Extract"
+    ],
+    "description": "Dior Forever Skin Correct is the clean high-perfection concealer by Dior that offers 24h wear and hydration.",
+    "sizes": [
+      {
+        "label": "11 ml",
+        "price_hkd": 390
+      }
+    ],
+    "price_hkd_from": 390,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw328124de/Y0326000/Y0326000_C032600020_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-forever-skin-correct-Y0326000.html",
+    "color_hex": "#e0bca2",
+    "aliases": [
+      "dior forever skin correct",
+      "forever skin correct"
+    ],
+    "stock": 27
+  },
+  {
+    "id": "dior-dior-forever-natural-velvet",
+    "brand": "Dior",
+    "name": "Dior Forever Natural Velvet",
+    "line": "Dior Forever",
+    "category": "makeup",
+    "subcategory": "compact foundation",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Iris Extract",
+      "Rose Extract",
+      "Wild Pansy Extract"
+    ],
+    "description": "Dior Forever Natural Velvet is the 1st no-transfer Dior compact foundation with 24h wear, composed with 90%** natural-origin ingredients.",
+    "sizes": [
+      {
+        "label": "10 g",
+        "price_hkd": 650
+      }
+    ],
+    "price_hkd_from": 650,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw05eb0726/Y0293000/Y0293000_C029300020_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-forever-natural-velvet-Y0293000.html",
+    "color_hex": "#e8c9ad",
+    "aliases": [
+      "dior forever natural velvet",
+      "forever natural velvet"
+    ],
+    "stock": 5
+  },
+  {
+    "id": "dior-dior-backstage-rosy-glow",
+    "brand": "Dior",
+    "name": "Dior Backstage Rosy Glow",
+    "line": "Dior Backstage",
+    "category": "makeup",
+    "subcategory": "blush",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "The iconic Dior blush offers long-wearing, buildable, \"custom\" color thanks to a formula featuring a technology that reacts to the skin's pH to create a personalized color. Rosy Glow gives skin an instant healthy glow and is now even more buildable thanks to a formula concentrated in pigments.",
+    "sizes": [
+      {
+        "label": "4.5 g",
+        "price_hkd": 380
+      }
+    ],
+    "price_hkd_from": 380,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwc9998712/Y0000049/Y0000049_E000000573_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-backstage-rosy-glow-Y0000049.html",
+    "color_hex": "#f792c8",
+    "aliases": [
+      "dior backstage rosy glow",
+      "backstage rosy glow"
+    ],
+    "stock": 22
+  },
+  {
+    "id": "dior-rouge-blush",
+    "brand": "Dior",
+    "name": "Rouge Blush",
+    "line": "Rouge Blush",
+    "category": "makeup",
+    "subcategory": "blush",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Dior has reinvented Rouge Blush, the House of Dior’s blush that enhances the cheeks with a long-wearing healthy glow effect. Its intense couture colour is available in 4 finishes: matte, satin, shimmer, and holographic.",
+    "sizes": [
+      {
+        "label": "6 g",
+        "price_hkd": 480
+      }
+    ],
+    "price_hkd_from": 480,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwe17bb824/Y0294001/Y0294001_C029400100_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/rouge-blush-Y0294001.html",
+    "color_hex": "#f7a9a0",
+    "aliases": [
+      "rouge blush",
+      "rouge blush 999"
+    ],
+    "stock": 20
+  },
+  {
+    "id": "dior-dior-forever-glow-maximizer",
+    "brand": "Dior",
+    "name": "Dior Forever Glow Maximizer",
+    "line": "Dior Forever",
+    "category": "makeup",
+    "subcategory": "highlighter",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Iris Extract"
+    ],
+    "description": "The 1st Dior Forever liquid highlighter, a true concentration of light in a bottle, brightens and enhances the complexion with a spectacular, instant, and long-lasting glow.",
+    "sizes": [
+      {
+        "label": "11 ml",
+        "price_hkd": 430
+      }
+    ],
+    "price_hkd_from": 430,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw70f337fd/Y0436000/Y0436000_C043600013_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-forever-glow-maximizer-Y0436000.html",
+    "color_hex": "#e3a98a",
+    "aliases": [
+      "dior forever glow maximizer",
+      "forever glow maximizer"
+    ],
+    "stock": 18
+  },
+  {
+    "id": "dior-dior-forever-skin-veil",
+    "brand": "Dior",
+    "name": "Dior Forever Skin Veil",
+    "line": "Dior Forever",
+    "category": "makeup",
+    "subcategory": "primer",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Hyaluronic Acid"
+    ],
+    "description": "Dior Forever Skin Veil is the 4-in-1 glow makeup base that visibly plumps the skin like a serum, hydrates like a cream, extends makeup wear like a primer, and protects like a UV base. As if smoothed, unified, and corrected, the skin is ready for foundation application for a fresh, radiant makeup result.",
+    "sizes": [
+      {
+        "label": "35 ml",
+        "price_hkd": 540
+      }
+    ],
+    "price_hkd_from": 540,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw60c6748d/Y0998922/Y0998922_C099892290_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-forever-skin-veil-Y0998922.html",
+    "color_hex": "#282b2f",
+    "aliases": [
+      "dior forever skin veil",
+      "forever skin veil"
+    ],
+    "stock": 15
+  },
+  {
+    "id": "dior-diorshow-iconic-overcurl",
+    "brand": "Dior",
+    "name": "Diorshow Iconic Overcurl",
+    "line": "Diorshow",
+    "category": "makeup",
+    "subcategory": "mascara",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Cornflower Water"
+    ],
+    "description": "Dior has reinvented Diorshow Iconic Overcurl, the iconic mascara from the House of Dior, composed with a formula enriched with cornflower floral water. This mascara helps nourish and fortify lashes, while fanning them out for spectacular volume and curl that last 24h.",
+    "sizes": [
+      {
+        "label": "6 g",
+        "price_hkd": 375
+      }
+    ],
+    "price_hkd_from": 375,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwfd440ee6/Y0365250/Y0365250_C036525090_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/diorshow-iconic-overcurl-Y0365250.html",
+    "color_hex": "#909098",
+    "aliases": [
+      "diorshow iconic overcurl"
+    ],
+    "stock": 33
+  },
+  {
+    "id": "dior-diorshow-overvolume",
+    "brand": "Dior",
+    "name": "Diorshow Overvolume",
+    "line": "Diorshow",
+    "category": "makeup",
+    "subcategory": "mascara",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "D-Panthenol"
+    ],
+    "description": "Diorshow Overvolume: the mascara that combines extreme volume and lash-by-lash definition. This mascara instantly provides a +440% extreme volume boost combined with lash-by-lash definition for a fanned-out look. Intensely pigmented, it coats the lashes in a deep, no-transfer shade that lasts 24 hours.",
+    "sizes": [
+      {
+        "label": "8.5 g",
+        "price_hkd": 375
+      }
+    ],
+    "price_hkd_from": 375,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw1d31a882/Y0000002/Y0000002_E000000243_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/diorshow-overvolume-Y0000002.html",
+    "color_hex": "#39383c",
+    "aliases": [
+      "diorshow overvolume"
+    ],
+    "stock": 35
+  },
+  {
+    "id": "dior-diorshow-stylo",
+    "brand": "Dior",
+    "name": "Diorshow Stylo",
+    "line": "Diorshow",
+    "category": "makeup",
+    "subcategory": "eyeliner",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Signature of the Dior couture looks, the smoky eye embraces a new makeup technique with Diorshow Stylo, the waterproof eyeliner that defines the eyes with intense color and 24h transfer-proof wear.",
+    "sizes": [
+      {
+        "label": "0.3 g",
+        "price_hkd": 250
+      }
+    ],
+    "price_hkd_from": 250,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw80b97dcf/Y0423000/Y0423000_C042300091_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/diorshow-stylo-Y0423000.html",
+    "color_hex": "#373439",
+    "aliases": [
+      "diorshow stylo"
+    ],
+    "stock": 25
+  },
+  {
+    "id": "dior-dior-vernis",
+    "brand": "Dior",
+    "name": "Dior Vernis",
+    "line": "Dior Vernis",
+    "category": "makeup",
+    "subcategory": "nail polish",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Peony Extract",
+      "Pistachio Extract"
+    ],
+    "description": "Dior has reinvented the emblematic Dior Vernis nail polish in a colorful wardrobe inspired by the iconic pieces by the House of Dior.",
+    "sizes": [
+      {
+        "label": "standard",
+        "price_hkd": 235
+      }
+    ],
+    "price_hkd_from": 235,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw642a7027/Y0381009/Y0381009_C038100555_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-vernis-Y0381009.html",
+    "color_hex": "#f38b8e",
+    "aliases": [
+      "dior vernis",
+      "dior vernis 999"
+    ],
+    "stock": 27
+  },
+  {
+    "id": "dior-dior-capture-le-serum",
+    "brand": "Dior",
+    "name": "Dior Capture Le Sérum",
+    "line": "Dior Capture",
+    "category": "skincare",
+    "subcategory": "serum",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "OX-C Treatment",
+      "Exo-Liposome patented complex",
+      "Lily Extract"
+    ],
+    "description": "Inspired by regenerative medicine, Dior Capture has reinvented the iconic serum with a formula that delivers results in as little as 7 days: wrinkles are visibly replenished, skin appears firmer and the face looks younger.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 1090
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1470
+      },
+      {
+        "label": "75 ml",
+        "price_hkd": 1765
+      }
+    ],
+    "price_hkd_from": 1090,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwbe61bb36/Y0998028/Y0998028_C099800207_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-capture-le-s%C3%A9rum-Y0998028.html",
+    "color_hex": "#a9a9af",
+    "aliases": [
+      "dior capture le serum",
+      "capture le serum",
+      "dior capture serum"
+    ],
+    "stock": 9
+  },
+  {
+    "id": "dior-dior-capture-hyalushot-advanced",
+    "brand": "Dior",
+    "name": "Dior Capture Hyalushot Advanced",
+    "line": "Dior Capture",
+    "category": "skincare",
+    "subcategory": "serum",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Hyaluronic Acid",
+      "Peptides",
+      "Polysaccharides",
+      "Lily Extract"
+    ],
+    "description": "Inspired by dermo-aesthetic procedures, Dior Capture Hyalushot Advanced is a high-precision intensive corrector that instantly smooths the appearance of wrinkles and visibly plumps established wrinkles day after day.",
+    "sizes": [
+      {
+        "label": "15 ml",
+        "price_hkd": 815
+      }
+    ],
+    "price_hkd_from": 815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwe8180818/Y0000262/Y0000262_E000001627_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-capture-hyalushot-advanced-Y0000262.html",
+    "color_hex": "#909095",
+    "aliases": [
+      "dior capture hyalushot advanced",
+      "capture hyalushot advanced"
+    ],
+    "stock": 32
+  },
+  {
+    "id": "dior-dior-capture-pdrn-shot",
+    "brand": "Dior",
+    "name": "Dior Capture PDRN-Shot",
+    "line": "Dior Capture",
+    "category": "skincare",
+    "subcategory": "serum",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "PDRN",
+      "Vitamin C",
+      "Niacinamide",
+      "Lily Extract"
+    ],
+    "description": "Inspired by dermo-aesthetic procedures, Dior Capture PDRN-Shot is an intensive solution that revitalizes, illuminates, and visibly smooths the skin. From the first application, it revives the radiance of tired-looking skin and delivers increased results day after day.",
+    "sizes": [
+      {
+        "label": "20 ml",
+        "price_hkd": 815
+      }
+    ],
+    "price_hkd_from": 815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw4c469283/Y0000263/Y0000263_E000001625_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-capture-pdrn-shot-Y0000263.html",
+    "color_hex": "#97969b",
+    "aliases": [
+      "dior capture pdrn shot",
+      "capture pdrn shot"
+    ],
+    "stock": 16
+  },
+  {
+    "id": "dior-capture-totale-retishot",
+    "brand": "Dior",
+    "name": "Capture Totale Retishot",
+    "line": "Dior Capture",
+    "category": "skincare",
+    "subcategory": "serum",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Retinol",
+      "Longoza Extract"
+    ],
+    "description": "Capture Totale Retishot night concentrate is Dior's first intensive solution that corrects 6 age-related skin quality issues: visible pores, a dull complexion, roughness, unevenness, imperfections and marks such as those caused by the sun or acne.",
+    "sizes": [
+      {
+        "label": "20 ml",
+        "price_hkd": 980
+      }
+    ],
+    "price_hkd_from": 980,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/en_HK/dw22f26b9a/Y0998011/Y0998011_C099800039_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/capture-totale-retishot-Y0998011.html",
+    "color_hex": "#b7b6ba",
+    "aliases": [
+      "capture totale retishot"
+    ],
+    "stock": 6
+  },
+  {
+    "id": "dior-dior-capture-rich-creme",
+    "brand": "Dior",
+    "name": "Dior Capture Rich Creme",
+    "line": "Dior Capture",
+    "category": "skincare",
+    "subcategory": "cream",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "OX-C Treatment",
+      "Ceramides",
+      "Lily Extract",
+      "Hyaluronic Acid"
+    ],
+    "description": "40 years of research, the pioneer in skin mother cells, inspired by regenerative science. Dior Capture reinvents the Rich Creme with a nourishing formula in an enveloping texture. After 7 days, wrinkles are visibly filled, skin is nourished, and it appears firmer and smoother.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1090
+      }
+    ],
+    "price_hkd_from": 1090,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw868e6413/Y0000195/Y0000195_C099700476_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-capture-rich-creme-Y0000195.html",
+    "color_hex": "#a4a3a7",
+    "aliases": [
+      "dior capture rich creme",
+      "capture rich creme"
+    ],
+    "stock": 9
+  },
+  {
+    "id": "dior-dior-capture-day-creme",
+    "brand": "Dior",
+    "name": "Dior Capture Day Creme",
+    "line": "Dior Capture",
+    "category": "skincare",
+    "subcategory": "cream",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "OX-C Treatment",
+      "Hyaluronic Acid",
+      "Lily Extract"
+    ],
+    "description": "Inspired by regenerative medicine, Dior Capture has reinvented the iconic day cream with a formula that delivers results in as little as 7 days: wrinkles are visibly replenished, skin appears firmer and the face looks younger.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1090
+      }
+    ],
+    "price_hkd_from": 1090,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwfa830ca6/Y0997195/Y0997195_C099700369_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-capture-day-creme-Y0997195.html",
+    "color_hex": "#a5a4a9",
+    "aliases": [
+      "dior capture day creme",
+      "capture day creme"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "dior-dior-capture-pro-collagen-shot",
+    "brand": "Dior",
+    "name": "Dior Capture Pro-Collagen Shot",
+    "line": "Dior Capture",
+    "category": "skincare",
+    "subcategory": "eye care",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "OX-C Treatment",
+      "Exclusive patented polymers",
+      "Lily Extract",
+      "Collagen"
+    ],
+    "description": "Inspired by dermo-aesthetic procedures, Dior Capture Pro-Collagen Shot is a high-precision booster that acts on the eye area for an immediate and long-lasting lifting effect.",
+    "sizes": [
+      {
+        "label": "15 ml",
+        "price_hkd": 815
+      }
+    ],
+    "price_hkd_from": 815,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw88c1b752/Y0000144/Y0000144_E000000593_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-capture-pro-collagen-shot-Y0000144.html",
+    "color_hex": "#b5b5b5",
+    "aliases": [
+      "dior capture pro collagen shot",
+      "capture pro collagen shot"
+    ],
+    "stock": 26
+  },
+  {
+    "id": "dior-dior-prestige-la-micro-huile-de-rose-activated-serum",
+    "brand": "Dior",
+    "name": "Dior Prestige La Micro-Huile de Rose Activated Serum",
+    "line": "Dior Prestige",
+    "category": "skincare",
+    "subcategory": "serum",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Rose de Granville",
+      "Rosapeptide",
+      "Hyaluronic Acid"
+    ],
+    "description": "An anti-aging serum for face and neck, Dior Prestige La Micro-Huile de Rose Activated Serum is the ultimate Dior micro-nutritive supplement for visibly younger, plumper skin.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 2480
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 3250
+      },
+      {
+        "label": "75 ml",
+        "price_hkd": 3965
+      }
+    ],
+    "price_hkd_from": 2480,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw7569d488/Y0997186/Y0997186_C099700024_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-prestige-la-micro-huile-de-rose-activated-serum-Y0997186.html",
+    "color_hex": "#f0a996",
+    "aliases": [
+      "dior prestige la micro huile de rose activated serum",
+      "prestige la micro huile de rose activated serum"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "dior-dior-prestige-le-nectar-premier",
+    "brand": "Dior",
+    "name": "Dior Prestige Le Nectar Premier",
+    "line": "Dior Prestige",
+    "category": "skincare",
+    "subcategory": "serum",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Rose de Granville",
+      "Rosapeptide"
+    ],
+    "description": "Dior Prestige Le Nectar Premier is the first highly and visibly correcting serum for deep wrinkles. The first buds of the Rose de Granville, which are twice as rich in revitalizing factors, produce a revitalizing extract infused at the heart of Rosapeptide™ Premier.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 5850
+      }
+    ],
+    "price_hkd_from": 5850,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwec71f06e/Y0997097/Y0997097_E000000220_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-prestige-le-nectar-premier-Y0997097.html",
+    "color_hex": "#a47a4e",
+    "aliases": [
+      "dior prestige le nectar premier",
+      "prestige le nectar premier"
+    ],
+    "stock": 21
+  },
+  {
+    "id": "dior-dior-prestige-la-creme-texture-essentielle",
+    "brand": "Dior",
+    "name": "Dior Prestige La Crème Texture Essentielle",
+    "line": "Dior Prestige",
+    "category": "skincare",
+    "subcategory": "cream",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Rosapeptide",
+      "Rose de Granville"
+    ],
+    "description": "Dior Prestige La Crème is the new exceptional repairing and regenerating creme enriched with patented Rosapeptide-3 which reverses the cellular age of the skin by 10 years, to rejuvenate 10 visible signs of aging.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 3725
+      }
+    ],
+    "price_hkd_from": 3725,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwe754073b/Y0000264/Y0000264_E000001192_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-prestige-la-cr%C3%A8me-texture-essentielle-Y0000264.html",
+    "color_hex": "#b39476",
+    "aliases": [
+      "dior prestige la creme texture essentielle",
+      "prestige la creme texture essentielle"
+    ],
+    "stock": 32
+  },
+  {
+    "id": "dior-dior-prestige-la-lotion-essence-de-rose",
+    "brand": "Dior",
+    "name": "Dior Prestige La Lotion Essence de Rose",
+    "line": "Dior Prestige",
+    "category": "skincare",
+    "subcategory": "lotion",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Rose de Granville",
+      "Rosapeptide",
+      "Squalane"
+    ],
+    "description": "Dior Prestige La Lotion Essence de Rose is the 1st revitalizing Dior face lotion that combines the nourishment of a milk with the freshness of an essence.",
+    "sizes": [
+      {
+        "label": "150 ml",
+        "price_hkd": 1390
+      }
+    ],
+    "price_hkd_from": 1390,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw53d3557b/Y0997174/Y0997174_C099700564_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-prestige-la-lotion-essence-de-rose-Y0997174.html",
+    "color_hex": "#ba9b7f",
+    "aliases": [
+      "dior prestige la lotion essence de rose",
+      "prestige la lotion essence de rose"
+    ],
+    "stock": 6
+  },
+  {
+    "id": "dior-dior-prestige-le-micro-serum-de-rose-yeux-activated",
+    "brand": "Dior",
+    "name": "Dior Prestige Le Micro-Sérum de Rose Yeux Activated",
+    "line": "Dior Prestige",
+    "category": "skincare",
+    "subcategory": "eye care",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Rose de Granville",
+      "Rosapeptide",
+      "Rose Extract"
+    ],
+    "description": "This micro-nutritive eye serum with a 360° reshaping applicator helps the eyes appear rested and rejuvenated. It visibly reshapes the eye contour, fills expression lines and corrects signs of fatigue. In 1 month, the eyes appear 2 years younger.",
+    "sizes": [
+      {
+        "label": "20 ml",
+        "price_hkd": 2250
+      }
+    ],
+    "price_hkd_from": 2250,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw15109e11/Y0998038/Y0998038_C099800435_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-prestige-le-micro-s%C3%A9rum-de-rose-yeux-activated-Y0998038.html",
+    "color_hex": "#bb9f86",
+    "aliases": [
+      "dior prestige le micro serum de rose yeux activated",
+      "prestige le micro serum de rose yeux activated"
+    ],
+    "stock": 18
+  },
+  {
+    "id": "dior-lor-de-vie-le-serum",
+    "brand": "Dior",
+    "name": "L'Or de Vie Le Sérum",
+    "line": "L'Or de Vie",
+    "category": "skincare",
+    "subcategory": "serum",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Yquem Golden Sap",
+      "Golden Ferment"
+    ],
+    "description": "The second step in the L’Or de Vie skincare protocol, Le Sérum is like a longevity concentrate that visibly restructures and firms the skin. Formulated with Yquem Golden Sap and Golden Ferment extracts combined in precious Golden Drop™Life Technology, this powerful serum supports skin rejuvenation.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 13500
+      }
+    ],
+    "price_hkd_from": 13500,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwdb4b2288/Y0998020/Y0998020_C099800182_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/lor-de-vie-le-s%C3%A9rum-Y0998020.html",
+    "color_hex": "#b1905c",
+    "aliases": [
+      "lor de vie le serum"
+    ],
+    "stock": 33
+  },
+  {
+    "id": "dior-dior-snow-essence-of-light-serum",
+    "brand": "Dior",
+    "name": "Dior Snow Essence of Light Serum",
+    "line": "Dior Snow",
+    "category": "skincare",
+    "subcategory": "serum",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Edelweiss Extract"
+    ],
+    "description": "Dior Snow Essence of Light Serum is the 1st Dior 5QD brightening serum formulated with 93%** natural-origin ingredients. It acts on the 5 dimensions of skin quality: skin is more luminous, skin texture is visibly smoothed, the appearance of imperfections seems to be reduced, and skin is mattified and visibly soothed.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 1190
+      },
+      {
+        "label": "50 ml",
+        "price_hkd": 1545
+      }
+    ],
+    "price_hkd_from": 1190,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0bcc1728/Y0997163/Y0997163_C099700454_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-snow-essence-of-light-serum-Y0997163.html",
+    "color_hex": "#b7b6b9",
+    "aliases": [
+      "dior snow essence of light serum",
+      "snow essence of light serum"
+    ],
+    "stock": 24
+  },
+  {
+    "id": "dior-dior-snow-uv-shield",
+    "brand": "Dior",
+    "name": "Dior Snow UV Shield",
+    "line": "Dior Snow",
+    "category": "skincare",
+    "subcategory": "sunscreen",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Dior Snow UV Shield UV face protection features a UV-filtering SPF 50+ PA++++ system. Its sensorial formula withstands daily environmental stressors and ensures protection against UVB and UVA rays, which can cause spots of pigmentation to appear.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 600
+      }
+    ],
+    "price_hkd_from": 600,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwdbdb0d0d/Y0997161/Y0997161_C099700456_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-snow-uv-shield-Y0997161.html",
+    "color_hex": "#a19fa9",
+    "aliases": [
+      "dior snow uv shield",
+      "snow uv shield"
+    ],
+    "stock": 6
+  },
+  {
+    "id": "dior-one-essential-skin-boosting-super-serum",
+    "brand": "Dior",
+    "name": "One Essential Skin Boosting Super Serum",
+    "line": "One Essential",
+    "category": "skincare",
+    "subcategory": "serum",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Marine Extract",
+      "Vitamin E",
+      "Mallow Extract"
+    ],
+    "description": "Every day, skin is subjected to aggressions –microparticles, UV, stress, and an intense lifestyle– which generate free radicals. These invisible factors accumulate, oxidize skin proteins, and deplete cells.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 1100
+      }
+    ],
+    "price_hkd_from": 1100,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/en_HK/dw2598d530/Y0725320/Y0725320_F072533000_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/one-essential-skin-boosting-super-serum-Y0725320.html",
+    "color_hex": "#942b2d",
+    "aliases": [
+      "one essential skin boosting super serum"
+    ],
+    "stock": 25
+  },
+  {
+    "id": "dior-dior-hydra-life-fresh-sorbet-creme",
+    "brand": "Dior",
+    "name": "Dior Hydra Life Fresh Sorbet Creme",
+    "line": "Dior Hydra Life",
+    "category": "skincare",
+    "subcategory": "cream",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Hyaluronic Acid",
+      "Mallow Extract"
+    ],
+    "description": "Dior Hydra Life Fresh Sorbet Creme is the Dior hydrating cream for normal to combination skin.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 715
+      }
+    ],
+    "price_hkd_from": 715,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwc9c55aa1/Y0996436/Y0996436_C099600951_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-hydra-life-fresh-sorbet-creme-Y0996436.html",
+    "color_hex": "#adbebc",
+    "aliases": [
+      "dior hydra life fresh sorbet creme",
+      "hydra life fresh sorbet creme"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "dior-la-mousse-off-on-foaming-cleanser",
+    "brand": "Dior",
+    "name": "La Mousse OFF/ON Foaming Cleanser",
+    "line": "Dior Cleansers OFF/ON",
+    "category": "skincare",
+    "subcategory": "cleanser",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Water Lily",
+      "Niacinamide"
+    ],
+    "description": "OFF/ON Foaming Cleanser, infused with purifying water lily cryoextract and niacinamide, reveals skin purity and clarity while providing care and protection in a luscious, creamy texture that transforms into a generous, airy foam. Daily skin cleansing becomes a true moment of care.",
+    "sizes": [
+      {
+        "label": "150 ml",
+        "price_hkd": 475
+      }
+    ],
+    "price_hkd_from": 475,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw75016799/Y0000013/Y0000013_E000000428_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/la-mousse-off%2Fon-foaming-cleanser-Y0000013.html",
+    "color_hex": "#a3a2a8",
+    "aliases": [
+      "la mousse off on foaming cleanser"
+    ],
+    "stock": 23
+  },
+  {
+    "id": "dior-dior-homme-dermo-system-smoothing-firming-care",
+    "brand": "Dior",
+    "name": "Dior Homme Dermo System Smoothing Firming Care",
+    "line": "Dior Homme",
+    "category": "skincare",
+    "subcategory": "cream",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Centella Asiatica"
+    ],
+    "description": "Dior Homme Dermo System Smoothing Firming Care is skincare for men with firming and toning action that visibly reduces the signs of aging. With regular use, the facial contour is noticeably redefined, with a visible impact on skin's curves and the appearance of fine lines and wrinkles.",
+    "sizes": [
+      {
+        "label": "50 ml",
+        "price_hkd": 940
+      }
+    ],
+    "price_hkd_from": 940,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwe545a8e7/Y0997162/Y0997162_C099700830_E01_ZHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/dior-homme-dermo-system-smoothing-firming-care-Y0997162.html",
+    "color_hex": "#7e7d81",
+    "aliases": [
+      "dior homme dermo system smoothing firming care",
+      "homme dermo system smoothing firming care"
+    ],
+    "stock": 0
+  },
+  {
+    "id": "dior-hydrating-invisible-uv-fluid-spf-50-pa",
+    "brand": "Dior",
+    "name": "Hydrating Invisible UV Fluid SPF 50+ PA++++",
+    "line": "D-Line",
+    "category": "skincare",
+    "subcategory": "sunscreen",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [
+      "Hyaluronic Acid",
+      "Vitamin E"
+    ],
+    "description": "High protection, invisible texture This invisible UV protection fluid combines 5 filters for very high daily SPF 50+ PA++++ protection against the harmful effects of UVB and UVA rays. Its fresh, non-sticky texture hydrates and provides an immediate feeling of comfort.",
+    "sizes": [
+      {
+        "label": "30 ml",
+        "price_hkd": 520
+      }
+    ],
+    "price_hkd_from": 520,
+    "image_url": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwafb0d164/Y0000212/Y0000212_E000000241_E01_RHC.jpg?sw=800",
+    "url": "https://www.dior.com/en_hk/beauty/products/hydrating-invisible-uv-fluid-spf-50%2B-pa%2B%2B%2B%2B-Y0000212.html",
+    "color_hex": "#a8a8b0",
+    "aliases": [
+      "hydrating invisible uv fluid spf 50 pa"
+    ],
+    "stock": 33
+  }
+]

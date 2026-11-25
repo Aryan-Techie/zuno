@@ -32,6 +32,41 @@ export function isRateLimitError(err: unknown): boolean {
   return err instanceof Error && err.message.includes("429");
 }
 
+/**
+ * Which shop Zuno is working in. "apple" sells Apple devices; "perfume" is a
+ * beauty advisor for a boutique carrying Dior beauty (a demo, not affiliated
+ * with Dior). The caller can switch by voice mid-call, so the console treats
+ * the backend's answer as the truth rather than its own toggle.
+ */
+export type Mode = "apple" | "perfume";
+
+export const MODES: Mode[] = ["apple", "perfume"];
+
+export function isMode(value: unknown): value is Mode {
+  return value === "apple" || value === "perfume";
+}
+
+/**
+ * A failed request that carries its HTTP status, so a page can tell "this
+ * endpoint is not there yet" (404) apart from a real failure and show a calm
+ * empty state for the first instead of an error.
+ */
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    readonly status: number
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
+/** True for a 404, or for a request that never reached the backend at all. */
+export function isMissing(err: unknown): boolean {
+  if (err instanceof ApiError) return err.status === 404;
+  return err instanceof TypeError;
+}
+
 export interface StartCallResponse {
   session_id: string;
   channel_name: string;
@@ -40,6 +75,8 @@ export interface StartCallResponse {
   rtc_token: string;
   rtm_token: string;
   agent_id: string | null;
+  /** Absent on a backend that predates modes; the console keeps its pick. */
+  mode?: Mode;
 }
 
 export interface EndCallResponse {
@@ -48,9 +85,29 @@ export interface EndCallResponse {
   outcome: string;
 }
 
-export async function startCall(): Promise<StartCallResponse> {
-  const res = await fetch(`${BACKEND_URL}/api/call/start`, { method: "POST" });
+export async function startCall(mode?: Mode): Promise<StartCallResponse> {
+  const res = await fetch(`${BACKEND_URL}/api/call/start`, {
+    method: "POST",
+    headers: mode ? { "Content-Type": "application/json" } : undefined,
+    body: mode ? JSON.stringify({ mode }) : undefined,
+  });
   if (!res.ok) throw new Error(`Failed to start call: ${res.status}`);
+  return res.json();
+}
+
+/**
+ * The console's own switch, mid-call. The backend changes persona, catalog,
+ * knowledge base and CRM tagging on Zuno's next turn and also emits a
+ * mode_changed event (by: "console"), so the event stream stays the record
+ * of who switched what.
+ */
+export async function setSessionMode(sessionId: string, mode: Mode): Promise<{ mode: Mode }> {
+  const res = await fetch(`${BACKEND_URL}/api/session/${sessionId}/mode`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mode }),
+  });
+  if (!res.ok) throw new ApiError(`Failed to switch mode: ${res.status}`, res.status);
   return res.json();
 }
 
@@ -109,6 +166,143 @@ export interface SessionEventsResponse {
   outcome: string | null;
   left_brain?: LeftBrain;
   right_brain?: RightBrain;
+  /** The session's current mode - the truth after a voice switch. */
+  mode?: Mode;
+  /** The product most recently put on screen, or null. */
+  spotlight?: CatalogProduct | null;
+}
+
+/* ---------------- catalog (both modes share one product shape) ---------------- */
+
+export interface CatalogSize {
+  label: string;
+  price_hkd?: number | null;
+  price_usd?: number | null;
+}
+
+export interface FragranceNotes {
+  top: string[];
+  heart: string[];
+  base: string[];
+}
+
+/**
+ * One product in either catalog (backend/app/catalogs/{mode}.json). Dior
+ * beauty prices are in HKD; Apple prices are in USD, carried on the
+ * matching _usd fields instead.
+ */
+export interface CatalogProduct {
+  id: string;
+  brand: string;
+  name: string;
+  line: string | null;
+  /** fragrance | makeup | skincare for beauty; mac | iphone | ipad | accessory | service for Apple. */
+  category: string;
+  subcategory: string | null;
+  gender: "women" | "men" | "unisex" | null;
+  family: string | null;
+  notes: FragranceNotes | null;
+  key_ingredients: string[];
+  description: string | null;
+  sizes: CatalogSize[];
+  price_hkd_from?: number | null;
+  price_usd_from?: number | null;
+  image_url: string | null;
+  url: string | null;
+  color_hex: string | null;
+  aliases: string[];
+  stock: number | null;
+}
+
+export interface CatalogResponse {
+  mode: Mode;
+  products: CatalogProduct[];
+}
+
+export async function fetchCatalog(
+  mode: Mode,
+  filters: { category?: string; q?: string } = {}
+): Promise<CatalogResponse> {
+  const params = new URLSearchParams({ mode });
+  if (filters.category) params.set("category", filters.category);
+  if (filters.q) params.set("q", filters.q);
+  const res = await fetch(`${BACKEND_URL}/api/catalog?${params.toString()}`);
+  if (!res.ok) throw new ApiError(`Failed to fetch the catalog: ${res.status}`, res.status);
+  return res.json();
+}
+
+/** null when the product is unknown (404). */
+export async function fetchProduct(id: string): Promise<CatalogProduct | null> {
+  const res = await fetch(`${BACKEND_URL}/api/catalog/${encodeURIComponent(id)}`);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new ApiError(`Failed to fetch the product: ${res.status}`, res.status);
+  return res.json();
+}
+
+/**
+ * Always the backend's copy, never the brand CDN's URL: the backend fetches
+ * each image once and serves it with a long cache header, so the page never
+ * hotlinks a third-party CDN and WebGL can read the pixels (same origin in
+ * production, CORS-allowed in local dev).
+ */
+export function catalogImageUrl(id: string): string {
+  return `${BACKEND_URL}/api/catalog/${encodeURIComponent(id)}/image`;
+}
+
+/* ---------------- Graphify knowledge graphs ---------------- */
+
+export interface KnowledgeGraphStats {
+  nodes: number;
+  links: number;
+  /** Links stated outright in our documents. */
+  extracted: number;
+  /** Links Graphify resolved on its own. */
+  inferred: number;
+  communities: number;
+}
+
+export interface KnowledgeGraph {
+  mode: Mode;
+  nodes: Record<string, unknown>[];
+  links: Record<string, unknown>[];
+  stats: KnowledgeGraphStats;
+}
+
+/** null when that mode's graph has not been built yet (404). */
+export async function fetchKnowledgeGraph(mode: Mode): Promise<KnowledgeGraph | null> {
+  const res = await fetch(`${BACKEND_URL}/api/knowledge-graph?mode=${mode}`);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new ApiError(`Failed to fetch the knowledge graph: ${res.status}`, res.status);
+  return res.json();
+}
+
+/* ---------------- the two session events this adds ---------------- */
+
+/** `mode_changed`: who flipped it - the caller by voice, or this console. */
+export interface ModeChangedPayload {
+  mode: Mode;
+  previous: Mode | null;
+  by: "voice" | "console";
+}
+
+/** `product_spotlight`: the caller or Zuno named a product; show it. */
+export interface ProductSpotlightPayload {
+  product: CatalogProduct;
+}
+
+export function parseModeChanged(payload: Record<string, unknown>): ModeChangedPayload | null {
+  if (!isMode(payload.mode)) return null;
+  return {
+    mode: payload.mode,
+    previous: isMode(payload.previous) ? payload.previous : null,
+    by: payload.by === "console" ? "console" : "voice",
+  };
+}
+
+export function parseSpotlight(payload: Record<string, unknown>): ProductSpotlightPayload | null {
+  const product = payload.product as CatalogProduct | undefined;
+  if (!product || typeof product !== "object" || typeof product.id !== "string" || !product.name) return null;
+  return { product };
 }
 
 /** app/handoff/models.py::CallSummary - the wrap-up the rep is sent. */

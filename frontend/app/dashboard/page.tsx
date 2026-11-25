@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Logo } from "@/components/Logo";
+import { NavLinks } from "@/components/NavLinks";
+import { CatalogBrowser } from "@/components/CatalogBrowser";
 import {
   approveDiscount,
   createProduct,
@@ -205,18 +207,15 @@ export default function DashboardPage() {
       <header className="top">
         <div className="brand">
           <Logo size={24} />
-          <span>Zuno</span>
+          <span className="wordmark">Zuno</span>
           <span className="sub">Dashboard</span>
-          <DoodleUnderline className="doodle faint" width={40} />
         </div>
         <div className="actions">
-          <a href="/" className="ghost">
-            Console
-          </a>
+          <NavLinks current="/dashboard" />
         </div>
       </header>
 
-      <main className="stage" style={{ display: "block", padding: "24px 28px", maxWidth: 1100, margin: "0 auto" }}>
+      <main className="stage" style={{ display: "block", padding: "24px 0", width: "100%", maxWidth: 1100, margin: "0 auto" }}>
         {authed !== true ? (
           <section className="card" style={{ maxWidth: 380, margin: "80px auto 0" }}>
             <h3>Dashboard password</h3>
@@ -279,6 +278,8 @@ export default function DashboardPage() {
             </div>
           </div>
         </section>
+
+        <CatalogBrowser />
 
         <section className="card" style={{ marginBottom: 20 }}>
           <h3>

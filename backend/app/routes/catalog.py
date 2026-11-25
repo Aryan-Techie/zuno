@@ -31,11 +31,10 @@ router = APIRouter()
 # for the demo console and never committed.
 IMAGE_CACHE_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "images"
 
-# The CDN serves a browser and refuses the default python-httpx agent - the
-# same lesson provision_crm.py learned against EspoCRM's WAF.
-BROWSER_USER_AGENT = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+# Dior's image CDN sits behind bot rules that 403 a client claiming to be
+# Chrome without behaving like one, yet serve an honest non-browser agent.
+# Measured: Chrome UA -> 403, plain identifying UA -> 200.
+BROWSER_USER_AGENT = "ZUNO-demo/1.0 (+https://github.com/Aryan-Techie/zuno)"
 )
 CACHE_CONTROL = "public, max-age=86400"
 MAX_IMAGE_BYTES = 8 * 1024 * 1024

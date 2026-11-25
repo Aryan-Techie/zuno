@@ -17,6 +17,8 @@ export const TOOL_DONE: Record<string, string> = {
   calendar_book_meeting: "Booked the meeting",
   ask_solutions_engineer: "Asked a solutions engineer",
   escalate_to_human: "Escalated to a human",
+  show_product: "Put a product on screen",
+  switch_mode: "Switched the shop",
 };
 
 /** What a tool is doing, present tense - shown while it is in flight. */
@@ -32,6 +34,8 @@ export const TOOL_BUSY: Record<string, string> = {
   calendar_book_meeting: "Booking it",
   ask_solutions_engineer: "Asking a solutions engineer",
   escalate_to_human: "Bringing a person in",
+  show_product: "Bringing it up on screen",
+  switch_mode: "Switching the shop",
 };
 
 export function toolDone(name: string): string {

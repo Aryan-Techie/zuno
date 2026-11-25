@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { updateLeadManually, type LeadEdit, type LeftBrain } from "@/lib/api";
 import { OUTCOME_LABEL, STAGES } from "@/lib/vocab";
-import { DoodleCircle, DoodleDivider } from "@/components/Doodles";
 
 /** Counts a number up or down to its new value, so "10 devices" becoming
  * "50 devices" is seen to change rather than found to have changed. */
@@ -101,10 +100,7 @@ export function LeadCard({
   return (
     <section className="card">
       <h3>
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
-          Lead
-          <DoodleCircle className="doodle faint" size={16} />
-        </span>
+        <span className="h3-t">Lead</span>
         {booked && <span className="tone-good">Booked</span>}
         {!booked && escalated && <span className="tone-bad">Handed off</span>}
         {!editing && sessionId && !booked && !escalated && (
@@ -190,10 +186,7 @@ export function LeadCard({
       )}
       <div className="fields">
         <div className="field" data-field="devices">
-          <div className="k" style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
-            Devices
-            <DoodleCircle className="doodle faint" size={12} />
-          </div>
+          <div className="k">Devices</div>
           <div className={`v big${users == null ? " empty" : ""}${hot ? " hot" : ""}`}>{users ?? "—"}</div>
         </div>
         <div className="field" data-field="budget">
@@ -214,7 +207,6 @@ export function LeadCard({
           ))}
         </div>
       )}
-      <DoodleDivider className="doodle faint" style={{ display: "block", margin: "14px auto 0" }} />
       <div className="stepper" data-field="stage">
         {STAGES.map((s, i) => (
           <div

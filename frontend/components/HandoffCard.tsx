@@ -3,7 +3,6 @@
 import { useState } from "react";
 import type { RightBrain } from "@/lib/api";
 import { TRIGGER_LABEL } from "@/lib/vocab";
-import { DoodleWave, DoodleCheck } from "@/components/Doodles";
 
 export interface EscalationBrief {
   issue: string;
@@ -62,10 +61,7 @@ export function HandoffCard({
   return (
     <section className={`card${tripped ? " tripped" : ""}`} role="status">
       <h3>
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
-          Handoff
-          <DoodleWave className="doodle faint" width={20} />
-        </span>
+        <span className="h3-t">Handoff</span>
         <span className={repOnCall ? "tone-good" : tripped ? "tone-bad" : ""}>
           {repOnCall ? `${repOnCall} has it` : tripped ? "Waiting for a person" : "Zuno has it"}
         </span>
@@ -153,10 +149,7 @@ function Guard({ label, hint, value, max }: { label: string; hint: string; value
     <div className={`guard ${level}`}>
       <div className="g-text">
         <span className="g-label">
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
-            {label}
-            <DoodleCheck className="doodle faint" size={12} />
-          </span>
+          {label}
         </span>
         <span className="g-hint">{hint}</span>
       </div>

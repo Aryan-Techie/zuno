@@ -65,6 +65,28 @@ transitions (`grid-template-columns`, orb height) run 600ms. `prefers-reduced-mo
 collapses every transition and animation to a cut; `prefers-reduced-transparency`
 solidifies the top bar; `prefers-contrast: more` strengthens hairlines and tertiary text.
 
+## Perfume mode
+
+A second theme over the same layout, set on `<html data-mode="perfume">` (or on a
+section, as the dashboard's Dior catalog does) by `lib/mode.ts`; tokens live in
+`app/modes.css`. Ivory ground (deep black in dark), black ink, one champagne-gold
+accent standing in for `--zuno`, hairlines instead of shadows, 1-3px corners,
+spaced small caps. **Bodoni Moda** takes the one-serif slot that Instrument Serif
+holds in Apple mode (product names, the lead's company, the idle caption, the brief
+headline), so there is still only one serif on screen at a time. A mode change
+cross-fades colours for 0.75s (`html.mode-shift`); reduced motion cuts it.
+"Demo. Not affiliated with Dior." is always visible in perfume mode.
+
+## Product spotlight
+
+`product_spotlight` events put a product on the console mid-call
+(`components/ProductSpotlight.tsx`): a 3D stage (plain three.js, procedural
+bottle / amphora / lipstick / jar / compact / serum, `ProductViewer3D.tsx`), the
+details, an olfactory pyramid for fragrance, key ingredients for makeup and
+skincare, a device glyph for Apple, and a strip of the last four. The voice band
+compacts to make room; the transcript stays on screen. The same card is the
+dashboard catalog's detail view.
+
 ## Refused
 
 No chat bubbles, no card-per-stat dashboards, no colour used as decoration, no second

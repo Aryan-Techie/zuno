@@ -24,6 +24,17 @@ const PALETTE: Record<string, string[]> = {
   hold: ["#c7c7cc", "#d1d1d6", "#e5e5ea"],
 };
 
+/** Perfume mode's orb: champagne and ivory for Zuno, a muted blush for the
+ * caller - the same cool/warm split, re-dressed for the couture theme. */
+const PERFUME_PALETTE: Record<string, string[]> = {
+  idle: ["#e6d3b3", "#f1e6d2", "#d2b78c"],
+  zuno: ["#b8925a", "#e9d4a8", "#8c6a3c"],
+  you: ["#c98f84", "#e7b9ab", "#a8695e"],
+  think: ["#d9c29a", "#b8925a", "#efe3cc"],
+  ended: ["#a9b48f", "#e6d3b3", "#c9a96e"],
+  hold: ["#c7c2ba", "#d6d1c9", "#e5e1da"],
+};
+
 const BAR_COUNT = 72;
 
 /**
@@ -103,7 +114,8 @@ export function Orb({
       amp += (target - amp) * Math.min(1, dt * 9);
 
       const key = hold ? "hold" : phase === "ended" ? "ended" : speaker === "none" ? "idle" : speaker;
-      PALETTE[key].map(hex).forEach((c, i) =>
+      const palettes = document.documentElement.dataset.mode === "perfume" ? PERFUME_PALETTE : PALETTE;
+      palettes[key].map(hex).forEach((c, i) =>
         c.forEach((v, j) => {
           cur[i][j] += (v - cur[i][j]) * Math.min(1, dt * 3);
         })
@@ -118,8 +130,8 @@ export function Orb({
       const dark = document.documentElement.dataset.theme === "dark";
       const { phase } = propsRef.current;
       const cx = W / 2;
-      const cy = H / 2 - (phase === "idle" ? 30 : 8);
-      const base = Math.min(W, H) * (phase === "idle" ? 0.27 : 0.23);
+      const cy = H / 2 - (phase === "idle" ? 70 : 0);
+      const base = Math.min(W, H) * (phase === "idle" ? 0.25 : 0.23);
       const R = base * (1 + 0.2 * amp);
       const col = (i: number, a: number) => `rgba(${cur[i][0] | 0},${cur[i][1] | 0},${cur[i][2] | 0},${a})`;
 
