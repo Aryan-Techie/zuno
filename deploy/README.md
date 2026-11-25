@@ -316,3 +316,41 @@ gh release create v1.0.0 ./zuno-1.0.0.apk \
 
 Without the `gh` CLI, do the same thing in the browser: **repo → Releases →
 Draft a new release → Attach binaries**.
+
+---
+
+## Sharing a box with another stack
+
+The live ZUNO shares its Oracle VM with other projects, and one of them
+already runs a Caddy container on :80 and :443. Two processes cannot own
+those ports, so on a shared box ZUNO starts **without** its own Caddy (the
+`caddy` service sits behind the `standalone` profile) and borrows the
+existing one:
+
+```bash
+# on the box, from ~/zuno
+docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.production up -d --build
+bash deploy/cohost.sh <existing caddy container> <the Caddyfile it mounts>
+```
+
+`cohost.sh` attaches that Caddy to ZUNO's compose network, renders
+`deploy/Caddyfile` with container names (`zuno-backend`, `zuno-frontend`,
+`zuno-espocrm`, `zuno-espocrm-ws`) so nothing collides with the other
+stack's service names, appends it between `# >>> zuno` / `# <<< zuno`
+markers, validates, and reloads. Re-running replaces the block. A config
+that fails validation is rolled back before anything reloads.
+
+On a box of its own, ZUNO's Caddy comes back with one flag:
+
+```bash
+docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.production --profile standalone up -d --build
+```
+
+### No domain yet?
+
+`ZUNO_DOMAIN=zuno.<ip-with-dashes>.sslip.io` works with no DNS setup at
+all: sslip.io answers any name that embeds an IP with that IP, so Caddy
+can get a real Let's Encrypt certificate for it on first request. The
+live demo runs on `zuno.141-148-201-8.sslip.io` this way; moving to a
+real domain later is two A records and a frontend rebuild (the backend
+URL is baked into the client bundle).

@@ -16,6 +16,11 @@ services:
     image: caddy:2
     container_name: zuno-caddy
     restart: unless-stopped
+    # Only one process on a box can own :80 and :443. On a box of its own,
+    # start with `--profile standalone` and this Caddy serves ZUNO. On a box
+    # that already runs a Caddy for another stack, leave the profile off and
+    # run deploy/cohost.sh, which adds ZUNO's two hostnames to that Caddy.
+    profiles: ["standalone"]
     # The only two ports open to the internet. Everything else talks over the
     # compose network and is unreachable from outside the box - the backend,
     # the database and Espo's HTTP port are deliberately NOT published.
