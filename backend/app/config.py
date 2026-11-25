@@ -269,6 +269,20 @@ class Settings(BaseSettings):
     # once ready to prevent unauthenticated calls to a publicly exposed endpoint.
     llm_shared_secret: str = ""
 
+    # Which persona a new call starts in: "apple" (device sales, the original
+    # product) or "perfume" (a beauty advisor for a boutique that carries Dior
+    # beauty). The caller can switch mid-call by saying "Dior mode" or "Apple
+    # mode", and the console can switch it too - see app/modes/. Anything
+    # unrecognised falls back to apple rather than failing a call start.
+    default_mode: str = "apple"
+    # Zuno's own voice in perfume mode, so the switch is audible as well as
+    # visible. Blank takes the language profile's choice (app/language/
+    # profiles.py, `mode_voices`). The Sarvam one defaults to the same
+    # speaker as apple mode: only priya/kabir/dev are confirmed bulbul:v3
+    # names on this account, and a speaker Sarvam rejects is a silent call.
+    perfume_minimax_voice_id: str = ""
+    perfume_sarvam_speaker: str = ""
+
 
 @lru_cache
 def get_settings() -> Settings:

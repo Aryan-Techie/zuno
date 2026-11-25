@@ -123,7 +123,7 @@ def _build_asr_params(settings: Settings, profile: LanguageProfile) -> dict:
     return {}
 
 
-def _build_tts_params(settings: Settings, profile: LanguageProfile) -> dict:
+def _build_tts_params(settings: Settings, profile: LanguageProfile, mode: str = "apple") -> dict:
     """minimax + managed mode confirmed working the same way as deepgram
     above (real endpoint URL, no key needed). elevenlabs stays available as
     a byok fallback if the user switches TTS_VENDOR explicitly.
@@ -144,7 +144,7 @@ def _build_tts_params(settings: Settings, profile: LanguageProfile) -> dict:
             "url": MINIMAX_WS_URL,
             "model": settings.minimax_model,
             "voice_setting": {
-                "voice_id": settings.minimax_voice_id or profile.voice_id,
+                "voice_id": settings.minimax_voice_id or _zuno_minimax_voice(settings, profile, mode),
                 "speed": settings.minimax_speed if settings.minimax_speed is not None else profile.speech_speed,
                 "vol": settings.minimax_vol,
                 "pitch": settings.minimax_pitch,
@@ -179,7 +179,7 @@ def _build_tts_params(settings: Settings, profile: LanguageProfile) -> dict:
         params = {
             "api_subscription_key": settings.sarvam_api_key,
             "model": settings.sarvam_model,
-            "speaker": settings.sarvam_speaker or profile.sarvam_speaker,
+            "speaker": settings.sarvam_speaker or _zuno_sarvam_speaker(settings, profile, mode),
             "target_language_code": profile.sarvam_language_code,
             "pace": settings.sarvam_pace,
             "sample_rate": settings.sarvam_sample_rate,
@@ -191,6 +191,18 @@ def _build_tts_params(settings: Settings, profile: LanguageProfile) -> dict:
     return {}
 
 
+def _zuno_minimax_voice(settings: Settings, profile: LanguageProfile, mode: str) -> str:
+    from app.voice.director import resolve_voice
+
+    return resolve_voice(profile, mode=mode, settings=settings)
+
+
+def _zuno_sarvam_speaker(settings: Settings, profile: LanguageProfile, mode: str) -> str:
+    from app.voice.director import resolve_sarvam_target
+
+    return resolve_sarvam_target(profile, mode=mode, settings=settings)["speaker"]
+
+
 def build_join_payload(
     *,
     session_id: str,
@@ -200,12 +212,17 @@ def build_join_payload(
     agent_token: str,
     llm_url: str,
     settings: Settings,
+    mode: str = "apple",
 ) -> dict:
+    """`mode` is the mode the call starts in (app/modes/). It picks the
+    opening line and Zuno's starting voice - the two things Agora speaks with
+    before our webhook has run at all."""
     profile = profile_for(settings)
     warn_on_language_overrides(settings, profile)
 
     markup_ok = supports_speech_markup(settings)
-    greeting = profile.greeting if markup_ok else strip_speech_markup(profile.greeting)
+    opening = profile.mode_greetings.get(mode) or profile.greeting
+    greeting = opening if markup_ok else strip_speech_markup(opening)
     failure_message = profile.failure_message if markup_ok else strip_speech_markup(profile.failure_message)
 
     return {
@@ -238,7 +255,7 @@ def build_join_payload(
             "tts": {
                 "vendor": settings.tts_vendor,
                 "credential_mode": settings.tts_credential_mode,
-                "params": _build_tts_params(settings, profile),
+                "params": _build_tts_params(settings, profile, mode),
             },
             "llm": {
                 "url": llm_url,

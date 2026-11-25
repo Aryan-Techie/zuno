@@ -12,6 +12,7 @@ from app.background import run_in_background
 from app.config import Settings, get_settings
 from app.crm import service as crm_service
 from app.handoff import service as handoff_service
+from app.modes import Mode, coerce_mode
 from app.notify import service as notify_service
 from app.sessions.models import SessionState
 from app.sessions.store import SessionStore, session_store
@@ -46,9 +47,14 @@ def start_call(
     rtm_token_builder: RtmTokenBuilder = _default_rtm_token_builder,
     settings: Settings | None = None,
     store: SessionStore = session_store,
+    mode: Mode | None = None,
 ) -> dict:
     settings = settings or get_settings()
     agora_client = agora_client or default_agora_client()
+    # The mode the call starts in: the console's choice, else the deployment's
+    # default. Decided before the join, because the greeting Agora speaks
+    # first and Zuno's starting voice both depend on it.
+    mode = mode or coerce_mode(settings.default_mode)
 
     session_id = uuid.uuid4().hex
     channel_name = f"zuno-{session_id[:8]}"
@@ -72,6 +78,7 @@ def start_call(
         agent_token=agent_token,
         llm_url=llm_url,
         settings=settings,
+        mode=mode,
     )
 
     join_response = agora_client.join(payload)
@@ -79,6 +86,7 @@ def start_call(
     session = store.get_or_create(session_id)
     session.agora_channel = channel_name
     session.agent_id = join_response.get("agent_id")
+    session.mode = mode
     store.save(session)
 
     return {
@@ -89,6 +97,7 @@ def start_call(
         "rtc_token": browser_token,
         "rtm_token": browser_rtm_token,
         "agent_id": session.agent_id,
+        "mode": session.mode,
     }
 
 

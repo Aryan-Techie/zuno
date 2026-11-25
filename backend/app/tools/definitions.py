@@ -318,3 +318,133 @@ TOOLS: list[dict] = [
         },
     },
 ]
+
+# Both modes. Placed last so the Apple schemas above stay byte-identical to
+# what scripts/bench_llm.py measured tool selection against.
+SHOW_PRODUCT_TOOL: dict = {
+    "name": "show_product",
+    "description": (
+        "Put one product on the customer's screen while you talk about it. Call it when a "
+        "specific product becomes the subject - one you are recommending or one they asked "
+        "about - in the SAME step as any other tool you are calling; never spend a step on it "
+        "alone, because the screen also follows the product names said on the call. Returns "
+        "the catalog's own facts about the product (sizes, prices, notes), which are the only "
+        "facts about it you may state."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "product": {
+                "type": "string",
+                "description": "The product's name as the catalog has it, e.g. 'Sauvage Eau de Parfum' or 'MacBook Air (M5)'.",
+            }
+        },
+        "required": ["product"],
+    },
+}
+
+TOOLS.append(SHOW_PRODUCT_TOOL)
+
+
+# Perfume mode re-describes the tools the boutique uses differently. Same
+# names and the same handlers - only what the model is told they are for
+# changes, so a tool chosen in one persona cannot leak the other's framing
+# ("deployment engineer", "devices") into the conversation.
+_PERFUME_DESCRIPTIONS: dict[str, str] = {
+    "search_pricing_rag": (
+        "Search the boutique's knowledge base: every Dior fragrance, makeup and skincare product "
+        "we carry (olfactory family, notes, concentration, sizes and HK$ prices) and the "
+        "boutique's own policies (samples, engraving, gift wrap, delivery across Hong Kong, "
+        "returns, consultations). Always use this before recommending or pricing anything - "
+        "never describe a product, a note or a price from memory."
+    ),
+    "check_inventory": (
+        "Check how many units of a product the boutique has on hand right now. Use it for "
+        "anything about availability - 'do you have it', 'is the 100 ml in stock', 'can I pick "
+        "it up today', 'I need twelve for the office'. search_pricing_rag does NOT know stock. "
+        "Never state availability without calling this first."
+    ),
+    "ask_solutions_engineer": (
+        "Put a detailed product question to the boutique's senior fragrance and skincare "
+        "specialist - ingredients and allergens, sensitive skin, how a scent wears and how "
+        "long it lasts, layering, which concentration or formula suits. Use it whenever "
+        "search_pricing_rag does not settle one, instead of guessing and instead of "
+        "escalating. Not for prices - those are fixed and in the knowledge base."
+    ),
+    "negotiate_deal": (
+        "Required whenever the customer asks for a discount, a better price, a promo code or a "
+        "price match, or names a budget below the price. Boutique prices are fixed: this "
+        "returns the complimentary extras you may offer instead and, ONLY for a corporate "
+        "gifting order of 10 or more pieces, a small authorised corporate price. Never offer "
+        "any discount, percentage or price that did not come from this tool."
+    ),
+    "calendar_check_availability": (
+        "Check open slots for an in-boutique consultation (fragrance, makeup or skincare), "
+        "optionally within a date range (ISO 8601 datetimes)."
+    ),
+    "calendar_book_meeting": "Book an in-boutique consultation slot by its slot_id (from calendar_check_availability).",
+}
+
+_PERFUME_PROPERTY_DESCRIPTIONS: dict[str, dict[str, str]] = {
+    "crm_upsert_lead": {
+        "company": "Their company - ONLY for a corporate gifting order, never for a personal purchase.",
+        "user_count": "How many pieces they want, e.g. 2, or 25 for a corporate gifting order.",
+        "budget_range": "Budget as stated, in their words, e.g. 'around fifteen hundred Hong Kong dollars'.",
+        "timeline": "When they need it, e.g. 'before her birthday on the 12th'.",
+        "pain_points": (
+            "What they are looking for, in their words: who it is for, the occasion, notes they "
+            "love or dislike, how intense they like it."
+        ),
+        "title": "Only for a corporate gifting order: their role.",
+        "industry": "Only for a corporate gifting order: the company's industry.",
+    },
+    "negotiate_deal": {
+        "device_mix": (
+            "The products and quantities, e.g. [{'model': 'Sauvage Eau de Parfum 100 ml', "
+            "'quantity': 20}]. Omitted, the product on screen is used."
+        ),
+        "trade_in_devices": "Not used at the boutique - leave it out.",
+        "financing": "Not used at the boutique - leave it out.",
+        "target_unit_price": "Only if they named a price per piece, in HK$.",
+        "target_total_price": "Only if they named a total, in HK$.",
+    },
+    "check_inventory": {
+        "product": (
+            "The product as the customer named it, e.g. 'Sauvage', 'the Miss Dior 50 ml', "
+            "'Rouge Dior 999'."
+        ),
+        "quantity": "How many they asked for, if they named a number.",
+    },
+}
+
+_CORPORATE_GIFTING_PROPERTY = {
+    "type": "boolean",
+    "description": "True only when a company is buying these as gifts (clients, staff, an event).",
+}
+
+
+def _perfume_tools() -> list[dict]:
+    import copy
+
+    tools = copy.deepcopy(TOOLS)
+    for tool in tools:
+        name = tool["name"]
+        if name in _PERFUME_DESCRIPTIONS:
+            tool["description"] = _PERFUME_DESCRIPTIONS[name]
+        properties = tool["input_schema"].get("properties", {})
+        for prop, description in _PERFUME_PROPERTY_DESCRIPTIONS.get(name, {}).items():
+            if prop in properties:
+                properties[prop]["description"] = description
+        if name == "negotiate_deal":
+            properties["corporate_gifting"] = dict(_CORPORATE_GIFTING_PROPERTY)
+    return tools
+
+
+_TOOLS_BY_MODE: dict[str, list[dict]] = {"apple": TOOLS}
+
+
+def tools_for(mode: str) -> list[dict]:
+    """The tool schemas the model sees in `mode`. Built once per mode."""
+    if mode not in _TOOLS_BY_MODE:
+        _TOOLS_BY_MODE[mode] = _perfume_tools() if mode == "perfume" else TOOLS
+    return _TOOLS_BY_MODE[mode]

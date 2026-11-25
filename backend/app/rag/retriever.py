@@ -67,30 +67,34 @@ class KeywordIndex:
         return results[:top_k]
 
 
-_index: KeywordIndex | None = None
+# One index per mode. Each mode's knowledge base is its own business, and a
+# shared index would let a perfume question score against Apple's FAQ.
+_indexes: dict[str, KeywordIndex] = {}
 
 
-def get_index() -> KeywordIndex:
-    global _index
-    if _index is None:
-        _index = KeywordIndex(build_corpus())
-    return _index
+def get_index(mode: str = "apple") -> KeywordIndex:
+    index = _indexes.get(mode)
+    if index is None:
+        index = _indexes[mode] = KeywordIndex(build_corpus(mode))
+    return index
 
 
-def reset_index() -> None:
-    """Drops the cached index so the next search() rebuilds the corpus from
-    disk - called after an admin adds a product, so it's searchable
-    immediately rather than only after a process restart."""
-    global _index
-    _index = None
+def reset_index(mode: str | None = None) -> None:
+    """Drops the cached index (one mode's, or all) so the next search()
+    rebuilds the corpus from disk - called after an admin adds a product, so
+    it's searchable immediately rather than only after a process restart."""
+    if mode is None:
+        _indexes.clear()
+    else:
+        _indexes.pop(mode, None)
 
 
-def search(query: str, top_k: int = 4) -> list[SearchResult]:
-    return get_index().search(query, top_k=top_k)
+def search(query: str, top_k: int = 4, mode: str = "apple") -> list[SearchResult]:
+    return get_index(mode).search(query, top_k=top_k)
 
 
-def top_score(query: str) -> float:
+def top_score(query: str, mode: str = "apple") -> float:
     """Highest match score for a query — used by the escalation guardrail
     to detect a likely-unanswerable question (low RAG confidence)."""
-    results = search(query, top_k=1)
+    results = search(query, top_k=1, mode=mode)
     return results[0].score if results else 0.0

@@ -10,6 +10,15 @@ from pathlib import Path
 from pydantic import BaseModel
 
 DOCS_DIR = Path(__file__).parent / "docs"
+# The boutique's knowledge base: fragrance/makeup/skincare docs generated from
+# the perfume catalog by scripts/build_perfume_docs.py, plus the hand-written
+# boutique_faq.md. Kept in its own directory so each mode searches only its
+# own business - an Apple caller asking about "trade-in" must never be handed
+# a paragraph about gift wrap, and the other way round.
+DOCS_PERFUME_DIR = Path(__file__).parent / "docs_perfume"
+
+# Overridable per mode (tests point "perfume" at a generated temp dir).
+DOCS_DIRS: dict[str, Path] = {"apple": DOCS_DIR, "perfume": DOCS_PERFUME_DIR}
 
 
 class Chunk(BaseModel):
@@ -63,17 +72,21 @@ def _chunk_pricing_json(source: str, raw: str) -> list[Chunk]:
     return chunks
 
 
-def load_documents() -> list[tuple[str, str]]:
+def load_documents(docs_dir: Path = DOCS_DIR) -> list[tuple[str, str]]:
     docs = []
-    for path in sorted(DOCS_DIR.iterdir()):
+    if not docs_dir.is_dir():
+        # The perfume docs only exist once the build script has run; a mode
+        # with no documents searches an empty corpus rather than crashing.
+        return docs
+    for path in sorted(docs_dir.iterdir()):
         if path.is_file() and path.suffix in (".md", ".json"):
             docs.append((path.name, path.read_text(encoding="utf-8")))
     return docs
 
 
-def build_corpus() -> list[Chunk]:
+def build_corpus(mode: str = "apple") -> list[Chunk]:
     chunks: list[Chunk] = []
-    for source, raw in load_documents():
+    for source, raw in load_documents(DOCS_DIRS.get(mode, DOCS_DIR)):
         if source.endswith(".json"):
             chunks.extend(_chunk_pricing_json(source, raw))
         else:

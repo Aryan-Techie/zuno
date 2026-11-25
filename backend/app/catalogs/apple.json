@@ -1,0 +1,690 @@
+[
+  {
+    "id": "apple-macbook-air-m5",
+    "brand": "Apple",
+    "name": "MacBook Air (M5)",
+    "line": "MacBook Air",
+    "category": "mac",
+    "subcategory": "mac",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "13-inch, 18-hour battery; also in 15-inch.",
+    "sizes": [
+      {
+        "label": "13-inch",
+        "price_usd": 999
+      }
+    ],
+    "price_usd_from": 999,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#c7c9cc",
+    "aliases": [
+      "macbook air",
+      "mac book air",
+      "macbook air m5",
+      "macbook air m five"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-macbook-pro-m5",
+    "brand": "Apple",
+    "name": "MacBook Pro (M5)",
+    "line": "MacBook Pro",
+    "category": "mac",
+    "subcategory": "mac",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "14-inch; for engineering/design-heavy roles; also available in M5 Pro and M5 Max, and a 16-inch size.",
+    "sizes": [
+      {
+        "label": "14-inch",
+        "price_usd": 1599
+      }
+    ],
+    "price_usd_from": 1599,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#c7c9cc",
+    "aliases": [
+      "macbook pro",
+      "mac book pro",
+      "macbook pro m5",
+      "macbook pro m five"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-mac-mini",
+    "brand": "Apple",
+    "name": "Mac mini",
+    "line": "Mac mini",
+    "category": "mac",
+    "subcategory": "mac",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Desktop; for fixed workstations, labs, kiosks.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 599
+      }
+    ],
+    "price_usd_from": 599,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#c7c9cc",
+    "aliases": [
+      "mac mini"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-mac-studio",
+    "brand": "Apple",
+    "name": "Mac Studio",
+    "line": "Mac Studio",
+    "category": "mac",
+    "subcategory": "mac",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "M5 Max or M5 Ultra; for heavy compute/render workloads.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 1999
+      }
+    ],
+    "price_usd_from": 1999,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#c7c9cc",
+    "aliases": [
+      "mac studio"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-imac-m4",
+    "brand": "Apple",
+    "name": "iMac (M4)",
+    "line": "iMac",
+    "category": "mac",
+    "subcategory": "mac",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "All-in-one desktop.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 1299
+      }
+    ],
+    "price_usd_from": 1299,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#c7c9cc",
+    "aliases": [
+      "imac",
+      "i mac"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-iphone-17e",
+    "brand": "Apple",
+    "name": "iPhone 17e",
+    "line": "iPhone",
+    "category": "iphone",
+    "subcategory": "iphone",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Entry-level, A19 chip.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 699
+      }
+    ],
+    "price_usd_from": 699,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#3a3a3c",
+    "aliases": [
+      "iphone 17e",
+      "iphone seventeen e",
+      "iphone 17 e"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-iphone-17",
+    "brand": "Apple",
+    "name": "iPhone 17",
+    "line": "iPhone",
+    "category": "iphone",
+    "subcategory": "iphone",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "iPhone 17, from $899.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 899
+      }
+    ],
+    "price_usd_from": 899,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#3a3a3c",
+    "aliases": [
+      "iphone 17",
+      "iphone seventeen"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-iphone-air",
+    "brand": "Apple",
+    "name": "iPhone Air",
+    "line": "iPhone",
+    "category": "iphone",
+    "subcategory": "iphone",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Thinnest model in the lineup, single rear camera.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 1099
+      }
+    ],
+    "price_usd_from": 1099,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#3a3a3c",
+    "aliases": [
+      "iphone air"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-iphone-18-pro",
+    "brand": "Apple",
+    "name": "iPhone 18 Pro",
+    "line": "iPhone",
+    "category": "iphone",
+    "subcategory": "iphone",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "6.3-inch; 6.9-inch model from $1299.",
+    "sizes": [
+      {
+        "label": "6.3-inch",
+        "price_usd": 1199
+      },
+      {
+        "label": "6.9-inch",
+        "price_usd": 1299
+      }
+    ],
+    "price_usd_from": 1199,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#3a3a3c",
+    "aliases": [
+      "iphone 18 pro",
+      "iphone eighteen pro",
+      "iphone 18 pro max",
+      "iphone eighteen pro max"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-iphone-duo",
+    "brand": "Apple",
+    "name": "iPhone Duo",
+    "line": "iPhone",
+    "category": "iphone",
+    "subcategory": "iphone",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Foldable, 7.6-inch inner display, A20 Pro chip.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 1999
+      }
+    ],
+    "price_usd_from": 1999,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#3a3a3c",
+    "aliases": [
+      "iphone duo",
+      "iphone fold",
+      "foldable iphone"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-ipad",
+    "brand": "Apple",
+    "name": "iPad",
+    "line": "iPad",
+    "category": "ipad",
+    "subcategory": "ipad",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Field teams, shared-device kiosks; A16 chip.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 449
+      }
+    ],
+    "price_usd_from": 449,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#d9dadc",
+    "aliases": [
+      "ipad",
+      "ipads"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-ipad-mini",
+    "brand": "Apple",
+    "name": "iPad mini",
+    "line": "iPad",
+    "category": "ipad",
+    "subcategory": "ipad",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "A17 Pro chip; pocketable field/inventory use.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 599
+      }
+    ],
+    "price_usd_from": 599,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#d9dadc",
+    "aliases": [
+      "ipad mini"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-ipad-air-m4",
+    "brand": "Apple",
+    "name": "iPad Air (M4)",
+    "line": "iPad",
+    "category": "ipad",
+    "subcategory": "ipad",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "iPad Air (M4), from $749.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 749
+      }
+    ],
+    "price_usd_from": 749,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#d9dadc",
+    "aliases": [
+      "ipad air"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-ipad-pro-m5",
+    "brand": "Apple",
+    "name": "iPad Pro (M5)",
+    "line": "iPad",
+    "category": "ipad",
+    "subcategory": "ipad",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "11-inch; 13-inch model from $1499.",
+    "sizes": [
+      {
+        "label": "11-inch",
+        "price_usd": 1199
+      },
+      {
+        "label": "13-inch",
+        "price_usd": 1499
+      }
+    ],
+    "price_usd_from": 1199,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#d9dadc",
+    "aliases": [
+      "ipad pro",
+      "ipad pro m5"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-apple-watch-se-3",
+    "brand": "Apple",
+    "name": "Apple Watch SE 3",
+    "line": "Apple Watch",
+    "category": "accessory",
+    "subcategory": "watch",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Essential health/notifications for field staff.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 249
+      }
+    ],
+    "price_usd_from": 249,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#f2f2f7",
+    "aliases": [
+      "apple watch se",
+      "watch se"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-apple-watch-series-12",
+    "brand": "Apple",
+    "name": "Apple Watch Series 12",
+    "line": "Apple Watch",
+    "category": "accessory",
+    "subcategory": "watch",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Apple Watch Series 12, from $399.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 399
+      }
+    ],
+    "price_usd_from": 399,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#f2f2f7",
+    "aliases": [
+      "apple watch series 12",
+      "apple watch",
+      "watch series 12"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-apple-watch-ultra-4",
+    "brand": "Apple",
+    "name": "Apple Watch Ultra 4",
+    "line": "Apple Watch",
+    "category": "accessory",
+    "subcategory": "watch",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Rugged, for outdoor/field roles.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 799
+      }
+    ],
+    "price_usd_from": 799,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#f2f2f7",
+    "aliases": [
+      "apple watch ultra",
+      "watch ultra"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-airpods-5",
+    "brand": "Apple",
+    "name": "AirPods 5",
+    "line": "AirPods",
+    "category": "accessory",
+    "subcategory": "airpods",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "AirPods 5, from $129.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 129
+      }
+    ],
+    "price_usd_from": 129,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#f2f2f7",
+    "aliases": [
+      "airpods",
+      "air pods",
+      "airpods 5"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-airpods-pro-3",
+    "brand": "Apple",
+    "name": "AirPods Pro 3",
+    "line": "AirPods",
+    "category": "accessory",
+    "subcategory": "airpods",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Active noise cancellation, common add-on for call-center/field roles.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 249
+      }
+    ],
+    "price_usd_from": 249,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#f2f2f7",
+    "aliases": [
+      "airpods pro",
+      "air pods pro"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-airpods-max-2",
+    "brand": "Apple",
+    "name": "AirPods Max 2",
+    "line": "AirPods",
+    "category": "accessory",
+    "subcategory": "airpods",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "AirPods Max 2, from $549.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 549
+      }
+    ],
+    "price_usd_from": 549,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#f2f2f7",
+    "aliases": [
+      "airpods max",
+      "air pods max"
+    ],
+    "stock": null
+  },
+  {
+    "id": "apple-ipad-10",
+    "brand": "Apple",
+    "name": "iPad 10th gen",
+    "line": "iPad",
+    "category": "ipad",
+    "subcategory": "ipad",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Stock model (SKU IPAD-10), lead time 3 days.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 349
+      }
+    ],
+    "price_usd_from": 349,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#d9dadc",
+    "aliases": [
+      "ipad 10th gen",
+      "ipad tenth generation",
+      "ipad 10"
+    ],
+    "stock": 240
+  },
+  {
+    "id": "apple-ipadpro-m4-11",
+    "brand": "Apple",
+    "name": "iPad Pro M4 11-inch",
+    "line": "iPad",
+    "category": "ipad",
+    "subcategory": "ipad",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Stock model (SKU IPADPRO-M4-11), lead time 7 days.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 999
+      }
+    ],
+    "price_usd_from": 999,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#d9dadc",
+    "aliases": [
+      "ipad pro m4",
+      "ipad pro m4 11 inch",
+      "ipad pro m four"
+    ],
+    "stock": 60
+  },
+  {
+    "id": "apple-mba-m3-13",
+    "brand": "Apple",
+    "name": "MacBook Air M3 13-inch",
+    "line": "MacBook Air",
+    "category": "mac",
+    "subcategory": "macbook air",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Stock model (SKU MBA-M3-13), lead time 5 days.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 1099
+      }
+    ],
+    "price_usd_from": 1099,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#c7c9cc",
+    "aliases": [
+      "macbook air m3",
+      "macbook air m three",
+      "mac book air m3"
+    ],
+    "stock": 85
+  },
+  {
+    "id": "apple-iphone-15",
+    "brand": "Apple",
+    "name": "iPhone 15",
+    "line": "iPhone",
+    "category": "iphone",
+    "subcategory": "iphone",
+    "gender": null,
+    "family": null,
+    "notes": null,
+    "key_ingredients": [],
+    "description": "Stock model (SKU IPHONE-15), lead time 21 days.",
+    "sizes": [
+      {
+        "label": "base model",
+        "price_usd": 799
+      }
+    ],
+    "price_usd_from": 799,
+    "image_url": null,
+    "url": null,
+    "color_hex": "#3a3a3c",
+    "aliases": [
+      "iphone 15",
+      "iphone fifteen"
+    ],
+    "stock": 0
+  }
+]

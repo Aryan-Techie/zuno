@@ -79,7 +79,24 @@ def _recap_lines(session: SessionState) -> list[str]:
     return lines
 
 
-def _body(*, lead: Lead, slot: Slot, label: str, recap: list[str]) -> str:
+# Who the email is from and what was booked, per mode (app/modes/). A
+# perfume caller who booked a boutique consultation and receives "your Apple
+# Sales demo" has been told the call was not about them.
+_BRAND = {
+    "apple": {"team": "Apple Sales", "meeting": "demo", "assistant": "the Apple Sales voice assistant"},
+    "perfume": {
+        "team": "the ZUNO beauty boutique",
+        "meeting": "consultation",
+        "assistant": "the boutique's beauty advisor",
+    },
+}
+
+
+def _brand(session) -> dict:
+    return _BRAND.get(getattr(session, "mode", "apple"), _BRAND["apple"])
+
+
+def _body(*, lead: Lead, slot: Slot, label: str, recap: list[str], brand: dict = _BRAND["apple"]) -> str:
     greeting = f"Hi {lead.name.split()[0]}," if lead.name else "Hi,"
     company = f" for {lead.company}" if lead.company else ""
 
@@ -87,7 +104,7 @@ def _body(*, lead: Lead, slot: Slot, label: str, recap: list[str]) -> str:
         greeting,
         "",
         f"Thanks for your time just now. Your meeting{company} with {slot.rep_name} "
-        f"from Apple Sales is confirmed for {label}.",
+        f"from {brand['team']} is confirmed for {label}.",
         "",
         "The invitation is attached - accept it and it will drop straight into "
         "your calendar.",
@@ -99,7 +116,7 @@ def _body(*, lead: Lead, slot: Slot, label: str, recap: list[str]) -> str:
         "If that time stops working, reply to this email and we will move it.",
         "",
         "Zuno",
-        "Apple Sales",
+        brand["team"][0].upper() + brand["team"][1:],
     ]
     return "\n".join(parts)
 
@@ -152,9 +169,11 @@ def send_booking_confirmation(
 
         label = slot_label(slot.start)
         recap = _recap_lines(session) if include_recap else []
+        brand = _brand(session)
+        team = brand["team"][0].upper() + brand["team"][1:]
         description = (
-            f"Apple Sales consultation with {slot.rep_name}.\n"
-            f"Booked on a call with Zuno, the Apple Sales voice assistant.\n"
+            f"{team} consultation with {slot.rep_name}.\n"
+            f"Booked on a call with Zuno, {brand['assistant']}.\n"
             f"Reference: {session.session_id}"
         )
         invite = ics.build_invite(
@@ -164,7 +183,7 @@ def send_booking_confirmation(
             uid=f"zuno-{session.session_id}@zuno.local",
             start=slot.start,
             end=slot.end,
-            summary=f"Apple Sales demo - {slot.rep_name}",
+            summary=f"{team} {brand['meeting']} - {slot.rep_name}",
             description=description,
             location=MEETING_LOCATION,
             organizer_email=from_email,
@@ -173,12 +192,12 @@ def send_booking_confirmation(
             attendee_name=lead.name,
         )
         message = mailer.build_message(
-            subject=f"Confirmed: your Apple Sales demo, {label}",
+            subject=f"Confirmed: your {brand['team'].removeprefix('the ')} {brand['meeting']}, {label}",
             from_email=from_email,
             from_name=from_name,
             to_email=to_email,
             to_name=lead.name,
-            text_body=_body(lead=lead, slot=slot, label=label, recap=recap),
+            text_body=_body(lead=lead, slot=slot, label=label, recap=recap, brand=brand),
             ics_text=invite,
             bcc=settings.email_bcc,
             reply_to=settings.email_reply_to or from_email,

@@ -95,26 +95,68 @@ AGENT_BY_TOOL = {
 }
 
 
-def agent_for_tools(tool_names) -> str:
-    """The layer whose answer this turn is about to relay."""
+def agent_for_tools(tool_names, mode: str = "apple") -> str:
+    """The layer whose answer this turn is about to relay.
+
+    In perfume mode negotiate_deal is a fixed rule, not a second agent (see
+    app/deal/boutique.py): nobody else answered, so nobody else's voice should
+    either.
+    """
     for name in tool_names or ():
+        if mode == "perfume" and name == "negotiate_deal":
+            continue
         role = AGENT_BY_TOOL.get(name)
         if role:
             return role
     return "zuno"
 
 
-def resolve_voice(profile: LanguageProfile, *, role: str = "zuno", language: str | None = None) -> str:
+def _mode_voice(profile: LanguageProfile, mode: str, settings=None) -> str | None:
+    """Zuno's MiniMax voice for a mode other than apple, or None to keep the
+    profile's. A PERFUME_MINIMAX_VOICE_ID setting outranks the profile."""
+    if mode == "apple":
+        return None
+    if mode == "perfume" and settings is not None and getattr(settings, "perfume_minimax_voice_id", ""):
+        return settings.perfume_minimax_voice_id
+    return profile.mode_voices.get(mode) or None
+
+
+def _mode_sarvam_speaker(profile: LanguageProfile, mode: str, settings=None) -> str | None:
+    if mode == "apple":
+        return None
+    if mode == "perfume" and settings is not None and getattr(settings, "perfume_sarvam_speaker", ""):
+        return settings.perfume_sarvam_speaker
+    return profile.sarvam_mode_speakers.get(mode) or None
+
+
+def resolve_voice(
+    profile: LanguageProfile,
+    *,
+    role: str = "zuno",
+    language: str | None = None,
+    mode: str = "apple",
+    settings=None,
+) -> str:
     """The MiniMax voice that should be speaking, given who is talking and in
     what language. Role wins over language: the deal desk sounding like the
     deal desk is the point, and it has one voice per profile rather than one
-    per language, which keeps this a lookup rather than a matrix."""
+    per language, which keeps this a lookup rather than a matrix.
+
+    The mode changes Zuno's own voice only, and only for an English reply - a
+    Hindi reply keeps the profile's Hindi voice, because those are the only
+    Hindi voices there are."""
     if role != "zuno":
         return profile.agent_voices.get(role) or profile.voice_id
-    return voice_for_language(profile, language)
+    voice = voice_for_language(profile, language)
+    mode_voice = _mode_voice(profile, mode, settings)
+    if mode_voice and voice == profile.voice_id and language in (None, "en"):
+        return mode_voice
+    return voice
 
 
-def resolve_sarvam_target(profile: LanguageProfile, *, role: str = "zuno") -> dict:
+def resolve_sarvam_target(
+    profile: LanguageProfile, *, role: str = "zuno", mode: str = "apple", settings=None
+) -> dict:
     """The Sarvam speaker/language pair for whoever is talking.
 
     Unlike MiniMax's voice ids, Sarvam speakers are cross-lingual, so there is
@@ -126,6 +168,8 @@ def resolve_sarvam_target(profile: LanguageProfile, *, role: str = "zuno") -> di
     speaker = profile.sarvam_speaker
     if role != "zuno":
         speaker = profile.sarvam_agent_speakers.get(role) or speaker
+    else:
+        speaker = _mode_sarvam_speaker(profile, mode, settings) or speaker
     return {"speaker": speaker, "target_language_code": profile.sarvam_language_code}
 
 
@@ -193,8 +237,11 @@ def follow(session, *, role: str = "zuno", spoken_language: str | None = None, *
 
     settings = get_settings()
     profile = get_profile(settings.agent_language)
+    mode = getattr(session, "mode", "apple")
     if settings.tts_vendor == "sarvam":
-        voice = resolve_sarvam_target(profile, role=role)
+        voice = resolve_sarvam_target(profile, role=role, mode=mode, settings=settings)
     else:
-        voice = resolve_voice(profile, role=role, language=spoken_language)
+        voice = resolve_voice(
+            profile, role=role, language=spoken_language, mode=mode, settings=settings
+        )
     return ensure_voice(session, voice, settings=settings, **kwargs)

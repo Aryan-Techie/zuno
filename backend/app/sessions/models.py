@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 from app.deal.models import NegotiationState
 from app.escalation.models import TranscriptTurn
 from app.memory.schema import LeftBrain, RightBrain
+from app.modes import Mode, default_mode
 
 SessionStatus = Literal["active", "ended", "escalated"]
 Outcome = Literal["meeting_booked", "escalated", "qualified", "disqualified", "follow_up"]
@@ -28,6 +29,28 @@ class SessionState(BaseModel):
     # skips one that did not. See notify/service.py.
     confirmation_sent: bool = False
     mem0_user_id: str | None = None  # defaults to session_id once memory (Step 4) is wired in
+
+    # Which business this call is selling for - see app/modes/. Read fresh on
+    # every turn (and every hop) rather than cached anywhere, so a switch said
+    # out loud or clicked on the console takes effect on the very next model
+    # call.
+    mode: Mode = Field(default_factory=default_mode)
+    # Set when the console switches mode, consumed by the next turn's prompt
+    # so the reply picks up the new persona with a bridge rather than as if
+    # nothing had happened. A voice switch does not need it: the turn that
+    # heard it is the turn that answers it.
+    pending_mode_switch: dict | None = None
+    # The catalog entry currently on the customer's screen (the console's
+    # product spotlight), or None. A whole CatalogProduct, not an id, so the
+    # events endpoint can hand it straight to the browser.
+    spotlight: dict | None = None
+    # product id -> epoch seconds it was last put on screen. The spotlight
+    # fires from the caller's words and from the model's show_product tool;
+    # this is what keeps the two from flashing the same card twice in a row.
+    spotlight_shown_at: dict[str, float] = Field(default_factory=dict)
+    # Catalog ids that were put on screen during the call, in order and once
+    # each - the "products" list in the call_ended integration event.
+    products_mentioned: list[str] = Field(default_factory=list)
 
     status: SessionStatus = "active"
     outcome: Outcome | None = None

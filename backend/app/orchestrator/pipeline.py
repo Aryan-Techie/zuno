@@ -10,11 +10,13 @@ import logging
 import time
 from typing import Callable, Iterator
 
+from app.catalogs import spotlight
 from app.config import get_settings
 from app.escalation import triggers
 from app.escalation.models import TranscriptTurn
 from app.language.profiles import strip_speech_markup
 from app.memory.session_memory import safe_recall, safe_write_back
+from app.modes import switch as mode_switch
 from app.orchestrator import bridge_lines
 from app.orchestrator.llm_client import (
     ChatLLMClient,
@@ -68,7 +70,8 @@ def _render_call_state(session: SessionState) -> str:
         contact = " / ".join(c for c in (left.email, left.phone) if c)
         facts.append(f"Contact on file: {contact}")
     if left.user_count is not None:
-        facts.append(f"Devices/users needed: {left.user_count}")
+        what = "Pieces wanted" if session.mode == "perfume" else "Devices/users needed"
+        facts.append(f"{what}: {left.user_count}")
     if left.budget_range:
         facts.append(f"Budget: {left.budget_range}")
     if left.timeline:
@@ -125,6 +128,9 @@ def _render_negotiation(session: SessionState) -> str:
     if offer is None:
         return ""
 
+    if session.mode == "perfume":
+        return _render_boutique_negotiation(negotiation, offer)
+
     lines = [
         f"- You have already offered {negotiation.granted_discount_pct:g}% off list "
         f"(round {negotiation.round_count}, authorised by {offer.authorised_by}). "
@@ -153,12 +159,52 @@ def _render_negotiation(session: SessionState) -> str:
     return "Where the negotiation stands:\n" + "\n".join(lines)
 
 
-def _build_system_prompt(session: SessionState, memories: list[str]) -> str:
-    blocks = [build_system_prompt()]
+def _render_boutique_negotiation(negotiation, offer) -> str:
+    """Perfume mode's version of the above: there is no ladder to restate,
+    only what was said about price and what was offered instead."""
+    extras = "; ".join(c.detail for c in offer.concessions if c.kind != "discount")
+    lines = [f"- The price as you gave it, verbatim: {offer.price_summary}"]
+    if negotiation.granted_discount_pct:
+        lines.append(
+            f"- Corporate gifting pricing of {negotiation.granted_discount_pct:g}% is authorised and "
+            "stands. It is the most the boutique gives - never offer more."
+        )
+    else:
+        lines.append(
+            "- No discount was given, and none can be: boutique prices are fixed. Never imply "
+            "otherwise later in the call."
+        )
+    if extras:
+        lines.append(f"- Complimentary extras you offered: {extras}")
+    lines.append("- If they push again, call negotiate_deal again rather than answering on your own.")
+    return "Where the price conversation stands:\n" + "\n".join(lines)
+
+
+def _render_spotlight(session: SessionState) -> str:
+    product = session.spotlight
+    if not product:
+        return ""
+    return (
+        f"On the customer's screen right now: {product.get('name')} (catalog id {product.get('id')}). "
+        "If they say \"this one\" or \"it\", they most likely mean this product."
+    )
+
+
+def _build_system_prompt(
+    session: SessionState, memories: list[str], mode_change: dict | None = None
+) -> str:
+    blocks = [build_system_prompt(session.mode)]
+
+    if mode_change:
+        blocks.append(mode_switch.switch_note(mode_change))
 
     call_state = _render_call_state(session)
     if call_state:
         blocks.append(call_state)
+
+    on_screen = _render_spotlight(session)
+    if on_screen:
+        blocks.append(on_screen)
 
     if memories:
         memory_block = "\n".join(f"- {m}" for m in memories)
@@ -227,6 +273,8 @@ def _execute_tool_calls(
             publisher.publish(session.session_id, "qualification_updated", session.left_brain.model_dump(mode="json"))
         elif call.name == "log_objection":
             publisher.publish(session.session_id, "objection_logged", result)
+        elif call.name == "show_product" and result.get("newly_shown") and session.spotlight:
+            spotlight.publish(session, session.spotlight, publisher)
         elif call.name == "calendar_book_meeting" and "error" not in result:
             publisher.publish(session.session_id, "call_outcome_set", {"outcome": "meeting_booked", **result})
         elif call.name == "negotiate_deal" and "error" not in result:
@@ -256,6 +304,10 @@ def _execute_tool_calls(
                     "commitments": [c.model_dump(mode="json") for c in offer.commitments] if offer else [],
                     "requires_human": offer.requires_human if offer else False,
                     "declined": offer.declined if offer else False,
+                    # USD for Apple, HKD at the boutique - the quote's numbers
+                    # mean nothing without it.
+                    "currency": result.get("currency", "USD"),
+                    "mode": session.mode,
                 },
             )
             if result.get("awaiting_human_approval"):
@@ -274,6 +326,40 @@ def _execute_tool_calls(
 
     messages.append({"role": "user", "content": tool_result_blocks})
     return escalate_called
+
+
+def _begin_turn(session: SessionState, latest_user_message: str, publisher: RtmPublisher) -> dict | None:
+    """What happens on the caller's words before the model sees them.
+
+    1. A spoken mode switch ("Dior mode", "Apple mode") takes effect now, so
+       this very turn's prompt, tools and catalog are the new mode's and the
+       reply can acknowledge it. Returns the switch for the prompt note. A
+       switch made from the console since the last turn is picked up here
+       too, once.
+    2. A catalog product the caller named goes on screen (deduped).
+
+    Both are regex and dict work on local data - no network on the turn path.
+    """
+    change = mode_switch.from_utterance(session, latest_user_message, publisher)
+    pending, session.pending_mode_switch = session.pending_mode_switch, None
+    try:
+        spotlight.from_text(session, latest_user_message, publisher)
+    except Exception:
+        logger.warning("spotlight from caller text failed", exc_info=True)
+    return change or pending
+
+
+def _spotlight_reply(session: SessionState, text: str, publisher: RtmPublisher, showed: bool) -> None:
+    """The screen follows what Zuno says, too: a product she named in her
+    reply goes on screen without her spending a hop on show_product. Skipped
+    when she already called show_product this turn - that was a deliberate
+    choice and a passing mention must not override it."""
+    if showed or not text:
+        return
+    try:
+        spotlight.from_text(session, strip_speech_markup(text), publisher)
+    except Exception:
+        logger.warning("spotlight from reply text failed", exc_info=True)
 
 
 def run_turn(
@@ -303,17 +389,21 @@ def run_turn(
     latest_user_message = next(
         (t.content for t in reversed(session.transcript) if t.role == "user"), ""
     )
+    mode_change = _begin_turn(session, latest_user_message, publisher)
     recalled_memories = memory_recall(session.session_id, latest_user_message)
 
     escalate_called = False
     final_text = ""
     turn: LLMTurn | None = None
+    showed = False
 
     for _hop in range(max_hops):
         # Rebuilt each hop: a tool called in the previous hop may have just
         # changed LeftBrain/RightBrain, and this hop should see the new value.
-        system_prompt = _build_system_prompt(session, recalled_memories)
-        turn = llm_client.create_turn(system=system_prompt, messages=messages, tools=definitions.TOOLS)
+        system_prompt = _build_system_prompt(session, recalled_memories, mode_change)
+        turn = llm_client.create_turn(
+            system=system_prompt, messages=messages, tools=definitions.tools_for(session.mode)
+        )
 
         if not turn.wants_tool_use:
             if not turn.text:
@@ -324,6 +414,7 @@ def run_turn(
             final_text = turn.text
             break
 
+        showed |= any(c.name == "show_product" for c in turn.tool_calls)
         escalate_called |= _execute_tool_calls(turn, session, publisher, messages)
     else:
         final_text = (turn.text if turn else "") or (
@@ -350,6 +441,7 @@ def run_turn(
                 "just to make sure you're fully taken care of."
             )
 
+    _spotlight_reply(session, final_text, publisher, showed)
     session.transcript.append(TranscriptTurn(role="assistant", content=final_text))
     logger.info("session=%s final_text=%r", session.session_id, final_text)
     memory_write_back(session.session_id, latest_user_message, final_text)
@@ -384,6 +476,9 @@ def run_turn_stream(
     latest_user_message = next(
         (t.content for t in reversed(session.transcript) if t.role == "user"), ""
     )
+    # Before the voice follow below, so a spoken mode switch is already in
+    # force when the voice for this turn is chosen.
+    mode_change = _begin_turn(session, latest_user_message, publisher)
     recalled_memories = memory_recall(session.session_id, latest_user_message)
     director.follow(
         session, spoken_language=director.script_language(latest_user_message)
@@ -396,9 +491,10 @@ def run_turn_stream(
     # ... "let me pull those up") is worse than none, and a turn that chains
     # three hops would otherwise get one before each.
     bridged = False
+    showed = False
 
     for _hop in range(max_hops):
-        system_prompt = _build_system_prompt(session, recalled_memories)
+        system_prompt = _build_system_prompt(session, recalled_memories, mode_change)
 
         turn = None
         hop_text: list[str] = []
@@ -411,7 +507,7 @@ def run_turn_stream(
         # that is NOT calling a tool - i.e. the hop that actually concludes the
         # turn.
         for kind, value in llm_client.stream_turn(
-            system=system_prompt, messages=messages, tools=definitions.TOOLS
+            system=system_prompt, messages=messages, tools=definitions.tools_for(session.mode)
         ):
             if kind == "text":
                 hop_text.append(value)
@@ -430,6 +526,9 @@ def run_turn_stream(
             text = "".join(hop_text)
             if text:
                 spoken_parts.append(text)
+                # Before the yield: once the text is handed to Agora the
+                # generator may be closed by a barge-in and never resume.
+                _spotlight_reply(session, text, publisher, showed)
                 yield text
                 break
             # Concluded with no tool call AND nothing to say - observed live on
@@ -447,7 +546,7 @@ def run_turn_stream(
         # customer is actually waiting on, and only once per turn.
         if not bridged:
             waited_on = bridge_lines.speakable_tool([c.name for c in turn.tool_calls])
-            line = bridge_lines.line_for(waited_on) if waited_on else None
+            line = bridge_lines.line_for(waited_on, mode=session.mode) if waited_on else None
             if line and not supports_speech_markup(get_settings()):
                 line = strip_speech_markup(line)
             if line:
@@ -455,9 +554,10 @@ def run_turn_stream(
                 spoken_parts.append(line)
                 yield line
 
+        showed |= any(c.name == "show_product" for c in turn.tool_calls)
         escalate_called |= _execute_tool_calls(turn, session, publisher, messages)
 
-        role = director.agent_for_tools([c.name for c in turn.tool_calls])
+        role = director.agent_for_tools([c.name for c in turn.tool_calls], session.mode)
         if role != "zuno":
             director.follow(session, role=role)
     else:

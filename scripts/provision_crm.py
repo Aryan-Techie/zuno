@@ -11,13 +11,14 @@ them. It cannot recover an existing key, though: EspoCRM returns `apiKey`
 only in the response that creates the user. If the key is lost, pass
 --recreate to delete the user and mint a fresh one.
 
-    python scripts/provision_crm.py [--recreate]
+    python scripts/provision_crm.py [--recreate] [--skip-perfume]
 
 Writes nothing. Prints the two lines to paste into the root .env.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import pathlib
@@ -84,6 +85,14 @@ CUSTOM_FIELDS = [
     # The join key back to our own session state. Indexed lookups on it are
     # how a mid-call update finds the row it created two turns earlier.
     {"name": "zunoSessionId", "type": "varchar", "label": "Zuno Session", "maxLength": 64},
+    # Which business the call was for: Apple device sales or the perfume
+    # boutique (backend/app/modes/). Lets a rep filter the Lead list by mode.
+    {
+        "name": "zunoMode",
+        "type": "enum",
+        "label": "Zuno Mode",
+        "options": ["", "apple", "perfume"],
+    },
 ]
 
 # Live stock, as a real entity in the CRM rather than another document in the
@@ -121,7 +130,24 @@ INVENTORY_FIELDS = [
         "label": "Availability",
         "options": ["", "in_stock", "low_stock", "out_of_stock", "discontinued"],
     },
+    # Added for the perfume catalog, which shares this entity with the Apple
+    # stock rows. `category` is what keeps them apart: the backend's Apple
+    # stock lookup drops fragrance/makeup/skincare rows on read (see
+    # backend/app/inventory/store.py). Apple rows leave it blank.
+    {"name": "category", "type": "varchar", "label": "Category", "maxLength": 40},
+    {"name": "priceHkd", "type": "float", "label": "Price from (HKD)", "min": 0},
 ]
+
+# The boutique's catalog, written by the Dior scraper. Seeded when present so
+# the perfume stock is visible and editable in the CRM next to Apple's.
+PERFUME_CATALOG = (
+    pathlib.Path(__file__).resolve().parent.parent / "backend" / "app" / "catalogs" / "perfume.json"
+)
+# EspoCRM pages lists at 200 rows, and the backend reads this whole entity in
+# one page for Apple stock - the perfume rows must leave room for those.
+PERFUME_SEED_LIMIT = 150
+# The `sku` column was created with maxLength 40; catalog ids can be longer.
+SKU_MAX = 40
 
 # Enough rows to hold a conversation about. Matched to the device lineup in
 # app/rag/docs/pricing.json so she cannot quote a price for something that has
@@ -323,12 +349,73 @@ def _ensure_inventory(metadata: dict) -> None:
         print(f"inventory : seeded {product['sku']} ({product['stockQty']} units)")
 
 
+def _perfume_sku(product_id: str) -> str:
+    """The catalog id when it fits the column, else a stable shortened form.
+    Truncating alone could collide two long ids that share a prefix."""
+    if len(product_id) <= SKU_MAX:
+        return product_id
+    digest = hashlib.sha1(product_id.encode()).hexdigest()[:8]
+    return f"{product_id[: SKU_MAX - 9]}-{digest}"
+
+
+def _perfume_status(stock: int) -> str:
+    if stock <= 0:
+        return "out_of_stock"
+    return "low_stock" if stock < 5 else "in_stock"
+
+
+def _seed_perfume() -> None:
+    """Seed the boutique's catalog into CZunoProduct, idempotently by SKU.
+
+    A row someone has edited by hand is left exactly as they left it, same as
+    the Apple seed. The backend's perfume-mode stock answers come from the
+    catalog file itself, not these rows - this is the CRM view of it.
+    """
+    if not PERFUME_CATALOG.exists():
+        print(f"perfume   : SKIPPED, no catalog at {PERFUME_CATALOG}")
+        return
+    try:
+        products = json.loads(PERFUME_CATALOG.read_text(encoding="utf-8"))
+    except ValueError as exc:
+        print(f"perfume   : SKIPPED, catalog unreadable ({exc})")
+        return
+
+    listing = _request("GET", INVENTORY_SCOPE, params={"maxSize": 200, "select": "sku"}) or {}
+    existing = {row.get("sku") for row in listing.get("list") or []}
+
+    seeded = reused = 0
+    for product in [p for p in products if isinstance(p, dict) and p.get("id")][:PERFUME_SEED_LIMIT]:
+        sku = _perfume_sku(product["id"])
+        if sku in existing:
+            reused += 1
+            continue
+        stock = int(product.get("stock") or 0)
+        row = {
+            "name": f"{product.get('brand') or 'Dior'} {product.get('name')}",
+            "sku": sku,
+            "stockQty": stock,
+            "status": _perfume_status(stock),
+            "category": product.get("category"),
+        }
+        if product.get("price_hkd_from") is not None:
+            row["priceHkd"] = float(product["price_hkd_from"])
+        _request("POST", INVENTORY_SCOPE, row)
+        existing.add(sku)
+        seeded += 1
+    print(f"perfume   : seeded {seeded}, reused {reused} (catalog has {len(products)})")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--recreate",
         action="store_true",
         help="delete the existing API user first (the only way to get a new key)",
+    )
+    parser.add_argument(
+        "--skip-perfume",
+        action="store_true",
+        help="do not seed the perfume catalog into CZunoProduct",
     )
     args = parser.parse_args()
 
@@ -354,6 +441,8 @@ def main() -> int:
 
     _install_layout()
     _ensure_inventory(metadata)
+    if not args.skip_perfume:
+        _seed_perfume()
 
     # After _ensure_inventory: a role that lists a scope Espo does not know
     # yet is rejected with "Bad data. Scope CZunoProduct is not allowed."

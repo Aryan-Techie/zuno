@@ -5,7 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import get_settings
-from app.routes import admin, call, llm, rep
+from app.integrations import register_all as register_integrations
+from app.routes import admin, call, catalog, llm, rep
 
 # Default log level is WARNING — our own INFO-level diagnostic logging
 # (e.g. pipeline.py logging the exact reply text per turn) was silently
@@ -55,6 +56,9 @@ app.include_router(call.router)
 app.include_router(llm.router)
 app.include_router(admin.router)
 app.include_router(rep.router)
+app.include_router(catalog.router)
+
+register_integrations()
 
 
 @app.get("/healthz")

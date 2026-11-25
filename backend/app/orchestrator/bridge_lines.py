@@ -168,6 +168,63 @@ _BY_LANGUAGE: dict[str, dict[str, tuple[str, ...]]] = {
     "hinglish": _HINGLISH,
 }
 
+# Perfume mode overrides the lines that would give the wrong counter away -
+# "pricing", "deployment engineers", "deal desk" - and keeps the rest (stock,
+# the calendar), which read the same at a boutique. Same markup, same rule:
+# a line for a real wait, said once.
+_PERFUME_ENGLISH: dict[str, tuple[str, ...]] = {
+    "search_pricing_rag": (
+        "Let me look that up for you. <#0.2#> One moment.",
+        "(breath) Lovely, <#0.2#> let me find the right one for you.",
+        "Let me check the notes on that <#0.25#> just a second.",
+    ),
+    "check_inventory": (
+        "Let me check what we have in the boutique. <#0.25#> One moment.",
+        "Okay <#0.2#> let me see what's on our shelves right now.",
+    ),
+    "ask_solutions_engineer": (
+        "Let me check that with our fragrance specialist. <#0.3#> One moment.",
+        "(breath) Good question <#0.2#> I want to get that exactly right for you.",
+    ),
+    "negotiate_deal": (
+        "Let me see what I can do for you. <#0.3#> One moment.",
+        "(breath) Of course <#0.2#> let me check what I can add for you.",
+    ),
+    "calendar_check_availability": (
+        "Let me look at the boutique's diary. <#0.25#> One moment.",
+        "Okay, <#0.2#> let me see when an advisor is free.",
+    ),
+}
+_PERFUME_HINDI: dict[str, tuple[str, ...]] = {
+    "search_pricing_rag": (
+        "मैं आपके लिए देखती हूँ. <#0.2#> एक पल.",
+        "(breath) ठीक है <#0.2#> मैं सही fragrance ढूँढती हूँ.",
+    ),
+    "ask_solutions_engineer": (
+        "मैं ये हमारी fragrance specialist से confirm कर लेती हूँ. <#0.3#> एक पल.",
+    ),
+    "negotiate_deal": (
+        "देखती हूँ मैं आपके लिए क्या कर सकती हूँ. <#0.3#> एक पल.",
+    ),
+}
+_PERFUME_HINGLISH: dict[str, tuple[str, ...]] = {
+    "search_pricing_rag": (
+        "Let me look that up <#0.2#> एक पल.",
+        "ठीक है <#0.2#> मैं सही fragrance ढूँढती हूँ.",
+    ),
+    "ask_solutions_engineer": (
+        "मैं ये fragrance specialist से confirm कर लेती हूँ <#0.3#> one moment.",
+    ),
+    "negotiate_deal": (
+        "Let me see what I can do <#0.3#> एक पल.",
+    ),
+}
+_PERFUME_BY_LANGUAGE: dict[str, dict[str, tuple[str, ...]]] = {
+    "en": _PERFUME_ENGLISH,
+    "hi": _PERFUME_HINDI,
+    "hinglish": _PERFUME_HINGLISH,
+}
+
 
 def speakable_tool(tool_names: Sequence[str]) -> str | None:
     """The first tool in this hop the customer is genuinely waiting on.
@@ -180,7 +237,11 @@ def speakable_tool(tool_names: Sequence[str]) -> str | None:
 
 
 def line_for(
-    tool_name: str, *, language: str | None = None, rng: random.Random | None = None
+    tool_name: str,
+    *,
+    language: str | None = None,
+    rng: random.Random | None = None,
+    mode: str = "apple",
 ) -> str | None:
     """A bridge line for one tool, or None if that tool is silent bookkeeping.
 
@@ -188,14 +249,21 @@ def line_for(
     That is the lesser of two bad options: a line in the wrong language is
     jarring, but several seconds of dead air on a live call reads as the
     system having hung up.
+
+    In perfume mode the boutique's own lines come first, then the shared
+    ones for tools whose wait sounds the same at either counter.
     """
     if language is None:
         from app.config import get_settings
 
         language = get_settings().agent_language
 
-    lines = _BY_LANGUAGE.get((language or "en").strip().lower(), _ENGLISH)
-    options = lines.get(tool_name) or _ENGLISH.get(tool_name)
+    code = (language or "en").strip().lower()
+    lines = _BY_LANGUAGE.get(code, _ENGLISH)
+    options = None
+    if mode == "perfume":
+        options = _PERFUME_BY_LANGUAGE.get(code, _PERFUME_ENGLISH).get(tool_name)
+    options = options or lines.get(tool_name) or _ENGLISH.get(tool_name)
     if not options:
         return None
     return (rng or random).choice(options)

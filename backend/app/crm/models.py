@@ -29,6 +29,11 @@ class Lead(BaseModel):
     pain_points: list[str] = Field(default_factory=list)
     decision_stage: DecisionStage | None = None
 
+    # Which business the call was for (app/modes/). Tagged on every upsert
+    # from the session, so a rep filtering the CRM by mode sees the boutique's
+    # leads apart from Apple's. None on records that predate modes.
+    mode: Literal["apple", "perfume"] | None = None
+
     status: LeadStatus = "new"
     outcome: str | None = None
     notes: list[str] = Field(default_factory=list)

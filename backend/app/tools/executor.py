@@ -8,16 +8,19 @@ from datetime import datetime, timezone
 
 from app.config import get_settings
 
+from app import bus_events
 from app.background import run_in_background
 from app.calendar import service as calendar_service
 from app.calendar.labels import slot_label as _slot_label
 from app.calendar.models import BookingNotFoundError, SlotTakenError
+from app.catalogs import catalog, spotlight
 from app.crm import service as crm_service
-from app.deal import desk, engine, policy
+from app.deal import boutique, desk, engine, policy
 from app.escalation import service as escalation_service, triggers
 from app.escalation.models import TriggerSource
 from app.inventory import service as inventory_service
 from app.inventory.models import InventoryUnavailable
+from app.knowledge import graph
 from app.memory.schema import Objection
 from app.notify import service as notify_service
 from app.rag import retriever
@@ -53,8 +56,16 @@ def dispatch(tool_name: str, tool_input: dict, session, *, trigger_source: Trigg
     return handler(tool_input, session, trigger_source=trigger_source)
 
 
+def _emit_lead(session, lead) -> None:
+    bus_events.emit("lead_upserted", session, lead=lead.model_dump(mode="json"))
+
+
 def _search_pricing_rag(tool_input: dict, session, **_) -> dict:
-    results = retriever.search(tool_input["query"], top_k=tool_input.get("top_k", 4))
+    # The session's own knowledge base: a perfume question is never scored
+    # against Apple's FAQ, or the other way round.
+    results = retriever.search(
+        tool_input["query"], top_k=tool_input.get("top_k", 4), mode=session.mode
+    )
     session.last_rag_score = results[0].score if results else 0.0
     payload = {"chunks": [r.model_dump() for r in results]}
 
@@ -81,19 +92,30 @@ def _ask_solutions_engineer(tool_input: dict, session, **_) -> dict:
     what a corpus does not say.
     """
     question = tool_input["question"]
-    results = retriever.search(question, top_k=8)
+    results = retriever.search(question, top_k=8, mode=session.mode)
     session.last_rag_score = results[0].score if results else 0.0
+
+    chunks = [r.model_dump() for r in results]
+    # What the documents are connected to, not just what they say: the
+    # Graphify graph's edges around the concepts the question names, each
+    # labelled EXTRACTED (stated) or INFERRED (resolved). Local file, no
+    # network - see app/knowledge/graph.py.
+    facts = graph.facts_for(question, session.mode)
+    if facts:
+        chunks.append({"source": "graphify knowledge graph", "text": "\n".join(facts), "score": 0.0})
 
     answer = solutions.consult(
         question=question,
-        chunks=[r.model_dump() for r in results],
+        chunks=chunks,
         context=tool_input.get("their_setup") or session.left_brain.model_dump_json(),
+        mode=session.mode,
     )
 
     return {
         "answer": answer.answer,
         "confidence": answer.confidence,
         "still_open": answer.open_questions,
+        "graph_facts": len(facts),
         "guidance": (
             "Say the answer in your own words, and say the open questions out loud too - "
             "a customer told precisely what is still to be checked trusts you more than one "
@@ -121,9 +143,11 @@ def _crm_upsert_lead(tool_input: dict, session, **_) -> dict:
         industry=tool_input.get("industry"),
         email=tool_input.get("email"),
         phone=tool_input.get("phone"),
+        mode=session.mode,
     )
     session.crm_lead_id = lead.id
     crm_service.sync_left_brain(session, lead)
+    _emit_lead(session, lead)
     return {"lead_id": lead.id, "lead": lead.model_dump(mode="json")}
 
 
@@ -133,6 +157,7 @@ def _crm_qualify_lead(tool_input: dict, session, **_) -> dict:
     session.left_brain.status = lead.status
     if tool_input["status"] in ("qualified", "disqualified"):
         session.outcome = tool_input["status"]
+    _emit_lead(session, lead)
     return {"lead_id": lead.id, "status": lead.status}
 
 
@@ -167,7 +192,7 @@ def _calendar_check_availability(tool_input: dict, session, **_) -> dict:
 def _calendar_book_meeting(tool_input: dict, session, **_) -> dict:
     lead_id = session.crm_lead_id
     if lead_id is None:
-        lead = crm_service.upsert_lead(session.session_id)
+        lead = crm_service.upsert_lead(session.session_id, mode=session.mode)
         lead_id = session.crm_lead_id = lead.id
 
     try:
@@ -178,7 +203,7 @@ def _calendar_book_meeting(tool_input: dict, session, **_) -> dict:
     session.booking_id = booking.id
     session.booking_slot_id = tool_input["slot_id"]
     session.outcome = "meeting_booked"
-    crm_service.qualify_lead(session.session_id, "meeting_booked", "meeting booked via calendar tool")
+    lead = crm_service.qualify_lead(session.session_id, "meeting_booked", "meeting booked via calendar tool")
     slot = calendar_service.calendar_store.get_slot(tool_input["slot_id"])
 
     if slot is not None:
@@ -187,7 +212,10 @@ def _calendar_book_meeting(tool_input: dict, session, **_) -> dict:
         # already committed, so the reply must not wait on the email.
         run_in_background(notify_service.on_booking, session, slot)
 
-    return {"booking_id": booking.id, "slot": slot.model_dump(mode="json") if slot else None}
+    result = {"booking_id": booking.id, "slot": slot.model_dump(mode="json") if slot else None}
+    _emit_lead(session, lead)
+    bus_events.emit("meeting_booked", session, booking=result)
+    return result
 
 
 def _calendar_reschedule_meeting(tool_input: dict, session, **_) -> dict:
@@ -207,7 +235,9 @@ def _calendar_reschedule_meeting(tool_input: dict, session, **_) -> dict:
     slot = calendar_service.calendar_store.get_slot(tool_input["new_slot_id"])
     if slot is not None:
         run_in_background(notify_service.on_booking, session, slot)
-    return {"booking_id": booking.id, "slot": slot.model_dump(mode="json") if slot else None}
+    result = {"booking_id": booking.id, "slot": slot.model_dump(mode="json") if slot else None}
+    bus_events.emit("meeting_booked", session, booking={**result, "rescheduled": True})
+    return result
 
 
 def _calendar_cancel_meeting(tool_input: dict, session, **_) -> dict:
@@ -282,7 +312,14 @@ def _negotiate_deal(tool_input: dict, session, **_) -> dict:
     same reasoning as the calendar slot labels - the model reads out a number
     rather than working one out, because a wrong price said to a buyer is
     unrecoverable in a way a wrong weekday is not.
+
+    In perfume mode none of the ladder applies: the boutique's prices are
+    fixed and app/deal/boutique.py enforces that, in code, the same way the
+    floors below are enforced here.
     """
+    if session.mode == "perfume":
+        return boutique.negotiate(tool_input, session)
+
     mix = tool_input.get("device_mix") or None
     units = sum(int(entry.get("quantity") or 0) for entry in mix) if mix else 0
     units = units or session.left_brain.user_count or 0
@@ -439,6 +476,9 @@ def _check_inventory(tool_input: dict, session, **_) -> dict:
     if not query:
         return {"error": "no_product", "guidance": "Ask which product they mean, then call again."}
 
+    if session.mode == "perfume":
+        return _check_catalog_stock(query, quantity)
+
     try:
         product, alternatives = inventory_service.find(query)
     except InventoryUnavailable:
@@ -528,6 +568,122 @@ def _check_inventory(tool_input: dict, session, **_) -> dict:
     return payload
 
 
+# Boutique stock is a handful of bottles, not a warehouse: under this it is
+# worth saying "we have the last few" rather than just a number.
+BOUTIQUE_LOW_STOCK = 5
+
+
+def _check_catalog_stock(query: str, quantity: int) -> dict:
+    """Perfume-mode stock: the catalog's own `stock` field, read in process.
+
+    Same discipline as the warehouse path above - the row was found (say the
+    number), nothing matched (say we do not carry it and name what we do),
+    out of stock (name real alternatives, never invented ones). There is no
+    "system did not answer" case: the catalog is a local file.
+    """
+    product, near = catalog.find(query, "perfume")
+    if product is None:
+        we_stock = near or catalog.search("perfume", query, limit=3) or catalog.products("perfume")[:3]
+        return {
+            "found": False,
+            "asked_for": query,
+            "we_stock": [p["name"] for p in we_stock[:3]],
+            "guidance": (
+                "That is not in our catalog. Say the boutique does not carry it rather than "
+                "guessing, name what we do have from we_stock, and ask which of those appeals."
+            ),
+        }
+
+    stock = int(product.get("stock") or 0)
+    status = "out_of_stock" if stock <= 0 else "low_stock" if stock < BOUTIQUE_LOW_STOCK else "in_stock"
+    summary = catalog.summary(product)
+    payload: dict = {
+        "found": True,
+        "product": product["name"],
+        "id": product["id"],
+        "units_in_stock": stock,
+        "availability": status,
+        "sizes": summary["sizes"],
+        "currency": summary["currency"],
+    }
+    if near:
+        payload["also_matched"] = [p["name"] for p in near]
+
+    if quantity:
+        payload["requested_quantity"] = quantity
+        payload["can_fulfil_now"] = stock >= quantity > 0
+
+    if status == "out_of_stock":
+        instead = [
+            p
+            for p in catalog.products("perfume")
+            if p["id"] != product["id"]
+            and int(p.get("stock") or 0) > 0
+            and p.get("category") == product.get("category")
+        ]
+        # Closest first: same olfactory family, then same line, then the rest.
+        instead.sort(
+            key=lambda p: (
+                not product.get("family") or p.get("family") != product.get("family"),
+                p.get("line") != product.get("line"),
+            )
+        )
+        payload["in_stock_instead"] = [
+            {"product": p["name"], "units_in_stock": int(p.get("stock") or 0)} for p in instead[:3]
+        ]
+        payload["guidance"] = (
+            "Out of stock at the boutique. Say so plainly, then offer one of in_stock_instead - "
+            "and nothing that is not on that list - or to take their details so the boutique "
+            "calls them when it is back (schedule_followup)."
+        )
+    elif quantity and not payload["can_fulfil_now"]:
+        payload["guidance"] = (
+            f"We hold {stock}, they asked for {quantity}. Say what is available now and offer to "
+            "arrange the rest with a follow-up - never round the number up."
+        )
+    elif status == "low_stock":
+        payload["guidance"] = (
+            "Only a few left. Give the exact number and offer to hold one for them or book a "
+            "consultation to collect it."
+        )
+    else:
+        payload["guidance"] = "In stock at the boutique. Give the number as written here."
+    return payload
+
+
+def _show_product(tool_input: dict, session, **_) -> dict:
+    """Put a catalog product on the customer's screen (the console spotlight)
+    and hand the model that product's facts.
+
+    The screen update itself is published by the pipeline, which owns the
+    publisher; this only decides whether there is anything new to publish.
+    Both modes, each against its own catalog.
+    """
+    query = (tool_input.get("product") or "").strip()
+    product, near = catalog.find(query, session.mode) if query else (None, [])
+    if product is None:
+        return {
+            "shown": False,
+            "error": "not_in_catalog",
+            "asked_for": query,
+            "closest": [p["name"] for p in near],
+            "guidance": (
+                "That product is not in our catalog, so nothing was shown. Do not describe it - "
+                "say we do not carry it, and offer one of `closest` if any fit."
+            ),
+        }
+    newly_shown = spotlight.mark(session, product)
+    return {
+        "shown": True,
+        "newly_shown": newly_shown,
+        "product": catalog.summary(product),
+        "guidance": (
+            "It is on their screen now. Describe it only from these facts - never add a note, "
+            "size or price that is not here."
+        ),
+    }
+
+
 def _log_objection(tool_input: dict, session, **_) -> dict:
     topic = tool_input["topic"]
     resolved = tool_input.get("resolved", False)
@@ -549,6 +705,7 @@ def _log_objection(tool_input: dict, session, **_) -> dict:
             resolution_text=tool_input.get("resolution_text"),
         )
         session.right_brain.objections.append(objection)
+    bus_events.emit("objection_logged", session, objection=objection.model_dump(mode="json"))
     return {"topic": objection.topic, "attempts": objection.attempts, "resolved": objection.resolved}
 
 
@@ -574,4 +731,5 @@ _HANDLERS = {
     "escalate_to_human": _escalate_to_human,
     "log_objection": _log_objection,
     "update_sentiment": _update_sentiment,
+    "show_product": _show_product,
 }

@@ -103,6 +103,18 @@ class LanguageProfile(BaseModel):
     # there lands as sluggish. A dial rather than a finding - retune by ear.
     speech_speed: float = 0.96
 
+    # Zuno's own voice per mode (app/modes/), for the MiniMax and Sarvam
+    # paths respectively. Empty means the mode keeps the profile's voice.
+    # Only the English voice changes for perfume mode: the profile's Hindi
+    # voices are the only ones MiniMax offers under managed mode, so a Hindi
+    # reply keeps its Hindi voice whichever counter she is at.
+    mode_voices: dict[str, str] = Field(default_factory=dict)
+    sarvam_mode_speakers: dict[str, str] = Field(default_factory=dict)
+    # The opening line per mode, when it differs from `greeting` (which is
+    # the apple one). Spoken by Agora at join time, so it is chosen by the
+    # mode the call STARTS in - see agora/join_payload.py.
+    mode_greetings: dict[str, str] = Field(default_factory=dict)
+
     # Spoken by Agora, not the model - see the fields it feeds in
     # agora/join_payload.py.
     greeting: str
@@ -113,6 +125,20 @@ class LanguageProfile(BaseModel):
     # translating a 2,000-word prompt would be a second thing to keep in sync
     # with every behaviour change, and instructing an output language works.
     prompt_instruction: str
+
+
+_PERFUME_GREETING_EN = (
+    "Thank you for calling the ZUNO beauty boutique in Hong Kong, "
+    "where we carry Dior fragrance, makeup and skincare. <#0.25#> "
+    "This is Zuno, your beauty advisor. <#0.2#> And who do I have the pleasure of speaking with today?"
+)
+_PERFUME_GREETING_HI = (
+    "ZUNO beauty boutique में आपका स्वागत है, जहाँ हम Dior fragrance, makeup और skincare रखते हैं. <#0.25#> "
+    "मैं Zuno, आपकी beauty advisor बोल रही हूँ. <#0.2#> आपका शुभ नाम क्या है?"
+)
+# Graceful and unhurried, for a luxury counter - and audibly not the Apple
+# voice, so a mid-call switch is heard as well as seen.
+_PERFUME_VOICE_EN = "English_Graceful_Lady"
 
 
 ENGLISH = LanguageProfile(
@@ -135,6 +161,8 @@ ENGLISH = LanguageProfile(
         "deal_desk": "kabir",
         "solutions": "dev",
     },
+    mode_voices={"perfume": _PERFUME_VOICE_EN},
+    mode_greetings={"perfume": _PERFUME_GREETING_EN},
     greeting=(
         "Thanks for calling Apple Business Sales, "
         "Apple Park, One Apple Park Way in Cupertino. <#0.25#> "
@@ -182,6 +210,7 @@ HINDI = LanguageProfile(
         "deal_desk": "kabir",
         "solutions": "dev",
     },
+    mode_greetings={"perfume": _PERFUME_GREETING_HI},
     greeting=(
         "Apple Business Sales में आपका स्वागत है. <#0.25#> "
         "मैं Zuno बोल रही हूँ. <#0.2#> आपका शुभ नाम क्या है?"
@@ -247,6 +276,8 @@ HINGLISH = LanguageProfile(
         "deal_desk": "kabir",
         "solutions": "dev",
     },
+    mode_voices={"perfume": _PERFUME_VOICE_EN},
+    mode_greetings={"perfume": _PERFUME_GREETING_EN},
     greeting=(
         "Thanks for calling Apple Business Sales, "
         "Apple Park, One Apple Park Way in Cupertino. <#0.25#> "

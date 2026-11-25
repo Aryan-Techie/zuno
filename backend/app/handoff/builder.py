@@ -48,7 +48,8 @@ def _facts(session: SessionState) -> list[str]:
     left = session.left_brain
     facts = []
     if left.user_count is not None:
-        facts.append(f"{left.user_count} devices")
+        unit = "pieces" if getattr(session, "mode", "apple") == "perfume" else "devices"
+        facts.append(f"{left.user_count} {unit}")
     if left.budget_range:
         facts.append(f"budget {left.budget_range}")
     if left.timeline:
@@ -67,11 +68,14 @@ def _agreed(session: SessionState) -> list[str]:
     agreed: list[str] = []
     negotiation = session.negotiation
     offer = negotiation.last_offer
-    if offer is not None:
+    if offer is not None and getattr(session, "mode", "apple") == "perfume" and not negotiation.granted_discount_pct:
+        agreed.append("No discount - boutique prices are fixed; complimentary extras were offered instead")
+    elif offer is not None:
         agreed.append(
             f"{negotiation.granted_discount_pct:g}% off list was offered and stands "
             f"(round {negotiation.round_count}, authorised by {offer.authorised_by})"
         )
+    if offer is not None:
         agreed.append(f"Quoted: {offer.price_summary}")
         for concession in offer.concessions:
             if concession.kind != "discount":

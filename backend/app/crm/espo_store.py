@@ -41,7 +41,10 @@ _CUSTOM = {
     "decision_stage": "cZunoDecisionStage",
     "outcome": "cZunoOutcome",
     "pain_points": "cZunoPainPoints",
+    "mode": "cZunoMode",
 }
+
+_MODES = ("apple", "perfume")
 
 # Our lifecycle -> EspoCRM's stock Lead status enum. Espo only accepts these
 # six values, so this cannot be a passthrough.
@@ -100,6 +103,8 @@ def _to_espo(lead: Lead) -> dict:
         payload[_CUSTOM["decision_stage"]] = lead.decision_stage
     if lead.outcome:
         payload[_CUSTOM["outcome"]] = lead.outcome
+    if lead.mode:
+        payload[_CUSTOM["mode"]] = lead.mode
     if lead.pain_points:
         payload[_CUSTOM["pain_points"]] = "\n".join(f"- {p}" for p in lead.pain_points)
     if lead.notes:
@@ -132,6 +137,10 @@ def _from_espo(record: dict) -> Lead:
         notes=[line for line in notes_raw.splitlines() if line.strip()],
         status=_STATUS_FROM_ESPO.get(record.get("status", "New"), "new"),
         outcome=record.get(_CUSTOM["outcome"]),
+        # An enum Espo hands back as "" when unset, and anything outside our
+        # two modes (a hand edit, a future option) reads as untagged rather
+        # than failing the whole record's validation.
+        mode=record.get(_CUSTOM["mode"]) if record.get(_CUSTOM["mode"]) in _MODES else None,
     )
 
 

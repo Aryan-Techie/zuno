@@ -22,6 +22,7 @@ def upsert_lead(
     industry: str | None = None,
     email: str | None = None,
     phone: str | None = None,
+    mode: str | None = None,
     store: LeadStore = lead_store,
 ) -> Lead:
     """Create-or-update the lead tied to this call session.
@@ -59,6 +60,8 @@ def upsert_lead(
         lead.email = email
     if phone is not None:
         lead.phone = phone
+    if mode is not None:
+        lead.mode = mode
 
     lead.updated_at = _now()
     return store.save(lead)

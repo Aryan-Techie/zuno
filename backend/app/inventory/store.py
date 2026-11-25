@@ -38,9 +38,17 @@ logger = logging.getLogger("zuno")
 # as "CZunoProduct" - unlike the fields on them.
 ENTITY = "CZunoProduct"
 
-# Enough for a demo catalogue, and small enough that one round trip beats
-# per-product lookups: the whole list is fetched and matched in process.
-MAX_PRODUCTS = 100
+# One round trip beats per-product lookups: the whole list is fetched and
+# matched in process. 200 is EspoCRM's own page-size ceiling, and since
+# scripts/provision_crm.py also seeds the boutique's perfume catalog into
+# this entity, the Apple rows have to fit alongside it.
+MAX_PRODUCTS = 200
+
+# Rows seeded from the perfume catalog carry one of these in `category`.
+# check_inventory in Apple mode must never quote a perfume's stock (and
+# perfume mode reads the catalog's own stock, not these rows - see
+# tools/executor.py::_check_catalog_stock), so they are dropped on read.
+PERFUME_CATEGORIES = frozenset({"fragrance", "makeup", "skincare"})
 
 
 def _from_espo(record: dict) -> Product:
@@ -52,6 +60,7 @@ def _from_espo(record: dict) -> Product:
         price_usd=record.get("priceUsd"),
         lead_time_days=record.get("leadTimeDays"),
         status=status if status in ("in_stock", "low_stock", "out_of_stock", "discontinued") else "in_stock",
+        category=record.get("category"),
     )
 
 
@@ -91,7 +100,11 @@ class EspoProductStore:
         except EspoCRMError as exc:
             logger.warning("inventory: EspoCRM read failed (%s)", exc)
             raise InventoryUnavailable(str(exc)) from exc
-        return [_from_espo(row) for row in rows]
+        return [
+            _from_espo(row)
+            for row in rows
+            if (row.get("category") or "").lower() not in PERFUME_CATEGORIES
+        ]
 
     def add(self, product: Product) -> Product:
         payload: dict = {
