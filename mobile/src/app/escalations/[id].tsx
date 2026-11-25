@@ -23,7 +23,7 @@ const SPEAKING = 0.06;
  *
  * Opening this screen is the whole interaction: it fetches the join payload,
  * puts the mic on the channel, and only then tells the backend a person has
- * arrived — because that call is what makes Aria say her closing line and
+ * arrived — because that call is what makes Zuno say her closing line and
  * leave (routes/rep.py:81-98), and doing it before the mic is live would hand
  * the customer to somebody they cannot hear.
  *
@@ -100,10 +100,10 @@ export default function RepCallScreen() {
     };
   }, [id, call]);
 
-  // Aria's departure is the moment the call is fully the rep's.
+  // Zuno's departure is the moment the call is fully the rep's.
   useEffect(() => {
-    if (session.ariaLeft && stage === 'handing_over') setStage('on_call');
-  }, [session.ariaLeft, stage]);
+    if (session.zunoLeft && stage === 'handing_over') setStage('on_call');
+  }, [session.zunoLeft, stage]);
 
   useEffect(() => {
     if (stage !== 'handing_over' && stage !== 'on_call') return;
@@ -132,7 +132,7 @@ export default function RepCallScreen() {
             {stage === 'gone' ? 'That call has already ended.' : (error ?? 'Could not join the call.')}
           </Text>
           <Pressable onPress={() => router.back()} hitSlop={10}>
-            <Text style={[type.small, { color: t.aria }]}>Back to escalations</Text>
+            <Text style={[type.small, { color: t.zuno }]}>Back to escalations</Text>
           </Pressable>
         </View>
       </SafeAreaView>
@@ -142,7 +142,7 @@ export default function RepCallScreen() {
   const remoteSpeaking = levels.remote > SPEAKING;
   const localSpeaking = levels.local > SPEAKING;
   if (remoteSpeaking) lastSpeaker.current = 'you';
-  else if (localSpeaking) lastSpeaker.current = 'aria';
+  else if (localSpeaking) lastSpeaker.current = 'zuno';
 
   const ringState: RingState = stage === 'loading' || stage === 'joining' ? 'idle' : lastSpeaker.current;
 
@@ -152,7 +152,7 @@ export default function RepCallScreen() {
       : stage === 'joining'
         ? 'Connecting…'
         : stage === 'handing_over'
-          ? 'Aria is handing over…'
+          ? 'Zuno is handing over…'
           : 'You have the call';
 
   const company = details?.lead?.company ?? 'A caller';
@@ -221,7 +221,7 @@ function Header({
 }
 
 /**
- * One line by default — why you are here — with everything Aria knew folded
+ * One line by default — why you are here — with everything Zuno knew folded
  * behind it. The full brief arrives in the same payload as the join token, so
  * showing it costs nothing; keeping it closed costs nothing either, and a
  * person who has just picked up a live call should not have to read first.

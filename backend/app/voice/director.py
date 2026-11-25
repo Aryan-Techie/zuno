@@ -10,10 +10,10 @@ an English sentence in a Hindi accent. It is not unusable, but it is
 immediately noticeable, and on a call where the customer has just switched
 language deliberately it reads as the agent not having noticed.
 
-**Each layer should sound like a different person.** Aria is layer 1. When she
+**Each layer should sound like a different person.** Zuno is layer 1. When she
 goes to the deal desk or the solutions engineer, a second agent really does
 answer - its own prompt, its own model call, its own objective. Today the
-customer hears all of it in Aria's voice, so the layering is invisible to the
+customer hears all of it in Zuno's voice, so the layering is invisible to the
 person it was built for. Giving each one a voice makes the handoff audible:
 "let me check with our deal desk" is followed by a different person answering,
 because a different agent genuinely did.
@@ -45,7 +45,7 @@ import logging
 from app.background import run_in_background
 from app.language.profiles import LanguageProfile, get_profile
 
-logger = logging.getLogger("aria.voice")
+logger = logging.getLogger("zuno.voice")
 
 # Devanagari block. Script detection rather than a language classifier: it is
 # exact, costs nothing, and needs no model call on the turn path. It answers
@@ -87,7 +87,7 @@ def voice_for_language(profile: LanguageProfile, language: str | None) -> str:
 
 
 # Which layer speaks the concluding hop, keyed by the tool that ran in it.
-# Only the two that genuinely are a second agent - the rest is Aria doing her
+# Only the two that genuinely are a second agent - the rest is Zuno doing her
 # own bookkeeping and lookups, and a voice change there would be theatre.
 AGENT_BY_TOOL = {
     "negotiate_deal": "deal_desk",
@@ -101,20 +101,20 @@ def agent_for_tools(tool_names) -> str:
         role = AGENT_BY_TOOL.get(name)
         if role:
             return role
-    return "aria"
+    return "zuno"
 
 
-def resolve_voice(profile: LanguageProfile, *, role: str = "aria", language: str | None = None) -> str:
+def resolve_voice(profile: LanguageProfile, *, role: str = "zuno", language: str | None = None) -> str:
     """The MiniMax voice that should be speaking, given who is talking and in
     what language. Role wins over language: the deal desk sounding like the
     deal desk is the point, and it has one voice per profile rather than one
     per language, which keeps this a lookup rather than a matrix."""
-    if role != "aria":
+    if role != "zuno":
         return profile.agent_voices.get(role) or profile.voice_id
     return voice_for_language(profile, language)
 
 
-def resolve_sarvam_target(profile: LanguageProfile, *, role: str = "aria") -> dict:
+def resolve_sarvam_target(profile: LanguageProfile, *, role: str = "zuno") -> dict:
     """The Sarvam speaker/language pair for whoever is talking.
 
     Unlike MiniMax's voice ids, Sarvam speakers are cross-lingual, so there is
@@ -124,7 +124,7 @@ def resolve_sarvam_target(profile: LanguageProfile, *, role: str = "aria") -> di
     default; Sarvam has no per-utterance "auto" mode to switch on instead.
     """
     speaker = profile.sarvam_speaker
-    if role != "aria":
+    if role != "zuno":
         speaker = profile.sarvam_agent_speakers.get(role) or speaker
     return {"speaker": speaker, "target_language_code": profile.sarvam_language_code}
 
@@ -184,7 +184,7 @@ def ensure_voice(session, voice, *, client=None, settings=None, runner=run_in_ba
     return True
 
 
-def follow(session, *, role: str = "aria", spoken_language: str | None = None, **kwargs) -> bool:
+def follow(session, *, role: str = "zuno", spoken_language: str | None = None, **kwargs) -> bool:
     """One call from the pipeline: work out who should be speaking and make it
     so. `spoken_language` is read off the customer's own last turn rather than
     the reply, because the reply is still being generated and the switch has

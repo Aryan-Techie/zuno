@@ -9,9 +9,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
  */
 
 const KEYS = {
-  baseUrl: 'aria.baseUrl',
-  theme: 'aria.theme',
-  repUnlocked: 'aria.repUnlocked',
+  baseUrl: 'zuno.baseUrl',
+  theme: 'zuno.theme',
+  repUnlocked: 'zuno.repUnlocked',
 } as const;
 
 export type ThemeMode = 'system' | 'light' | 'dark';

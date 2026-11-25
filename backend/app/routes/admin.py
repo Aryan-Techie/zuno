@@ -26,7 +26,7 @@ from app.sessions.store import session_store
 from app.tasks import service as tasks_service
 
 router = APIRouter()
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 _CUSTOM_PRODUCTS_DOC = DOCS_DIR / "custom_products.md"
 _CATALOG_JSON = DOCS_DIR / "pricing.json"
@@ -37,7 +37,7 @@ _CATALOG_JSON = DOCS_DIR / "pricing.json"
 # config - a backend restart naturally invalidates every session, the same
 # way live call state already resets on restart elsewhere in this app.
 # ---------------------------------------------------------------------------
-_DASHBOARD_COOKIE = "aria_dashboard_session"
+_DASHBOARD_COOKIE = "zuno_dashboard_session"
 _SESSION_TTL_SECONDS = 12 * 60 * 60  # a demo-day session, not a "remember me"
 _SIGNING_KEY = secrets.token_bytes(32)
 
@@ -144,7 +144,7 @@ def list_slots() -> list[dict]:
 def list_products() -> list[dict]:
     """The catalogue (app/rag/docs/pricing.json's device_lineup, plus
     anything added since via POST below) joined against live stock
-    (CAriaProduct) where a SKU/name happens to match. Best-effort join -
+    (CZunoProduct) where a SKU/name happens to match. Best-effort join -
     most catalogue entries have no matching stock row and that's fine,
     they just carry no stock fields."""
     catalog: list[dict] = []
@@ -285,7 +285,7 @@ def approve_discount(escalation_id: str, body: ApprovalRequest) -> dict:
     """Layer 3, answering while the call is still running.
 
     The whole point of separating a discount approval from a handoff is that
-    this does not take the call away from Aria — a person answers one question
+    this does not take the call away from Zuno — a person answers one question
     about margin and the conversation carries on. So this writes the approved
     figure onto the live session, and the next system prompt renders it
     (pipeline.py::_render_negotiation): she can lead her very next sentence

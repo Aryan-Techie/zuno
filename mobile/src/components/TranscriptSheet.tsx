@@ -19,8 +19,8 @@ import { Pill, type Tone } from './Pill';
  *
  * The rows follow the console's format rather than a messaging app's: a small
  * role marker and the text, no bubbles, no avatars, no alternating sides.
- * Aria's words sit in full-strength ink and the customer's in secondary,
- * because the thing being demonstrated is what Aria said.
+ * Zuno's words sit in full-strength ink and the customer's in secondary,
+ * because the thing being demonstrated is what Zuno said.
  */
 
 type Row =
@@ -100,7 +100,7 @@ export function TranscriptSheet({ turns, notes }: { turns: Turn[]; notes: CallNo
 
 function TurnRow({ turn }: { turn: Turn }) {
   const { t } = useTheme();
-  const isAria = turn.role === 'assistant';
+  const isZuno = turn.role === 'assistant';
   return (
     <Animated.View entering={FadeInDown.duration(350)} style={{ flexDirection: 'row', gap: 12 }}>
       <View style={{ width: 46, flexDirection: 'row', alignItems: 'center', gap: 5, paddingTop: 5 }}>
@@ -109,12 +109,12 @@ function TurnRow({ turn }: { turn: Turn }) {
             width: 6,
             height: 6,
             borderRadius: 3,
-            backgroundColor: isAria ? t.aria : t.you,
+            backgroundColor: isZuno ? t.zuno : t.you,
           }}
         />
-        <Text style={[type.role, { color: t.ink3 }]}>{isAria ? 'Aria' : 'You'}</Text>
+        <Text style={[type.role, { color: t.ink3 }]}>{isZuno ? 'Zuno' : 'You'}</Text>
       </View>
-      <Text style={[type.body, { flex: 1, color: isAria ? t.ink : t.ink2 }]}>{turn.text}</Text>
+      <Text style={[type.body, { flex: 1, color: isZuno ? t.ink : t.ink2 }]}>{turn.text}</Text>
     </Animated.View>
   );
 }

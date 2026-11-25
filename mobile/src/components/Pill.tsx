@@ -24,7 +24,7 @@ export function Pill({ tone = 'neutral', children }: { tone?: Tone; children: st
     good: { bg: t.goodSoft, fg: t.goodInk },
     warn: { bg: t.youSoft, fg: t.warnInk },
     bad: { bg: t.badSoft, fg: t.bad },
-    info: { bg: t.ariaSoft, fg: t.aria },
+    info: { bg: t.zunoSoft, fg: t.zuno },
     neutral: { bg: t.surface2, fg: t.ink2 },
   };
   const { bg, fg } = palette[tone];

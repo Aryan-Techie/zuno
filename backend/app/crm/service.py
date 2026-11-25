@@ -70,7 +70,7 @@ def sync_left_brain(session, lead: Lead) -> None:
     Both the voice tool loop (tools/executor.py) and a manual console edit
     call this after writing the Lead, so either path is re-rendered into the
     next system prompt the same way - a field typed into the console is a
-    fact Aria already has, not one she asks for again.
+    fact Zuno already has, not one she asks for again.
     """
     for field in (
         "name",

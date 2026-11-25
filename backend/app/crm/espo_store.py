@@ -8,7 +8,7 @@ pain-point merge - keeps working unchanged.
 Field naming
 ------------
 EspoCRM prefixes every custom field with "c", so the field provisioned as
-`ariaUserCount` is addressed as `cAriaUserCount`. Writing the unprefixed name
+`zunoUserCount` is addressed as `cZunoUserCount`. Writing the unprefixed name
 is accepted with a 200 and silently discarded, which is a genuinely nasty
 failure mode: the call looks like it worked and the value simply never
 appears. `_CUSTOM` below is the single source of truth for those names.
@@ -28,19 +28,19 @@ from app.config import get_settings
 from app.crm.espo_client import EspoClient, EspoCRMError
 from app.crm.models import Lead
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 _ENTITY = "Lead"
 
 # our field -> EspoCRM custom field (see scripts/provision_crm.py)
 _CUSTOM = {
-    "session_id": "cAriaSessionId",
-    "user_count": "cAriaUserCount",
-    "budget_range": "cAriaBudgetRange",
-    "timeline": "cAriaTimeline",
-    "decision_stage": "cAriaDecisionStage",
-    "outcome": "cAriaOutcome",
-    "pain_points": "cAriaPainPoints",
+    "session_id": "cZunoSessionId",
+    "user_count": "cZunoUserCount",
+    "budget_range": "cZunoBudgetRange",
+    "timeline": "cZunoTimeline",
+    "decision_stage": "cZunoDecisionStage",
+    "outcome": "cZunoOutcome",
+    "pain_points": "cZunoPainPoints",
 }
 
 # Our lifecycle -> EspoCRM's stock Lead status enum. Espo only accepts these
@@ -71,7 +71,7 @@ def _to_espo(lead: Lead) -> dict:
         _CUSTOM["session_id"]: lead.session_id,
     }
     # An unassigned lead is invisible on the rep's Espo dashboard ("My
-    # Leads" and the stream filter on assignedUser), so every lead Aria
+    # Leads" and the stream filter on assignedUser), so every lead Zuno
     # writes is handed to the same user the meetings are booked under.
     assigned = get_settings().espocrm_assigned_user_id
     if assigned:

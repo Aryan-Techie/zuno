@@ -35,7 +35,7 @@ export interface DealRound {
   declined?: boolean;
 }
 
-// Same approximate rate Aria uses to understand a rupee figure spoken on the
+// Same approximate rate Zuno uses to understand a rupee figure spoken on the
 // call (app/tools/prompts.py) - display-only, the deal math stays in USD.
 const USD_TO_INR = 83;
 
@@ -46,7 +46,7 @@ const moneyIn = (currency: "USD" | "INR") => (n: number) =>
 
 // app/deal/policy.py - the three numbers the engine enforces. Drawn as
 // stops on the track so a clamped offer reads as hitting a limit.
-const ARIA_CEILING = 3;
+const ZUNO_CEILING = 3;
 const DESK_CEILING = 10;
 const FLOOR = 18;
 
@@ -55,7 +55,7 @@ const FLOOR = 18;
  * way on a call, and the interesting fact is not where it landed but which
  * layer said yes and whether a limit stopped it going further. The approve
  * control is layer 3: a person signs a figure while the customer is still
- * on the line, and Aria offers it on her next turn.
+ * on the line, and Zuno offers it on her next turn.
  */
 export function DealCard({
   rounds,
@@ -113,12 +113,12 @@ export function DealCard({
         </button>
       </h3>
       <div className="ladder">
-        <div className="track" role="img" aria-label={`${granted}% granted; stops at ${ARIA_CEILING}, ${DESK_CEILING} and ${FLOOR} percent`}>
+        <div className="track" role="img" aria-label={`${granted}% granted; stops at ${ZUNO_CEILING}, ${DESK_CEILING} and ${FLOOR} percent`}>
           <div className="fill" style={{ width: pct(granted) }} />
-          <div className={`stop${granted >= ARIA_CEILING ? " hit" : ""}`} style={{ left: pct(ARIA_CEILING) }}>
+          <div className={`stop${granted >= ZUNO_CEILING ? " hit" : ""}`} style={{ left: pct(ZUNO_CEILING) }}>
             <i />
             <b>
-              {ARIA_CEILING}%<small>Aria</small>
+              {ZUNO_CEILING}%<small>Zuno</small>
             </b>
           </div>
           <div className={`stop${granted >= DESK_CEILING ? " hit" : ""}`} style={{ left: pct(DESK_CEILING) }}>
@@ -207,7 +207,7 @@ export function DealCard({
         <div className="approval done">
           <div>
             <b>{approvedPct}% signed off</b>
-            <span>by {approvedBy ?? "a manager"}, mid-call. Aria offers it on her next turn.</span>
+            <span>by {approvedBy ?? "a manager"}, mid-call. Zuno offers it on her next turn.</span>
           </div>
         </div>
       )}

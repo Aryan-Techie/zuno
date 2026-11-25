@@ -91,7 +91,7 @@ export const type = {
     textTransform: 'uppercase',
   } as TextStyle,
 
-  /** Transcript role marker — "You" / "Aria". */
+  /** Transcript role marker — "You" / "Zuno". */
   role: {
     fontFamily: sansSemi,
     fontSize: 12,

@@ -4,7 +4,7 @@ Deliberately NOT part of app/rag: the RAG corpus answers "what does this cost
 and what does it do", where a near-miss retrieval is survivable. "Do you have
 sixty of them" has exactly one right answer at the moment it is asked, it
 changes without anyone touching this repo, and being confidently wrong about
-it on a live call costs the deal. So it is a real CRM entity (CAriaProduct,
+it on a live call costs the deal. So it is a real CRM entity (CZunoProduct,
 see scripts/provision_crm.py) read through a dedicated tool.
 """
 from __future__ import annotations

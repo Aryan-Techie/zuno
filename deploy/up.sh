@@ -15,7 +15,7 @@ COMPOSE="docker compose -f deploy/docker-compose.prod.yml --env-file $ENV_FILE"
 }
 
 # Fail loudly now rather than half-way through a five-minute build.
-for required in ARIA_DOMAIN ARIA_CRM_DOMAIN MARIADB_ROOT_PASSWORD MARIADB_PASSWORD ESPOCRM_ADMIN_PASSWORD; do
+for required in ZUNO_DOMAIN ZUNO_CRM_DOMAIN MARIADB_ROOT_PASSWORD MARIADB_PASSWORD ESPOCRM_ADMIN_PASSWORD; do
   value="$(grep -E "^${required}=" "$ENV_FILE" | cut -d= -f2-)"
   [ -n "$value" ] || { echo "$required is empty in $ENV_FILE" >&2; exit 1; }
 done

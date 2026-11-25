@@ -19,7 +19,7 @@ import logging
 
 from app.handoff.models import CallSummary
 
-logger = logging.getLogger("aria.handoff")
+logger = logging.getLogger("zuno.handoff")
 
 
 def _settings(settings):

@@ -1,7 +1,7 @@
 """The join-link email: one message to the person taking over a call.
 
 Sent the moment an escalation is recorded, so the rep is reading the brief
-while Aria is still saying she will loop someone in. Short by design - it
+while Zuno is still saying she will loop someone in. Short by design - it
 is read on a phone, and the page behind the link carries the full brief.
 """
 from __future__ import annotations
@@ -12,7 +12,7 @@ from app.config import get_settings
 from app.escalation.models import EscalationRecord
 from app.notify import mailer
 
-logger = logging.getLogger("aria.notify")
+logger = logging.getLogger("zuno.notify")
 
 
 def _subject(record: EscalationRecord) -> str:
@@ -27,7 +27,7 @@ def _body(record: EscalationRecord, url: str, rep_name: str) -> str:
     lines = [
         f"{rep_name},",
         "",
-        "Aria has a customer on a live call who needs a person. Open this on your phone and tap Join:",
+        "Zuno has a customer on a live call who needs a person. Open this on your phone and tap Join:",
         "",
         url,
         "",
@@ -44,7 +44,7 @@ def _body(record: EscalationRecord, url: str, rep_name: str) -> str:
         f"Budget: {lead.budget_range or '-'}",
         f"Timeline: {lead.timeline or '-'}",
         "",
-        "Aria will announce you and leave the call once your mic is on.",
+        "Zuno will announce you and leave the call once your mic is on.",
     ]
     return "\n".join(lines)
 

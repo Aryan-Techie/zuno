@@ -8,19 +8,19 @@ web
 
 ## Users
 
-Internal operators only — the AR Voice hackathon team (and, by extension, mentors/judges watching over their shoulder). The actual customer/prospect on a call never sees this screen; they only ever hear Aria's voice over the phone. The operator's job here: start a call, watch it unfold live, and see how it resolved.
+Internal operators only — the AR Voice hackathon team (and, by extension, mentors/judges watching over their shoulder). The actual customer/prospect on a call never sees this screen; they only ever hear Zuno's voice over the phone. The operator's job here: start a call, watch it unfold live, and see how it resolved.
 
 ## Product Purpose
 
-Aria is a real-time voice AI sales agent — an LLM-driven tool-calling loop running on Agora's Conversational AI Engine — that qualifies leads, handles objections, and books meetings over a live call instead of following a fixed script. This surface (`frontend/`) is the operator console for that agent: start/end a call, and watch its live transcript, qualification record, and escalation state as they happen.
+Zuno is a real-time voice AI sales agent — an LLM-driven tool-calling loop running on Agora's Conversational AI Engine — that qualifies leads, handles objections, and books meetings over a live call instead of following a fixed script. This surface (`frontend/`) is the operator console for that agent: start/end a call, and watch its live transcript, qualification record, and escalation state as they happen.
 
 ## Positioning
 
-Unlike a scripted voice bot, Aria's brain visibly does things mid-call — it searches a knowledge base, updates a structured lead record, logs an objection, checks a calendar, or escalates via deterministic guardrails (not just the model's own judgment). The console's job is to make that process legible in real time — tool calls firing, state changing, an escalation triggering — not to hide it behind a generic "on a call" spinner.
+Unlike a scripted voice bot, Zuno's brain visibly does things mid-call — it searches a knowledge base, updates a structured lead record, logs an objection, checks a calendar, or escalates via deterministic guardrails (not just the model's own judgment). The console's job is to make that process legible in real time — tool calls firing, state changing, an escalation triggering — not to hide it behind a generic "on a call" spinner.
 
 ## Operating Context
 
-A live voice call runs between Aria and a customer over Agora RTC. The operator starts the call from this console, which then receives real-time transcript and agent-state events via Agora's RTC/RTM SDKs and the `agora-agent-client-toolkit`, plus our own custom JSON events over the same RTM channel (`qualification_updated`, `tool_call_started`/`finished`, `escalation_triggered`, `call_outcome_set`, `objection_logged`). Ending the call surfaces a resolved outcome: meeting booked, escalated, qualified/disqualified, or follow-up.
+A live voice call runs between Zuno and a customer over Agora RTC. The operator starts the call from this console, which then receives real-time transcript and agent-state events via Agora's RTC/RTM SDKs and the `agora-agent-client-toolkit`, plus our own custom JSON events over the same RTM channel (`qualification_updated`, `tool_call_started`/`finished`, `escalation_triggered`, `call_outcome_set`, `objection_logged`). Ending the call surfaces a resolved outcome: meeting booked, escalated, qualified/disqualified, or follow-up.
 
 Frequently used screen-shared or projected during mentor/judge demos — needs to read clearly at a glance and at a distance, not just up close.
 

@@ -15,9 +15,9 @@ import logging
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Callable
 
-logger = logging.getLogger("aria.background")
+logger = logging.getLogger("zuno.background")
 
-_executor = ThreadPoolExecutor(max_workers=4, thread_name_prefix="aria-bg")
+_executor = ThreadPoolExecutor(max_workers=4, thread_name_prefix="zuno-bg")
 
 
 def run_in_background(fn: Callable[..., Any], *args: Any, **kwargs: Any) -> None:

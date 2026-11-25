@@ -53,7 +53,7 @@ class AgoraRtmPublisher:
     failed publish is swallowed rather than breaking the call, since these
     events only drive UI panels, never call-critical logic."""
 
-    def __init__(self, app_id: str, customer_key: str, customer_secret: str, backend_user_id: str = "aria-backend"):
+    def __init__(self, app_id: str, customer_key: str, customer_secret: str, backend_user_id: str = "zuno-backend"):
         self._app_id = app_id
         self._backend_user_id = backend_user_id
         credentials = base64.b64encode(f"{customer_key}:{customer_secret}".encode()).decode()

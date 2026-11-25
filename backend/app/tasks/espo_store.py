@@ -11,7 +11,7 @@ import logging
 from app.crm.espo_client import EspoClient, EspoCRMError
 from app.tasks.models import Task
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 _ENTITY = "Task"
 

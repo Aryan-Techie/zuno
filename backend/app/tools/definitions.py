@@ -10,7 +10,7 @@ TOOLS: list[dict] = [
     {
         "name": "search_pricing_rag",
         "description": (
-            "Search Aria's product, pricing, feature, and competitor-comparison "
+            "Search Zuno's product, pricing, feature, and competitor-comparison "
             "knowledge base. Always use this instead of guessing at prices, "
             "features, or competitor comparisons."
         ),

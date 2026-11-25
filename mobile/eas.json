@@ -17,7 +17,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_BASE": "https://aria.aroice.in"
+        "EXPO_PUBLIC_API_BASE": "https://zuno.aroice.in"
       }
     },
     "production": {

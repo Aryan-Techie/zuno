@@ -3,7 +3,7 @@
 The deal desk (app/deal/desk.py) is the other one. Between them they are what
 makes the middle layer a *tier* rather than a single helper: two specialists
 with different objectives, neither of which is "hold a conversation", both
-reached by Aria and neither able to speak to the customer.
+reached by Zuno and neither able to speak to the customer.
 
 This one exists to close the gap that made escalation look reasonable. A
 compatibility, migration or deployment question that four sales documents do
@@ -31,7 +31,7 @@ from typing import Literal, Protocol
 
 from pydantic import BaseModel, Field
 
-logger = logging.getLogger("aria.specialists")
+logger = logging.getLogger("zuno.specialists")
 
 Confidence = Literal["high", "medium", "low"]
 
@@ -47,7 +47,7 @@ The single most useful thing you do is be precise about the boundary. Split what
 Never round a gap down to reassurance. "That should be fine" is the failure mode here.
 
 Respond with ONLY a JSON object with exactly these keys:
-"answer": what Aria should say, in two or three sentences of plain spoken English, no markdown. Lead with what IS supported.
+"answer": what Zuno should say, in two or three sentences of plain spoken English, no markdown. Lead with what IS supported.
 "confidence": "high" if the material fully answers it, "medium" if it answers the substance but leaves specifics open, "low" if it does not really cover this.
 "open_questions": array of short strings - the specific things that are genuinely unresolved. Empty if there are none.
 "escalate_recommended": true only if the material does not support any useful answer and a human engineer is genuinely needed.

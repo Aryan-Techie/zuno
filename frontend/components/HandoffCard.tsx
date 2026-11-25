@@ -32,7 +32,7 @@ const OBJECTION_MAX_ATTEMPTS = 3;
 const LOW_CONFIDENCE_THRESHOLD = 0.15;
 
 /**
- * When a person gets pulled in. Three deterministic guardrails plus Aria's
+ * When a person gets pulled in. Three deterministic guardrails plus Zuno's
  * own judgment; each is shown with how far along it is, and the whole card
  * turns red the moment one trips. This is the old alarm channel, with the
  * meter replaced by the actual numbers behind it.
@@ -67,7 +67,7 @@ export function HandoffCard({
           <DoodleWave className="doodle faint" width={20} />
         </span>
         <span className={repOnCall ? "tone-good" : tripped ? "tone-bad" : ""}>
-          {repOnCall ? `${repOnCall} has it` : tripped ? "Waiting for a person" : "Aria has it"}
+          {repOnCall ? `${repOnCall} has it` : tripped ? "Waiting for a person" : "Zuno has it"}
         </span>
       </h3>
 
@@ -92,7 +92,7 @@ export function HandoffCard({
             {escalation.inbox_position != null && `Number ${escalation.inbox_position} in the inbox.`}
           </p>
           {escalation.handoff_url && !repOnCall && <JoinLink url={escalation.handoff_url} name={escalation.rep_name ?? "the rep"} />}
-          {repOnCall && <p className="meta">{repOnCall} joined the call. Aria has handed over and left.</p>}
+          {repOnCall && <p className="meta">{repOnCall} joined the call. Zuno has handed over and left.</p>}
         </div>
       ) : (
         <div className="guards">
@@ -114,7 +114,7 @@ export function HandoffCard({
             value={ragScore != null && ragScore < LOW_CONFIDENCE_THRESHOLD ? 1 : 0}
             max={1}
           />
-          <p className="meta">Aria can also ask for a person herself. Any of these ends the call with a written brief.</p>
+          <p className="meta">Zuno can also ask for a person herself. Any of these ends the call with a written brief.</p>
         </div>
       )}
     </section>

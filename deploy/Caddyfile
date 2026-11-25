@@ -10,7 +10,7 @@
 # on its own. That is what replaces the cloudflared quick tunnel, whose
 # hostname changed on every single run.
 
-{$ARIA_DOMAIN} {
+{$ZUNO_DOMAIN} {
 	encode zstd gzip
 
 	# Agora's LLM webhook. Long-lived streaming response: the model writes a
@@ -50,8 +50,8 @@
 # EspoCRM on its own hostname rather than a subpath: the official image serves
 # from the web root and a subdirectory install rewrites asset URLs it does not
 # control. This is the address someone opens to change a stock number while
-# Aria is mid-call.
-{$ARIA_CRM_DOMAIN} {
+# Zuno is mid-call.
+{$ZUNO_CRM_DOMAIN} {
 	encode zstd gzip
 
 	# Espo pushes record changes to the open browser tab over this socket -

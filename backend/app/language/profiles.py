@@ -1,4 +1,4 @@
-"""What language Aria hears, thinks in, and speaks - as one profile per call.
+"""What language Zuno hears, thinks in, and speaks - as one profile per call.
 
 Language is not one setting. Getting a Hindi call right means five things
 agreeing with each other, and any one of them left on its English default is
@@ -73,13 +73,13 @@ class LanguageProfile(BaseModel):
     # MiniMax detect per utterance, which is what a mixed call needs).
     voice_id: str
     language_boost: str
-    # Aria's voice per language of the reply, for a profile that genuinely
+    # Zuno's voice per language of the reply, for a profile that genuinely
     # has two. Empty on a single-language profile: an English deployment that
     # quotes a Hindi company name has no second voice to switch to and no
     # reason to want one.
     alternate_voices: dict[str, str] = Field(default_factory=dict)
     # A voice per layer, so a handoff to the second layer is audible. When
-    # Aria goes to the deal desk a different agent really does answer - its
+    # Zuno goes to the deal desk a different agent really does answer - its
     # own prompt, its own model call, its own objective - and until now the
     # customer heard all of it in her voice, which made the layering invisible
     # to the person it was built for.
@@ -123,7 +123,7 @@ ENGLISH = LanguageProfile(
     language_boost="English",
     english_normalization=True,
     agent_voices={
-        "aria": "English_captivating_female1",
+        "zuno": "English_captivating_female1",
         # Clipped and male, so the change of person registers in one word.
         "deal_desk": "English_Trustworth_Man",
         "solutions": "English_Gentle-voiced_man",
@@ -131,14 +131,14 @@ ENGLISH = LanguageProfile(
     sarvam_speaker="priya",
     sarvam_language_code="en-IN",
     sarvam_agent_speakers={
-        "aria": "priya",
+        "zuno": "priya",
         "deal_desk": "kabir",
         "solutions": "dev",
     },
     greeting=(
         "Thanks for calling Apple Business Sales, "
         "Apple Park, One Apple Park Way in Cupertino. <#0.25#> "
-        "This is Aria speaking. <#0.2#> And who do I have the pleasure of speaking with today?"
+        "This is Zuno speaking. <#0.2#> And who do I have the pleasure of speaking with today?"
     ),
     failure_message="(breath) Sorry — could you say that once more? I didn't quite catch it.",
     filler_phrases=[
@@ -165,7 +165,7 @@ HINDI = LanguageProfile(
     english_normalization=False,
     speech_speed=1.02,
     agent_voices={
-        "aria": "hindi_female_1_v2",
+        "zuno": "hindi_female_1_v2",
         # MiniMax labels this one "Trustworthy Advisor", which is the deal
         # desk's job description.
         # One Hindi male voice is all MiniMax offers under managed mode, and
@@ -178,13 +178,13 @@ HINDI = LanguageProfile(
     sarvam_speaker="priya",
     sarvam_language_code="hi-IN",
     sarvam_agent_speakers={
-        "aria": "priya",
+        "zuno": "priya",
         "deal_desk": "kabir",
         "solutions": "dev",
     },
     greeting=(
         "Apple Business Sales में आपका स्वागत है. <#0.25#> "
-        "मैं Aria बोल रही हूँ. <#0.2#> आपका शुभ नाम क्या है?"
+        "मैं Zuno बोल रही हूँ. <#0.2#> आपका शुभ नाम क्या है?"
     ),
     failure_message="(breath) माफ़ कीजिए — क्या आप एक बार फिर कह सकते हैं? मैं ठीक से सुन नहीं पाई.",
     filler_phrases=[
@@ -225,7 +225,7 @@ HINGLISH = LanguageProfile(
         "en": "English_captivating_female1",
     },
     agent_voices={
-        "aria": "English_captivating_female1",
+        "zuno": "English_captivating_female1",
         # One Hindi male voice is all MiniMax offers under managed mode, and
         # it goes to the solutions engineer: on the demo call that is the
         # handoff that needs to land as a different person. The deal desk
@@ -243,14 +243,14 @@ HINGLISH = LanguageProfile(
     sarvam_speaker="priya",
     sarvam_language_code="en-IN",
     sarvam_agent_speakers={
-        "aria": "priya",
+        "zuno": "priya",
         "deal_desk": "kabir",
         "solutions": "dev",
     },
     greeting=(
         "Thanks for calling Apple Business Sales, "
         "Apple Park, One Apple Park Way in Cupertino. <#0.25#> "
-        "This is Aria speaking. <#0.2#> And who do I have the pleasure of speaking with today?"
+        "This is Zuno speaking. <#0.2#> And who do I have the pleasure of speaking with today?"
     ),
     failure_message="(breath) Sorry — could you say that once more? I didn't quite catch it.",
     filler_phrases=[

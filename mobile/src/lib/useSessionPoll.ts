@@ -7,7 +7,7 @@ import { fetchSessionEvents, type LeftBrain, type SessionEventEnvelope } from '.
  *
  * A trimmed port of the console's reducer (frontend/app/page.tsx:151-251). The
  * deal-round and discount-approval branches are deliberately absent: on this
- * app a discount is settled by Aria's own ceiling and the deal desk, never by
+ * app a discount is settled by Zuno's own ceiling and the deal desk, never by
  * a person on a phone, so those envelopes are read and ignored.
  *
  * Two details from the console are load-bearing and kept exactly:
@@ -40,7 +40,7 @@ export type SessionState = {
   lead: LeftBrain | null;
   /** Set once a person has taken the call. */
   repOnCall: string | null;
-  ariaLeft: boolean;
+  zunoLeft: boolean;
   escalated: boolean;
 };
 
@@ -52,7 +52,7 @@ const EMPTY: SessionState = {
   status: null,
   lead: null,
   repOnCall: null,
-  ariaLeft: false,
+  zunoLeft: false,
   escalated: false,
 };
 
@@ -135,13 +135,13 @@ export function useSessionPoll(sessionId: string | null, active: boolean): Sessi
             ],
           };
         }
-        case 'aria_left':
+        case 'zuno_left':
           return {
             ...prev,
-            ariaLeft: true,
+            zunoLeft: true,
             notes: [
               ...prev.notes,
-              { id: `note-${envelope.ts}`, tone: 'info', text: 'Aria has left the call.' },
+              { id: `note-${envelope.ts}`, tone: 'info', text: 'Zuno has left the call.' },
             ],
           };
         default:

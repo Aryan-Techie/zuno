@@ -24,7 +24,7 @@ import smtplib
 from email.message import EmailMessage
 from email.utils import formataddr, make_msgid
 
-logger = logging.getLogger("aria.notify")
+logger = logging.getLogger("zuno.notify")
 
 _TIMEOUT_SECONDS = 15.0
 
@@ -45,7 +45,7 @@ def build_message(
     message["Subject"] = subject
     message["From"] = formataddr((from_name, from_email))
     message["To"] = formataddr((to_name or "", to_email))
-    message["Message-ID"] = make_msgid(domain="aria.local")
+    message["Message-ID"] = make_msgid(domain="zuno.local")
     if reply_to:
         message["Reply-To"] = reply_to
     if bcc:

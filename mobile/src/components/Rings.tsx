@@ -22,7 +22,7 @@ import { DURATION, EASE, RING_PALETTE, type RingState } from '@/theme';
  * geometry. What carries over, because it is what the thing actually
  * communicates:
  *
- *   - Colour is who is speaking. Aria owns the cool half of the wheel, the
+ *   - Colour is who is speaking. Zuno owns the cool half of the wheel, the
  *     customer the warm half, so it reads without a label.
  *   - Colours cross-fade, never switch. The console smooths at dt*3; here the
  *     same feel comes from a timed mix between the outgoing and incoming

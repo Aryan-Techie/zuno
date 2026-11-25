@@ -27,7 +27,7 @@ import { PermissionsAndroid, Platform } from 'react-native';
 export type Levels = {
   /** 0..1, this device's microphone. */
   local: number;
-  /** 0..1, loudest remote speaker — Aria, or the rep once she has joined. */
+  /** 0..1, loudest remote speaker — Zuno, or the rep once she has joined. */
   remote: number;
 };
 

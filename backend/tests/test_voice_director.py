@@ -77,10 +77,10 @@ def test_each_layer_has_its_own_voice():
     """The handoff to the second layer should be audible - a different agent
     really did answer."""
     for profile in (ENGLISH, HINDI, HINGLISH):
-        aria = director.resolve_voice(profile, role="aria")
+        zuno = director.resolve_voice(profile, role="zuno")
         desk = director.resolve_voice(profile, role="deal_desk")
         solutions = director.resolve_voice(profile, role="solutions")
-        assert len({aria, desk, solutions}) == 3, profile.code
+        assert len({zuno, desk, solutions}) == 3, profile.code
 
 
 def test_role_outranks_language():
@@ -89,13 +89,13 @@ def test_role_outranks_language():
 
 
 def test_only_the_two_real_second_layer_tools_change_the_voice():
-    """Everything else is Aria doing her own lookups; a voice change there
+    """Everything else is Zuno doing her own lookups; a voice change there
     would be theatre."""
     assert director.agent_for_tools(["negotiate_deal"]) == "deal_desk"
     assert director.agent_for_tools(["ask_solutions_engineer"]) == "solutions"
     for tool in ("search_pricing_rag", "crm_upsert_lead", "calendar_book_meeting", "log_objection"):
-        assert director.agent_for_tools([tool]) == "aria"
-    assert director.agent_for_tools([]) == "aria"
+        assert director.agent_for_tools([tool]) == "zuno"
+    assert director.agent_for_tools([]) == "zuno"
 
 
 def test_the_lookup_is_picked_out_of_a_batched_hop():
@@ -156,10 +156,10 @@ def test_resolve_sarvam_target_uses_the_cross_lingual_speaker():
 
 
 def test_resolve_sarvam_target_gives_each_layer_its_own_speaker():
-    aria = director.resolve_sarvam_target(HINDI, role="aria")
+    zuno = director.resolve_sarvam_target(HINDI, role="zuno")
     desk = director.resolve_sarvam_target(HINDI, role="deal_desk")
     solutions = director.resolve_sarvam_target(HINDI, role="solutions")
-    assert len({aria["speaker"], desk["speaker"], solutions["speaker"]}) == 3
+    assert len({zuno["speaker"], desk["speaker"], solutions["speaker"]}) == 3
 
 
 def test_ensure_voice_accepts_a_vendor_shaped_dict_for_sarvam(live_call):

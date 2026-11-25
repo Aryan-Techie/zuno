@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Aria Console",
+  title: "Zuno Console",
 };
 
 // Applies the saved theme before first paint so a dark-mode operator never
 // sees a white flash. Inline so it runs before any stylesheet resolves.
-const themeScript = `(function(){try{var s=localStorage.getItem('aria-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();`;
+const themeScript = `(function(){try{var s=localStorage.getItem('zuno-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

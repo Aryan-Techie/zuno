@@ -14,12 +14,12 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 # Which layer said yes. The ladder, top to bottom:
-#   aria      - layer 1, live on the call, small gives, instant
+#   zuno      - layer 1, live on the call, small gives, instant
 #   deal_desk - layer 2, a separate agent with its own prompt and its own
 #               model call, reasoning about margin rather than conversation
 #   human     - layer 3, a person, reached only when the ask is past what
 #               layer 2 is allowed to sign
-AuthorityLevel = Literal["aria", "deal_desk", "human"]
+AuthorityLevel = Literal["zuno", "deal_desk", "human"]
 
 ConcessionKind = Literal["discount", "trade_in", "financing", "model_mix", "bundle", "term"]
 CommitmentKind = Literal[
@@ -92,7 +92,7 @@ class Offer(BaseModel):
     concessions: list[Concession] = Field(default_factory=list)
     commitments: list[Commitment] = Field(default_factory=list)
 
-    authorised_by: AuthorityLevel = "aria"
+    authorised_by: AuthorityLevel = "zuno"
     requires_human: bool = False
     clamped: bool = False
     clamp_reason: str | None = None

@@ -1,4 +1,4 @@
-"""The commercial envelope Aria negotiates inside - prices, tiers, and the
+"""The commercial envelope Zuno negotiates inside - prices, tiers, and the
 limit of what each layer is allowed to give away.
 
 This is deliberately data, not prompt text. A discount the model merely
@@ -110,10 +110,10 @@ class DealPolicy(BaseModel):
 
     # The authority ladder. Each layer may grant up to its own cap and no
     # further; crossing a cap is what promotes the decision to the next layer.
-    #   aria      - what she can say yes to on her own, instantly
+    #   zuno      - what she can say yes to on her own, instantly
     #   deal_desk - the second-layer agent, and it must take something back
     #   human     - a real person signs off, and this is also the floor
-    aria_max_discount_pct: float = 3.0
+    zuno_max_discount_pct: float = 3.0
     desk_max_discount_pct: float = 10.0
     walk_away_discount_pct: float = 18.0
 

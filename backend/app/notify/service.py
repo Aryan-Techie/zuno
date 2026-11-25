@@ -31,7 +31,7 @@ from app.crm.models import Lead
 from app.notify import ics, mailer
 from app.sessions.models import SessionState
 
-logger = logging.getLogger("aria.notify")
+logger = logging.getLogger("zuno.notify")
 
 _send_lock = threading.Lock()
 
@@ -98,7 +98,7 @@ def _body(*, lead: Lead, slot: Slot, label: str, recap: list[str]) -> str:
         "",
         "If that time stops working, reply to this email and we will move it.",
         "",
-        "Aria",
+        "Zuno",
         "Apple Sales",
     ]
     return "\n".join(parts)
@@ -154,14 +154,14 @@ def send_booking_confirmation(
         recap = _recap_lines(session) if include_recap else []
         description = (
             f"Apple Sales consultation with {slot.rep_name}.\n"
-            f"Booked on a call with Aria, the Apple Sales voice assistant.\n"
+            f"Booked on a call with Zuno, the Apple Sales voice assistant.\n"
             f"Reference: {session.session_id}"
         )
         invite = ics.build_invite(
             # Deterministic and session-scoped: a client that receives the
             # booking-time email and the call-end one treats them as the same
             # event and updates it, rather than showing two meetings.
-            uid=f"aria-{session.session_id}@aria.local",
+            uid=f"zuno-{session.session_id}@zuno.local",
             start=slot.start,
             end=slot.end,
             summary=f"Apple Sales demo - {slot.rep_name}",

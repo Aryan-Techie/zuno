@@ -82,7 +82,7 @@ export const OUTCOME_LABEL: Record<string, { tone: "good" | "info" | "warn" | "b
 };
 
 export const TRIGGER_LABEL: Record<string, string> = {
-  llm: "Aria asked for a person",
+  llm: "Zuno asked for a person",
   frustration_streak: "Two turns in a row sounded frustrated",
   objection_retry: "An objection came back a third time",
   low_confidence: "She could not find a confident answer",

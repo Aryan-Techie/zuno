@@ -90,7 +90,7 @@ def test_above_the_desk_ceiling_holds_the_offer_and_asks_a_human():
     )
     assert requires_human is True
     assert granted <= DEFAULT_POLICY.desk_max_discount_pct
-    assert level in ("deal_desk", "aria")
+    assert level in ("deal_desk", "zuno")
 
 
 def test_a_discount_with_nothing_asked_in_return_is_cut_back():
@@ -113,7 +113,7 @@ def test_small_gives_need_no_commitment():
         has_commitment=False,
     )
     assert granted == 2
-    assert level == "aria"
+    assert level == "zuno"
     assert clamped is False
 
 

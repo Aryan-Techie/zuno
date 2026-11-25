@@ -17,7 +17,7 @@ import { getRepUnlocked } from './storage';
  * demo's worth of escalations, not a queue.
  *
  * `deal_approval` records are dropped here rather than shown and disabled.
- * Aria settles discounts against her own ceiling and the deal desk's; a person
+ * Zuno settles discounts against her own ceiling and the deal desk's; a person
  * on a phone is only ever wanted for the other kind.
  */
 

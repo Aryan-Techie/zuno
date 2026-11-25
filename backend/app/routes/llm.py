@@ -22,7 +22,7 @@ from app.orchestrator import pipeline
 from app.rtm.publisher import default_rtm_publisher
 from app.sessions.store import session_store
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 router = APIRouter()
 
@@ -82,7 +82,7 @@ def _publish_turn(session_id: str, turn_id: str, role: str, text: str, final: bo
     transcript feed over RTM, which never reliably reached the page (same
     story as the tool events - see rtm/publisher.py::SessionEventRecorder).
     This route already sees every word: the user's turn arrives in the
-    request, Aria's leaves in the response. Speech markup is stripped so
+    request, Zuno's leaves in the response. Speech markup is stripped so
     the console shows what she says, not the pause tags the TTS reads.
     """
     default_rtm_publisher().publish(
@@ -119,7 +119,7 @@ def _stream_response(session_id: str, request: ChatCompletionsRequest) -> Stream
     history = _history_from_openai_messages(request.messages)
     chunk_id = f"chatcmpl-{uuid.uuid4().hex[:24]}"
     created = int(time.time())
-    model = request.model or "aria-orchestrator"
+    model = request.model or "zuno-orchestrator"
     turn_id = chunk_id
     user_text = _latest_user_text(history)
 
@@ -194,7 +194,7 @@ def chat_completions(
         "id": turn_id,
         "object": "chat.completion",
         "created": int(time.time()),
-        "model": request.model or "aria-orchestrator",
+        "model": request.model or "zuno-orchestrator",
         "choices": [
             {
                 "index": 0,

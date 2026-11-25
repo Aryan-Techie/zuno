@@ -23,9 +23,9 @@ def _settings(**overrides) -> Settings:
     base = {
         "email_enabled": True,
         "smtp_host": "smtp.example.com",
-        "smtp_username": "aria@example.com",
+        "smtp_username": "zuno@example.com",
         "smtp_password": "app-password",
-        "email_from_name": "Aria - Apple Business team",
+        "email_from_name": "Zuno - Apple Business team",
     }
     base.update(overrides)
     return Settings(**base)
@@ -59,14 +59,14 @@ def _session_with_lead(session_id="s1", *, email="priya@boltframe.io", store=Non
 
 def test_invite_is_a_request_with_utc_times_and_crlf():
     text = ics.build_invite(
-        uid="aria-s1@aria.local",
+        uid="zuno-s1@zuno.local",
         start=START,
         end=START + timedelta(minutes=30),
         summary="Apple Business demo",
         description="ref",
         location="Video call",
-        organizer_email="aria@example.com",
-        organizer_name="Aria",
+        organizer_email="zuno@example.com",
+        organizer_name="Zuno",
         attendee_email="priya@boltframe.io",
         attendee_name="Priya Nair",
     )
@@ -90,7 +90,7 @@ def test_invite_escapes_text_values():
         description="line one\nline two",
         location="Video call",
         organizer_email="a@b.c",
-        organizer_name="Aria",
+        organizer_name="Zuno",
         attendee_email="p@q.io",
     )
     assert "SUMMARY:Demo\\, with Dana\\; part 2" in text
@@ -107,7 +107,7 @@ def test_long_lines_fold_without_splitting_a_codepoint():
         description="d",
         location="l",
         organizer_email="a@b.c",
-        organizer_name="Aria",
+        organizer_name="Zuno",
         attendee_email="p@q.io",
     )
     for line in text.split("\r\n"):

@@ -20,7 +20,7 @@ reason for the wait and fires only when there is a real wait.
 
 Why the model does not write these itself
 -----------------------------------------
-It used to, and that is the "Aria said everything twice" bug: a model that
+It used to, and that is the "Zuno said everything twice" bug: a model that
 writes a bridge line AND calls a tool in the same hop then answers again once
 the tool returns. These lines are emitted by us, in code, between hops, so
 they cannot collide with the model's own output.

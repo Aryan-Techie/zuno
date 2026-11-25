@@ -12,9 +12,9 @@ from app.routes import admin, call, llm, rep
 # dropped without this, found live while trying to diagnose a real call.
 logging.basicConfig(level=logging.INFO, format="%(levelname)s:%(name)s:%(message)s")
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
-app = FastAPI(title="Aria orchestrator")
+app = FastAPI(title="Zuno orchestrator")
 
 
 @app.middleware("http")

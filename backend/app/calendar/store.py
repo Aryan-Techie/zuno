@@ -5,7 +5,7 @@ from app.calendar.fixtures import seed_slots
 from app.calendar.models import Booking, Slot
 from app.persistence import load_state, save_state
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 _STATE_NAME = "calendar"
 

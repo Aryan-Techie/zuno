@@ -51,7 +51,7 @@ def _consult_returning(proposal: DeskProposal, monkeypatch) -> StubDesk:
     return stub
 
 
-def test_a_modest_ask_is_authorised_by_aria_alone(session, monkeypatch):
+def test_a_modest_ask_is_authorised_by_zuno_alone(session, monkeypatch):
     _consult_returning(DeskProposal(recommended_discount_pct=2.0), monkeypatch)
 
     result = executor.dispatch(
@@ -59,7 +59,7 @@ def test_a_modest_ask_is_authorised_by_aria_alone(session, monkeypatch):
     )
 
     assert result["granted_discount_pct"] == 2.0
-    assert result["authorised_by"] == "aria"
+    assert result["authorised_by"] == "zuno"
     assert result["awaiting_human_approval"] is False
 
 
@@ -118,7 +118,7 @@ def test_past_the_desk_ceiling_a_human_is_asked_without_ending_the_call(session,
     assert result["awaiting_human_approval"] is True
     assert result["granted_discount_pct"] <= 10.0
     # The call is emphatically NOT handed over: a question about margin is not
-    # a handoff, and the customer stays with Aria while a person answers it.
+    # a handoff, and the customer stays with Zuno while a person answers it.
     assert session.status == "active"
     assert session.outcome is None
 

@@ -66,10 +66,10 @@ def test_list_filters_go_in_the_query_string():
         seen["url"] = str(request.url)
         return httpx.Response(200, json={"total": 0, "list": []})
 
-    _client(handler).find_one("Lead", cAriaSessionId="sess-1")
+    _client(handler).find_one("Lead", cZunoSessionId="sess-1")
 
     assert "where%5B0%5D%5Btype%5D=equals" in seen["url"]
-    assert "where%5B0%5D%5Battribute%5D=cAriaSessionId" in seen["url"]
+    assert "where%5B0%5D%5Battribute%5D=cZunoSessionId" in seen["url"]
     assert "sess-1" in seen["url"]
 
 
@@ -88,10 +88,10 @@ def test_lead_writes_use_the_c_prefixed_custom_field_names():
     store = EspoLeadStore(_client(handler))
     store.save(Lead(session_id="sess-1", company="Northwind", user_count=40, budget_range="50k"))
 
-    assert captured["cAriaUserCount"] == 40
-    assert captured["cAriaBudgetRange"] == "50k"
-    assert captured["cAriaSessionId"] == "sess-1"
-    assert "ariaUserCount" not in captured
+    assert captured["cZunoUserCount"] == 40
+    assert captured["cZunoBudgetRange"] == "50k"
+    assert captured["cZunoSessionId"] == "sess-1"
+    assert "zunoUserCount" not in captured
 
 
 def test_industry_writes_and_reads_as_espos_stock_field():

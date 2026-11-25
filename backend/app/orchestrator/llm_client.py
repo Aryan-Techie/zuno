@@ -9,7 +9,7 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Iterator, Protocol
 
-logger = logging.getLogger("aria.llm")
+logger = logging.getLogger("zuno.llm")
 
 
 @dataclass

@@ -145,8 +145,8 @@ def discount_for_target(quote: Quote, target_total: float) -> float:
 
 
 def authority_for(pct: float, policy: DealPolicy = DEFAULT_POLICY) -> AuthorityLevel:
-    if pct <= policy.aria_max_discount_pct:
-        return "aria"
+    if pct <= policy.zuno_max_discount_pct:
+        return "zuno"
     if pct <= policy.desk_max_discount_pct:
         return "deal_desk"
     return "human"

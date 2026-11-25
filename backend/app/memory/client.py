@@ -46,7 +46,7 @@ def build_config(settings) -> dict:
         "vector_store": {
             "provider": "qdrant",
             "config": {
-                "collection_name": "aria_sessions",
+                "collection_name": "zuno_sessions",
                 "embedding_model_dims": 1024,
                 "path": settings.mem0_vector_store_path,
             },

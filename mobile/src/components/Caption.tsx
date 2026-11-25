@@ -13,7 +13,7 @@ import { type } from '@/theme/type';
  *
  * The order below is the console's (frontend/app/page.tsx:420-439) and the
  * order is the design: an error outranks everything, a person on the call
- * outranks Aria, and a tool in flight outranks "thinking", because "checking
+ * outranks Zuno, and a tool in flight outranks "thinking", because "checking
  * the calendar" is the more useful of the two true statements.
  */
 
@@ -24,7 +24,7 @@ export type CaptionInput = {
   held: boolean;
   repOnCall: string | null;
   busyTool: string | null;
-  ariaSpeaking: boolean;
+  zunoSpeaking: boolean;
   youSpeaking: boolean;
   endedFor: string | null;
 };
@@ -40,7 +40,7 @@ function resolve(s: CaptionInput): { text: string; quiet: boolean } {
   if (s.held) return { text: 'On hold', quiet: true };
   if (s.repOnCall) return { text: `${s.repOnCall} has the call`, quiet: false };
   if (s.busyTool) return { text: `${toolBusy(s.busyTool)}…`, quiet: false };
-  if (s.ariaSpeaking) return { text: 'Aria is speaking', quiet: false };
+  if (s.zunoSpeaking) return { text: 'Zuno is speaking', quiet: false };
   if (s.muted) return { text: 'Muted', quiet: true };
   if (s.youSpeaking) return { text: 'Listening', quiet: false };
   return { text: 'Listening', quiet: false };

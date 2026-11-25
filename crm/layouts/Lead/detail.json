@@ -4,16 +4,16 @@
         "rows": [
             [{"name": "name"}, {"name": "accountName"}],
             [{"name": "emailAddress"}, {"name": "phoneNumber"}],
-            [{"name": "status"}, {"name": "cAriaDecisionStage"}]
+            [{"name": "status"}, {"name": "cZunoDecisionStage"}]
         ]
     },
     {
-        "label": "Aria Qualification",
+        "label": "Zuno Qualification",
         "rows": [
-            [{"name": "cAriaUserCount"}, {"name": "cAriaBudgetRange"}],
-            [{"name": "cAriaTimeline"}, {"name": "cAriaOutcome"}],
-            [{"name": "cAriaPainPoints", "fullWidth": true}],
-            [{"name": "cAriaSessionId", "fullWidth": true}]
+            [{"name": "cZunoUserCount"}, {"name": "cZunoBudgetRange"}],
+            [{"name": "cZunoTimeline"}, {"name": "cZunoOutcome"}],
+            [{"name": "cZunoPainPoints", "fullWidth": true}],
+            [{"name": "cZunoSessionId", "fullWidth": true}]
         ]
     },
     {

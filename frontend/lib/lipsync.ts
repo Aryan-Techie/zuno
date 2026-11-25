@@ -1,5 +1,5 @@
 /**
- * Real-time viseme detection from Aria's actual TTS audio - formant-band
+ * Real-time viseme detection from Zuno's actual TTS audio - formant-band
  * energy ratios on a WebAudio FFT, no ML model, no phoneme API. Adapted
  * directly from Agora's own reference implementation
  * (github.com/AgoraIO-Community/RPM-agora-agent, src/hooks/useLipSync.jsx) -

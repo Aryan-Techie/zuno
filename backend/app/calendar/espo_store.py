@@ -24,7 +24,7 @@ from app.calendar.fixtures import HOURS, REPS
 from app.calendar.models import Booking, Slot
 from app.crm.espo_client import EspoClient, EspoCRMError, from_espo_datetime, to_espo_datetime
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 _ENTITY = "Meeting"
 SLOT_MINUTES = 30
@@ -134,7 +134,7 @@ class EspoCalendarStore:
             "status": "Planned",
             "dateStart": to_espo_datetime(slot.start),
             "dateEnd": to_espo_datetime(slot.end),
-            "description": f"Booked by Aria on a live call.\nSession: {booking.session_id}",
+            "description": f"Booked by Zuno on a live call.\nSession: {booking.session_id}",
             # An api-type user cannot be an assignedUser, and Meeting requires
             # one, so bookings hang off the regular rep user provisioned by
             # scripts/provision_crm.py.

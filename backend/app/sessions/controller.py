@@ -51,7 +51,7 @@ def start_call(
     agora_client = agora_client or default_agora_client()
 
     session_id = uuid.uuid4().hex
-    channel_name = f"aria-{session_id[:8]}"
+    channel_name = f"zuno-{session_id[:8]}"
     browser_uid = random.randint(100_000, 999_999_999)
 
     agent_token = token_builder(settings.agora_app_id, settings.agora_app_certificate, channel_name, AGENT_RTC_UID)

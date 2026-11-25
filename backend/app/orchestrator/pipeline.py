@@ -26,9 +26,9 @@ from app.rtm.publisher import RtmPublisher, default_rtm_publisher
 from app.sessions.models import SessionState
 from app.tools import definitions, executor
 from app.voice import director
-from app.tools.prompts import ARIA_SYSTEM_PROMPT, build_system_prompt, supports_speech_markup
+from app.tools.prompts import ZUNO_SYSTEM_PROMPT, build_system_prompt, supports_speech_markup
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 # 4 was not enough for the booking flow: check_availability -> book ->
 # confirm burned every hop and the turn fell through to the fallback string
@@ -47,12 +47,12 @@ def _render_call_state(session: SessionState) -> str:
 
     The tools write these every single turn, but until now nothing ever read
     them back - the model only ever saw raw transcript. Re-injecting them is
-    what lets Aria hold on to a detail given twenty turns ago and notice when
+    what lets Zuno hold on to a detail given twenty turns ago and notice when
     the customer *changes* one (the 25 -> 50 device-count case in the demo
     scenario), without paying a network round-trip to a memory service.
 
     Returns "" when nothing has been captured yet, so an untouched session
-    leaves the system prompt byte-identical to ARIA_SYSTEM_PROMPT.
+    leaves the system prompt byte-identical to ZUNO_SYSTEM_PROMPT.
     """
     left, right = session.left_brain, session.right_brain
     sections: list[str] = []
@@ -290,9 +290,9 @@ def run_turn(
     provided by the caller for this request (Agora, in production). This is
     treated as the source of truth and overwrites session.transcript wholesale
     rather than being appended to our own locally-tracked copy — that's what
-    correctly handles a barge-in: if the customer interrupted Aria mid-reply,
+    correctly handles a barge-in: if the customer interrupted Zuno mid-reply,
     Agora's next request reflects the truncated version of what was actually
-    said, not what Aria intended to say.
+    said, not what Zuno intended to say.
     """
     llm_client = llm_client or default_llm_client()
     publisher = publisher or default_rtm_publisher()
@@ -406,7 +406,7 @@ def run_turn_stream(
 
         # Buffered rather than yielded live, because some models (Qwen on Groq
         # notably) write out a complete answer AND call a tool in the same hop,
-        # then answer again once the tool returns. Streaming both made Aria say
+        # then answer again once the tool returns. Streaming both made Zuno say
         # the whole thing twice on a live call. Text is only spoken from a hop
         # that is NOT calling a tool - i.e. the hop that actually concludes the
         # turn.
@@ -458,7 +458,7 @@ def run_turn_stream(
         escalate_called |= _execute_tool_calls(turn, session, publisher, messages)
 
         role = director.agent_for_tools([c.name for c in turn.tool_calls])
-        if role != "aria":
+        if role != "zuno":
             director.follow(session, role=role)
     else:
         if not spoken_parts:

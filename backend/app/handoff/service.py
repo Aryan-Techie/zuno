@@ -13,7 +13,7 @@ from app.handoff import builder, delivery
 from app.handoff.models import CallSummary
 from app.sessions.models import SessionState
 
-logger = logging.getLogger("aria.handoff")
+logger = logging.getLogger("zuno.handoff")
 
 # session_id -> the wrap-up produced when that call ended. Read by
 # GET /api/summaries; kept in the process alongside the session store rather

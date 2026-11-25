@@ -53,7 +53,7 @@ export default function Home() {
   const [approvedBy, setApprovedBy] = useState<string | null>(null);
   const [escalation, setEscalation] = useState<Escalation | null>(null);
   // Name of the person on the channel after a warm transfer; null while
-  // Aria still has the call.
+  // Zuno still has the call.
   const [repOnCall, setRepOnCall] = useState<string | null>(null);
   const [outcome, setOutcome] = useState<string | null>(null);
   const [leadId, setLeadId] = useState<string | null>(null);
@@ -94,7 +94,7 @@ export default function Home() {
     setDark(next);
     document.documentElement.dataset.theme = next ? "dark" : "light";
     try {
-      localStorage.setItem("aria-theme", next ? "dark" : "light");
+      localStorage.setItem("zuno-theme", next ? "dark" : "light");
     } catch {
       // private mode - the choice just does not persist
     }
@@ -147,7 +147,7 @@ export default function Home() {
     phase !== "live"
       ? "none"
       : agentState === "speaking"
-        ? "aria"
+        ? "zuno"
         : toolInFlight || agentState === "thinking"
           ? "think"
           : youTalking
@@ -157,7 +157,7 @@ export default function Home() {
   const getLevel = useCallback(() => {
     const levels = clientRef.current?.getLevels();
     if (!levels) return 0;
-    return speaker === "aria" ? levels.remote : speaker === "you" ? levels.local : 0;
+    return speaker === "zuno" ? levels.remote : speaker === "you" ? levels.local : 0;
   }, [speaker]);
 
   /* ---------------- feed helpers ---------------- */
@@ -167,7 +167,7 @@ export default function Home() {
 
   // One side of one exchange. The backend publishes these from the LLM
   // route as the words flow (routes/llm.py::_publish_turn) - the user's
-  // turn once, Aria's repeatedly as her reply grows, then once more marked
+  // turn once, Zuno's repeatedly as her reply grows, then once more marked
   // final. Upsert at the stable id so a growing reply updates in place.
   const upsertTurn = useCallback((id: string, role: "user" | "assistant", text: string, final: boolean) => {
     setFeed((prev) => {
@@ -273,12 +273,12 @@ export default function Home() {
         case "rep_joined": {
           const name = String(p.rep_name ?? "A colleague");
           setRepOnCall(name);
-          pushNote("good", `${name} is on the call. Aria is handing over.`);
+          pushNote("good", `${name} is on the call. Zuno is handing over.`);
           break;
         }
-        case "aria_left":
+        case "zuno_left":
           setAgentState("left");
-          pushNote("info", "Aria has left the call.");
+          pushNote("info", "Zuno has left the call.");
           break;
         case "objection_logged":
           // Reflected in right_brain on the next poll; nothing to print.
@@ -467,11 +467,11 @@ export default function Home() {
         <em>{summary ? "Brief sent, CRM note written." : "Writing the brief for the rep…"}</em>
       </>
     );
-  else if (hold) caption = <>On hold <em>· Aria can’t hear you and you can’t hear her</em></>;
-  else if (repOnCall && agentState === "left") caption = <>{repOnCall} has the call <em>· Aria has left</em></>;
-  else if (repOnCall) caption = <>{repOnCall} is on the line <em>· Aria is handing over</em></>;
+  else if (hold) caption = <>On hold <em>· Zuno can’t hear you and you can’t hear her</em></>;
+  else if (repOnCall && agentState === "left") caption = <>{repOnCall} has the call <em>· Zuno has left</em></>;
+  else if (repOnCall) caption = <>{repOnCall} is on the line <em>· Zuno is handing over</em></>;
   else if (toolInFlight) caption = `${toolBusy(toolInFlight.tool)}…`;
-  else if (agentState === "speaking") caption = "Aria is speaking";
+  else if (agentState === "speaking") caption = "Zuno is speaking";
   else if (agentState === "thinking") caption = <em>Thinking</em>;
   else if (micMuted) caption = <em>Muted</em>;
   else caption = youTalking ? "Listening" : <em>Listening</em>;
@@ -485,7 +485,7 @@ export default function Home() {
       <header className="top">
         <div className="brand">
           <Logo size={24} />
-          <span>Aria</span>
+          <span>Zuno</span>
           <span className="sub">Console</span>
           <DoodleSpark className="doodle faint" size={13} />
         </div>

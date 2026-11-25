@@ -271,7 +271,7 @@ def _escalate_to_human(tool_input: dict, session, *, trigger_source: TriggerSour
 def _negotiate_deal(tool_input: dict, session, **_) -> dict:
     """The three layers, in one tool call.
 
-    Layer 1 (Aria) does not decide this. She reports what was asked; the deal
+    Layer 1 (Zuno) does not decide this. She reports what was asked; the deal
     desk (layer 2, its own agent and its own model call) proposes; the engine
     clamps that proposal against policy; and if what the desk wants is past
     what it is allowed to sign, a human (layer 3) is asked - without ending
@@ -370,7 +370,7 @@ def _negotiate_deal(tool_input: dict, session, **_) -> dict:
 
     if requires_human and not negotiation.pending_human_approval:
         # Not escalate_to_human: that hands the call over and ends it. The
-        # customer stays with Aria while one person answers one question.
+        # customer stays with Zuno while one person answers one question.
         record, _position = escalation_service.escalate(
             session.session_id,
             f"Deal desk recommends {proposal.recommended_discount_pct:g}% on "

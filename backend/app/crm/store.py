@@ -5,7 +5,7 @@ from app.crm.fixtures import SEED_LEADS
 from app.crm.models import Lead
 from app.persistence import load_state, save_state
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 _STATE_NAME = "crm"
 

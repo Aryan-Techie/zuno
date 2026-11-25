@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import { useTheme } from '@/theme';
 
 /**
- * The Aria mark.
+ * The Zuno mark.
  *
  * Two inks, one per ground: the dark mark on light, the light mark on dark.
  * The blue is common to both and never changes, so the logo keeps its identity
@@ -31,7 +31,7 @@ export function Logo({ width = 34 }: { width?: number }) {
   return (
     <Image
       accessibilityRole="image"
-      accessibilityLabel="Aria"
+      accessibilityLabel="Zuno"
       source={scheme === 'dark' ? ON_DARK : ON_LIGHT}
       style={{ width, height: width / ASPECT }}
       resizeMode="contain"

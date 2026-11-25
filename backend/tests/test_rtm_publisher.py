@@ -67,5 +67,5 @@ def test_agora_rtm_publisher_posts_to_correct_url_and_swallows_errors():
 
     mock_post.assert_called_once()
     args, kwargs = mock_post.call_args
-    assert args[0] == "https://api.agora.io/dev/v2/project/app123/rtm/users/aria-backend/channel_messages"
+    assert args[0] == "https://api.agora.io/dev/v2/project/app123/rtm/users/zuno-backend/channel_messages"
     assert kwargs["json"]["channel_name"] == "sess-1"  # falls back to session_id when no session/channel found

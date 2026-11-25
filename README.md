@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="assets/aria-logo.png" width="88" height="88" alt="Aria logo">
+<img src="assets/zuno-logo.png" width="88" height="88" alt="Zuno logo">
 
-# ARIA
+# ZUNO
 
 **A real-time voice AI that sells like a real salesperson — not a phone tree.**
 
@@ -16,13 +16,13 @@
 
 [Features](#features) • [Quick Start](#quick-start) • [Architecture](#architecture) • [Tech Stack](#tech-stack) • [Contributing](#contributing) • [Team](#team)
 
-**🔴 Live now:** [aria.aroice.in](https://aria.aroice.in) — console + ops dashboard · [crm.aria.aroice.in](https://crm.aria.aroice.in) — the real CRM, hosted on a real Oracle Cloud VPS behind Caddy and Let's Encrypt TLS, not a laptop and a tunnel.
+**🔴 Live now:** [zuno.aroice.in](https://zuno.aroice.in) — console + ops dashboard · [crm.zuno.aroice.in](https://crm.zuno.aroice.in) — the real CRM, hosted on a real Oracle Cloud VPS behind Caddy and Let's Encrypt TLS, not a laptop and a tunnel.
 
 </div>
 
-![Aria console mid-call — the lead card, sentiment, and live deal state updating while she is still talking](assets/screenshot-live-call.png)
+![Zuno console mid-call — the lead card, sentiment, and live deal state updating while she is still talking](assets/screenshot-live-call.png)
 
-Aria runs a complete B2B sales qualification call, out loud, in real time. She answers pricing
+Zuno runs a complete B2B sales qualification call, out loud, in real time. She answers pricing
 questions from a knowledge base, handles objections, negotiates within limits she is not allowed
 to cross, remembers what you told her twenty turns ago, **writes to a real CRM while you are
 still talking**, books a meeting with a calendar invite, and escalates to a human — with a
@@ -31,7 +31,7 @@ written handoff brief — the moment she genuinely should.
 > Open the console and a CRM lead page side by side. Say *"actually, make that fifty devices"* —
 > the lead updates itself, with no refresh, while she is still speaking.
 
-![Aria console after the call ends — the AI-written brief, recommended next action, and handoff status](assets/screenshot-call-ended.png)
+![Zuno console after the call ends — the AI-written brief, recommended next action, and handoff status](assets/screenshot-call-ended.png)
 
 ## Contents
 
@@ -62,7 +62,7 @@ written handoff brief — the moment she genuinely should.
 - **A real CRM, live.** EspoCRM in Docker backs every lead and meeting. Leads are created and
   updated mid-call, meetings are booked for real, and the CRM's own audit trail shows an agent
   genuinely working the record.
-- **She bargains, and she can't give the deal away.** A three-layer negotiation: Aria can offer up
+- **She bargains, and she can't give the deal away.** A three-layer negotiation: Zuno can offer up
   to 3% herself, a separate deal-desk agent can go to 10% against a real commitment, and nothing
   ever crosses an 18% walk-away floor — enforced by code, not by asking the model nicely.
 - **A specialist for the technical questions.** A second agent, its own prompt and its own voice,
@@ -79,21 +79,21 @@ written handoff brief — the moment she genuinely should.
   independently and best-effort.
 - **She can take the call in Hindi.** One `AGENT_LANGUAGE` setting moves five things together —
   ASR, TTS voice, voice boosting, greeting, and prompt — so a Hinglish call doesn't half-switch.
-- **The voice changes with who's actually talking.** Aria, the deal desk, and the solutions
+- **The voice changes with who's actually talking.** Zuno, the deal desk, and the solutions
   engineer each get a distinct voice, and the accent follows the caller's language mid-call.
 - **A mobile app for the rep.** An Expo app that surfaces live escalations and handoff briefs, so
   the human on the other end of a warm transfer isn't stuck at a desktop.
-- **Not just B2B.** Aria reads the phrasing — "my team" vs. "I need a new phone" — and skips the
+- **Not just B2B.** Zuno reads the phrasing — "my team" vs. "I need a new phone" — and skips the
   company/role/headcount questions entirely for a solo buyer. Financing, AppleCare+, and trade-in
   work exactly the same for one device as for fifty.
 - **A live ops dashboard.** `/dashboard` lists every lead and session the backend has ever seen,
   live capacity stats, open escalations (with one-click discount approval), follow-up tasks, and
   the product catalog — proof concurrency is real, not simulated.
 - **A catalog a rep can extend live.** Adding a product writes real stock and re-indexes the RAG
-  corpus in the same call — Aria can answer about it on the very next question, no restart.
+  corpus in the same call — Zuno can answer about it on the very next question, no restart.
 - **When it isn't ready to be a meeting yet.** A follow-up gets written as a real Task in the CRM,
   not a line buried in a transcript, so a rep has something to work later.
-- **She does the currency math.** ₹, rupees, lakh, crore — Aria recognizes all of them, converts
+- **She does the currency math.** ₹, rupees, lakh, crore — Zuno recognizes all of them, converts
   at an approximate stated rate, and switches her own spoken currency to match the caller's.
 - **A face, not just a voice.** An optional 3D avatar, lip-synced off the live remote audio track
   in real time — toggle it on mid-call, the 2D orb stays the default.
@@ -187,7 +187,7 @@ backend as if it were OpenAI, streaming the response into TTS chunk by chunk. Th
 persona, the tool loop, RAG, the CRM, qualification state, negotiation, escalation, and every word
 she actually says. Agora never sees any of it.
 
-The diagram above is local dev — `aria.aroice.in` runs the identical stack on a real Oracle Cloud
+The diagram above is local dev — `zuno.aroice.in` runs the identical stack on a real Oracle Cloud
 VPS behind Caddy, one hostname split by path so the browser never makes a cross-origin request.
 The backend runs `--workers 1` there, deliberately: sessions live in an in-process dict, so a
 second worker would get its own empty copy and Agora's next webhook for a call would land on a
@@ -200,9 +200,9 @@ workers.
 |---|---|---|
 | **Agora Conversational AI Engine** | Real-time voice cloud (RTC audio + RTM data channel) | The whole phone-call layer — ASR, barge-in, TTS — without building real-time audio ourselves |
 | **Deepgram Nova-3** | Speech-to-text, multi-language mode | Handles Hindi/English mixed in one sentence (Hinglish) |
-| **MiniMax speech-2.8-turbo** | Text-to-speech, three distinct voices | Aria, the deal desk, and the solutions engineer each sound like a different person |
+| **MiniMax speech-2.8-turbo** | Text-to-speech, three distinct voices | Zuno, the deal desk, and the solutions engineer each sound like a different person |
 | **Anthropic Claude / Groq** | The reasoning model, run on one turn | Groq for speed, Anthropic as the quality fallback — chosen by measurement, not guesswork |
-| **FastAPI** | Python backend | Every tool, every rule, every word Aria says |
+| **FastAPI** | Python backend | Every tool, every rule, every word Zuno says |
 | **Next.js + React** | Operator console | Live transcript, lead card, signals, deal, handoff |
 | **Expo / React Native** | Mobile app for the rep | Escalations and handoff briefs on the move |
 | **EspoCRM** | Open-source CRM, in Docker | The real system of record — leads and meetings, not a mock |
@@ -210,7 +210,7 @@ workers.
 | **Three.js** | Optional 3D avatar | Real lipsync off live audio, plain WebGL — no react-three-fiber |
 | **cloudflared** | Cloudflare Tunnel | Public HTTPS so Agora's cloud can reach a laptop during local dev |
 | **Caddy + Let's Encrypt** | Reverse proxy, automatic TLS | The live deployment — one hostname split by path, real HTTPS that renews itself |
-| **Oracle Cloud (ARM/A1.Flex)** | The VPS `aria.aroice.in` runs on | Hosts console, backend, and CRM behind Caddy, `--workers 1` by design (see [Architecture](#architecture)) |
+| **Oracle Cloud (ARM/A1.Flex)** | The VPS `zuno.aroice.in` runs on | Hosts console, backend, and CRM behind Caddy, `--workers 1` by design (see [Architecture](#architecture)) |
 | **SMTP** | Email delivery | Confirmation invites and end-of-call wrap-ups |
 
 ## How a call actually flows
@@ -218,7 +218,7 @@ workers.
 1. The customer speaks in the browser; audio goes to Agora over RTC.
 2. Agora runs Deepgram ASR and gets text.
 3. Agora sends that text to this backend, in the same shape as an OpenAI chat request.
-4. The backend builds the prompt: Aria's persona, the current lead state, memory recalled from
+4. The backend builds the prompt: Zuno's persona, the current lead state, memory recalled from
    mem0, and the tool list.
 5. The model decides: answer directly, or call a tool first — search products, update the lead,
    log an objection, negotiate, ask the solutions engineer, check the calendar, book a meeting,
@@ -230,9 +230,9 @@ workers.
 
 ## Three layers of who is talking
 
-- **Layer 1 — Aria.** The only one who talks to the customer. Warm, generalist, holds the
+- **Layer 1 — Zuno.** The only one who talks to the customer. Warm, generalist, holds the
   conversation and can offer up to 3% off on her own.
-- **Layer 2 — two specialists.** Neither talks to the customer directly; Aria relays the answer,
+- **Layer 2 — two specialists.** Neither talks to the customer directly; Zuno relays the answer,
   in a distinct voice.
   - **Deal desk** — reasons about margin. Can go to 10%, only against a real commitment, and
     every round moves less than the last so the floor is felt coming.
@@ -244,21 +244,21 @@ workers.
 ## The console
 
 - **Orb + caption** — who is speaking, driven by real audio levels.
-- **Transcript** — customer and Aria turns, streamed live as words are generated.
+- **Transcript** — customer and Zuno turns, streamed live as words are generated.
 - **Tool calls** — every tool fired, with its latency in milliseconds.
 - **Lead** — company, devices, budget, timeline, and the qualification stage.
 - **Signals** — sentiment right now.
-- **Deal** — the three limits (Aria/desk/floor) and every round offered.
+- **Deal** — the three limits (Zuno/desk/floor) and every round offered.
 - **Handoff** — the escalation guardrails filling up live, then the join link.
 - **Brief** — after the call ends, the AI-written wrap-up for the rep.
 
 ## The CRM
 
 Not a mock — a real **EspoCRM** instance, running in Docker, backing every product, lead, and
-meeting Aria touches.
+meeting Zuno touches.
 
 <p align="center">
-  <img src="assets/crm-products.jpg" width="49%" alt="EspoCRM Products list — the real catalog Aria's pricing tool searches">
+  <img src="assets/crm-products.jpg" width="49%" alt="EspoCRM Products list — the real catalog Zuno's pricing tool searches">
   <img src="assets/crm-product-detail.jpg" width="49%" alt="EspoCRM Product detail view — an iPhone 15 record">
 </p>
 
@@ -271,7 +271,7 @@ A warm transfer needs somewhere for the human to land. The Expo app surfaces the
 queue and each call's AI-written brief, so a rep isn't stuck at a desktop waiting for a handoff.
 
 <p align="center">
-  <img src="assets/mobile-app-inbox.jpg" width="280" alt="Aria mobile app — escalation inbox showing a customer waiting and the AI-written call outcome">
+  <img src="assets/mobile-app-inbox.jpg" width="280" alt="Zuno mobile app — escalation inbox showing a customer waiting and the AI-written call outcome">
 </p>
 
 ## The Configuration

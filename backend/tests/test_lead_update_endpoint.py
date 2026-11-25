@@ -19,7 +19,7 @@ def test_manual_edit_writes_the_crm_and_the_live_session():
     assert body["lead"]["name"] == "Priya"
     assert body["lead"]["email"] == "priya@northwind.example"
 
-    # The point of the endpoint: Aria's own next-turn view already has it.
+    # The point of the endpoint: Zuno's own next-turn view already has it.
     assert session.left_brain.name == "Priya"
     assert session.left_brain.email == "priya@northwind.example"
     assert session.left_brain.industry == "Logistics"

@@ -24,7 +24,7 @@ import {
 } from "@/components/Doodles";
 
 export const metadata: Metadata = {
-  title: "Aria — a voice AI that sells like a person",
+  title: "Zuno — a voice AI that sells like a person",
   description:
     "A real-time voice sales agent built on Agora's Conversational AI Engine — she negotiates, updates a real CRM mid-call, and knows when to bring in a human.",
 };
@@ -38,7 +38,7 @@ export default function AboutPage() {
       <header className="top">
         <div className="brand">
           <Logo size={24} />
-          <span>Aria</span>
+          <span>Zuno</span>
           <span className="sub">Story</span>
         </div>
         <div className="actions">
@@ -67,7 +67,7 @@ export default function AboutPage() {
           </p>
           <div className="story-cta-row">
             <a href="/" className="primary">
-              Talk to Aria
+              Talk to Zuno
             </a>
             <a href="#brain" className="ghost">
               See how she thinks
@@ -84,7 +84,7 @@ export default function AboutPage() {
               A scripted voice bot holds together right up until someone interrupts mid-sentence,
               changes a number they already gave, or asks something out of order — then it restarts
               the flow, or hands off blind. A real salesperson doesn&apos;t do that. They listen, adapt,
-              and keep the thread. That&apos;s the gap Aria is built for.
+              and keep the thread. That&apos;s the gap Zuno is built for.
             </p>
           </div>
         </section>
@@ -102,7 +102,7 @@ export default function AboutPage() {
             </h2>
             <p>
               Every hard problem in real-time voice — hearing the customer, catching the exact
-              instant they start talking over Aria, turning her reply into speech that sounds
+              instant they start talking over Zuno, turning her reply into speech that sounds
               spoken rather than read — is Agora&apos;s Conversational AI Engine, not code this team
               wrote. Under <code>credential_mode: managed</code>, Agora holds the real Deepgram and
               MiniMax connections and injects its own vendor keys server-side, so this team never
@@ -206,7 +206,7 @@ export default function AboutPage() {
               <h3>Three layers of negotiation</h3>
               <p>
                 A discount request is the most ordinary thing on a sales call, and the most
-                dangerous thing to hand an LLM outright. Aria can concede 3% herself, instantly. Past
+                dangerous thing to hand an LLM outright. Zuno can concede 3% herself, instantly. Past
                 that, a separate deal-desk agent can go to 10% — only against a real commitment. Past
                 that, a human is asked, without ending the call.
               </p>
@@ -226,7 +226,7 @@ export default function AboutPage() {
             <div className="card">
               <h3>Grounded, not guessed</h3>
               <p>
-                Every price, spec, and comparison Aria states comes from a live knowledge-base
+                Every price, spec, and comparison Zuno states comes from a live knowledge-base
                 search — she says she&apos;s not sure rather than invent a number. A technical question
                 goes to a second specialist agent that is required to state exactly what it{" "}
                 <em>doesn&apos;t</em> know, not just what it does.
@@ -327,7 +327,7 @@ export default function AboutPage() {
             <div className="card">
               <h3>Hindi, English, or both mid-sentence</h3>
               <p>
-                One setting and Aria takes the call in Hinglish — Deepgram&apos;s <code>multi</code>{" "}
+                One setting and Zuno takes the call in Hinglish — Deepgram&apos;s <code>multi</code>{" "}
                 ASR mode and MiniMax&apos;s <code>language_boost: auto</code> follow a buyer who
                 switches languages mid-thought. Hindi renders in Devanagari, never romanised —
                 &ldquo;ek second&rdquo; spelled in Latin letters gets read out as English words.
@@ -453,7 +453,7 @@ export default function AboutPage() {
             <div className="card">
               <h3>Buys for one person or a fleet</h3>
               <p>
-                Aria reads the phrasing — &ldquo;my team&rdquo; versus &ldquo;I need a new
+                Zuno reads the phrasing — &ldquo;my team&rdquo; versus &ldquo;I need a new
                 phone&rdquo; — and skips the company, role, and headcount questions entirely for a
                 solo buyer. Financing, AppleCare+, and trade-in work exactly the same either way.
               </p>
@@ -463,7 +463,7 @@ export default function AboutPage() {
               <p>
                 <code>POST /api/products</code> writes new stock and appends it to the RAG corpus,
                 then calls <code>retriever.reset_index()</code>. A product added mid-shift is
-                answerable by Aria on the very next question asked — no restart, no redeploy.
+                answerable by Zuno on the very next question asked — no restart, no redeploy.
               </p>
             </div>
             <div className="card">
@@ -497,7 +497,7 @@ export default function AboutPage() {
             <div className="card">
               <h3>She does the currency math</h3>
               <p>
-                ₹, rupees, lakh, crore — Aria recognises all of them, converts at an approximate
+                ₹, rupees, lakh, crore — Zuno recognises all of them, converts at an approximate
                 stated rate, and keeps negotiating in USD, since the deal engine and the catalog
                 only ever speak one currency.
               </p>
@@ -564,7 +564,7 @@ export default function AboutPage() {
               </p>
             </details>
             <details>
-              <summary>What happens when Aria doesn&apos;t know something?</summary>
+              <summary>What happens when Zuno doesn&apos;t know something?</summary>
               <p>
                 She says so. Every price or spec comes from a live knowledge-base search — no
                 answer, no guess. Technical questions beyond that go to a specialist agent required
@@ -587,7 +587,7 @@ export default function AboutPage() {
             <details>
               <summary>What if I&apos;m buying one device for myself, not a fleet?</summary>
               <p>
-                Aria reads that from how you talk about it and skips the company/headcount
+                Zuno reads that from how you talk about it and skips the company/headcount
                 questions entirely. Financing, AppleCare+, and trade-in credit all work the same
                 for one device as for fifty.
               </p>
@@ -595,7 +595,7 @@ export default function AboutPage() {
             <details>
               <summary>Is there a security or compliance review before we&apos;d sign anything?</summary>
               <p>
-                Yes — that&apos;s a human step by design. Aria can walk through the standard
+                Yes — that&apos;s a human step by design. Zuno can walk through the standard
                 documentation on the call, but a formal security/compliance review is routed to a
                 specialist rather than closed out by an AI.
               </p>
@@ -634,11 +634,11 @@ export default function AboutPage() {
 
       <footer className="story-footer">
         <div className="story-footer-links">
-          <a href="/">Talk to Aria</a>
+          <a href="/">Talk to Zuno</a>
           <a href="/dashboard">Dashboard</a>
           <a href="#brain">The brain</a>
           <a href="#agora">Powered by Agora</a>
-          <a href="https://github.com/Aryan-Techie/aria" target="_blank" rel="noreferrer">
+          <a href="https://github.com/Aryan-Techie/zuno" target="_blank" rel="noreferrer">
             GitHub
           </a>
         </div>
@@ -646,7 +646,7 @@ export default function AboutPage() {
           <span>Built on</span>
           <img src={AGORA_LOGO} alt="Agora" />
         </div>
-        <p className="story-fineprint">Aria — for Agora&apos;s Adaptive AI Sales and Negotiation Agent track.</p>
+        <p className="story-fineprint">Zuno — for Agora&apos;s Adaptive AI Sales and Negotiation Agent track.</p>
       </footer>
     </div>
   );

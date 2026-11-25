@@ -43,7 +43,7 @@ function findMorphMeshes(root: THREE.Object3D): THREE.SkinnedMesh[] {
 }
 
 /**
- * Standalone 3D face, lipsynced to Aria's real remote audio - plain Three.js
+ * Standalone 3D face, lipsynced to Zuno's real remote audio - plain Three.js
  * (no react-three-fiber): R3F v8's react-reconciler dependency reads a React
  * internals field Next's App Router build renames, and no version of either
  * lined up with this app's React/Next combination without pulling in

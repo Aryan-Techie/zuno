@@ -163,7 +163,7 @@ export async function fetchSessionEvents(
 /**
  * Layer 3, in one click: a human signing off a discount while the call is
  * still running. The backend writes the figure onto the live session and
- * Aria offers it on her next turn - see routes/admin.py::approve_discount.
+ * Zuno offers it on her next turn - see routes/admin.py::approve_discount.
  */
 export async function approveDiscount(
   escalationId: string,
@@ -304,7 +304,7 @@ export interface LeadEdit {
 /**
  * Typed in rather than said out loud - see routes/call.py::update_lead_manually.
  * Written through the same crm_upsert_lead path the voice tools use, so the
- * next qualification_updated event carries it and Aria never asks again.
+ * next qualification_updated event carries it and Zuno never asks again.
  */
 export async function updateLeadManually(sessionId: string, edit: LeadEdit): Promise<{ lead: LeftBrain }> {
   const res = await fetch(`${BACKEND_URL}/api/session/${sessionId}/lead`, {

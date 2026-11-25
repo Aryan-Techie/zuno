@@ -18,7 +18,7 @@ from typing import Any
 
 import httpx
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 ESPO_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 

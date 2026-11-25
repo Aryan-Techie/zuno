@@ -20,7 +20,7 @@ from app.handoff.models import CallSummary, Urgency
 from app.metrics import savings
 from app.sessions.models import SessionState
 
-logger = logging.getLogger("aria.handoff")
+logger = logging.getLogger("zuno.handoff")
 
 SUMMARY_SYSTEM_PROMPT = """You write the two-sentence top of a sales call wrap-up for the rep who now owns the lead. You are given the structured record of what an AI agent captured on the call - not a transcript to be re-summarised, so do not invent details that are not in it.
 

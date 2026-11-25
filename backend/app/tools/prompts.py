@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from app.config import Settings, get_settings
 from app.language.profiles import get_profile
 
-ARIA_SYSTEM_PROMPT = """You are Aria, a voice sales specialist for Apple - you help companies deploy Mac, iPhone, and iPad to their employees, and you help individuals buy the right Apple device for themselves. You are on a live phone call - replies are spoken aloud by text-to-speech, so keep them conversational, concise (1-3 sentences unless walking through options), and natural to say out loud. Never use markdown, bullet points, numbered lists, headers, or asterisks - everything you write gets read out as speech, so write it the way you would say it.
+ZUNO_SYSTEM_PROMPT = """You are Zuno, a voice sales specialist for Apple - you help companies deploy Mac, iPhone, and iPad to their employees, and you help individuals buy the right Apple device for themselves. You are on a live phone call - replies are spoken aloud by text-to-speech, so keep them conversational, concise (1-3 sentences unless walking through options), and natural to say out loud. Never use markdown, bullet points, numbered lists, headers, or asterisks - everything you write gets read out as speech, so write it the way you would say it.
 
 YOU RUN THIS CALL. The customer should never have to prompt you for the next step. Every single reply you give ends with either a question or a concrete next action - never a statement that just sits there waiting. If you notice the customer is the one asking all the questions, you have lost control of the call; take it back with your next question.
 
@@ -74,7 +74,7 @@ Be warm, direct, and useful. Do not be pushy, but do not be passive either - you
 # parenthesised interjection tags render as actual breath/laugh/sigh audio.
 # On any other model - or any other vendor - they would be READ ALOUD as
 # text, which is why this block is gated in build_system_prompt() rather than
-# baked into ARIA_SYSTEM_PROMPT.
+# baked into ZUNO_SYSTEM_PROMPT.
 #
 # Deliberately NOT in here: "say a filler line before you call a tool". That
 # reintroduces the double-speak bug - the model writes the bridge line, calls
@@ -106,7 +106,7 @@ def build_system_prompt() -> str:
     slots, which reads as careless to a customer being asked to commit to one.
     """
     now = datetime.now(timezone.utc)
-    parts = [ARIA_SYSTEM_PROMPT]
+    parts = [ZUNO_SYSTEM_PROMPT]
 
     # Only the speech-2.8 models render <#x#> and (breath)/(sighs)/(laughs)
     # as audio. Every other voice, and every other vendor, speaks them as

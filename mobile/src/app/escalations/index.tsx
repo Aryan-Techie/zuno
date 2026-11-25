@@ -14,7 +14,7 @@ import { type } from '@/theme/type';
  * Everyone waiting for a person. Usually nobody.
  *
  * There is no review step here on purpose. A rep opening this screen is
- * opening it because Aria has already decided she cannot finish the call, and
+ * opening it because Zuno has already decided she cannot finish the call, and
  * the useful thing to do about that is be on the call — not read about it
  * first. So a row has exactly one action.
  */
@@ -34,7 +34,7 @@ export default function EscalationsScreen() {
       {handoffs.length === 0 ? (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 40 }}>
           <Text style={[type.body, { color: t.ink3, fontStyle: 'italic', textAlign: 'center' }]}>
-            Nobody is waiting. Aria will bring you in when she needs you.
+            Nobody is waiting. Zuno will bring you in when she needs you.
           </Text>
         </View>
       ) : (

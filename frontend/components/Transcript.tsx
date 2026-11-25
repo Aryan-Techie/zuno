@@ -12,7 +12,7 @@ import { SpinIcon, ToolIcon, toolBusy, toolDone } from "@/lib/vocab";
  *
  * Layout: two columns. The narrow left column carries tool calls and notes
  * (the machinery), the wide right column carries what was actually said -
- * the operator's turns and Aria's, streaming in real time. Each column
+ * the operator's turns and Zuno's, streaming in real time. Each column
  * follows its own bottom.
  */
 export type FeedItem =
@@ -82,10 +82,10 @@ export function Transcript({
         {turns.map((item) => {
           if (item.kind !== "turn") return null;
           return (
-            <div className={`turn ${item.role === "user" ? "you" : "aria"}${item.final ? "" : " live"}`} key={item.id}>
+            <div className={`turn ${item.role === "user" ? "you" : "zuno"}${item.final ? "" : " live"}`} key={item.id}>
               <div className="who">
                 <i />
-                {item.role === "user" ? "You" : "Aria"}
+                {item.role === "user" ? "You" : "Zuno"}
               </div>
               <div className="text">{item.text}</div>
             </div>

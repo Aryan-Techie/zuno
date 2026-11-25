@@ -6,7 +6,7 @@
  * app should a hex literal appear.
  *
  * Semantic colour is never a large fill (DESIGN.md) — it tints pills, dots and
- * hairlines only. Aria owns the cool half of the wheel, the customer the warm
+ * hairlines only. Zuno owns the cool half of the wheel, the customer the warm
  * half, so who is speaking reads from the rings alone.
  */
 
@@ -19,8 +19,8 @@ export type Theme = {
   ink3: string;
   line: string;
   line2: string;
-  aria: string;
-  ariaSoft: string;
+  zuno: string;
+  zunoSoft: string;
   you: string;
   youSoft: string;
   good: string;
@@ -51,8 +51,8 @@ const light: Theme = {
   ink3: '#aeaeb2',
   line: 'rgba(0, 0, 0, 0.07)',
   line2: 'rgba(0, 0, 0, 0.12)',
-  aria: '#5e5ce6',
-  ariaSoft: 'rgba(94, 92, 230, 0.12)',
+  zuno: '#5e5ce6',
+  zunoSoft: 'rgba(94, 92, 230, 0.12)',
   you: '#ff9f0a',
   youSoft: 'rgba(255, 159, 10, 0.14)',
   good: '#34c759',
@@ -88,8 +88,8 @@ const dark: Theme = {
   ink3: '#5c5c61',
   line: 'rgba(255, 255, 255, 0.08)',
   line2: 'rgba(255, 255, 255, 0.14)',
-  aria: '#7d7aff',
-  ariaSoft: 'rgba(125, 122, 255, 0.18)',
+  zuno: '#7d7aff',
+  zunoSoft: 'rgba(125, 122, 255, 0.18)',
   you: '#ffb340',
   youSoft: 'rgba(255, 179, 64, 0.16)',
   good: '#30d158',
@@ -132,7 +132,7 @@ export const DURATION = {
  */
 export const RING_PALETTE = {
   idle: '#a5b4fc',
-  aria: '#5e5ce6',
+  zuno: '#5e5ce6',
   you: '#ff9f0a',
   think: '#64d2ff',
   ended: '#34c759',

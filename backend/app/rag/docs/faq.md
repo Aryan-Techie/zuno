@@ -13,7 +13,7 @@ A: Yes. Apple Business Manager integrates with Jamf, Kandji, and Microsoft Intun
 A: With MDM enrollment automation (Growth tier and above), new devices arrive pre-configured for the employee — zero-touch setup, no IT visit required per device. Most rollouts of under 100 devices complete within 2-3 weeks of order.
 
 **Q: What if a question comes up you can't answer on this call?**
-A: Aria will say so directly rather than guessing, and can escalate to a human Apple Business specialist with full context from this conversation.
+A: Zuno will say so directly rather than guessing, and can escalate to a human Apple Business specialist with full context from this conversation.
 
 **Q: Is there a security/compliance review process?**
 A: Yes — Enterprise-tier customers get a dedicated review and can request Apple's security documentation and compliance materials before signing.

@@ -2,9 +2,9 @@
 
 After an escalation the console shows a link (`/rep/{escalation_id}`, on
 the backend's public URL). Whoever opens it - from any city, on any
-device - sees the brief Aria wrote and a single "Join call" button. The
+device - sees the brief Zuno wrote and a single "Join call" button. The
 button joins the customer's RTC channel with a token minted here, and the
-moment their mic is up the backend has Aria say her handoff line and leave
+moment their mic is up the backend has Zuno say her handoff line and leave
 the channel. The customer never hangs up; the voice on the line changes.
 
 Served as one self-contained HTML page off this backend rather than off
@@ -27,11 +27,11 @@ from app.escalation.inbox import inbox
 from app.rtm.publisher import default_rtm_publisher
 from app.sessions.store import session_store
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 router = APIRouter()
 
-# How long Aria gets to finish the handoff sentence before she is pulled.
+# How long Zuno gets to finish the handoff sentence before she is pulled.
 # /speak returns as soon as TTS is queued, not when it has been heard.
 _HANDOFF_LINE_SECONDS = 5.0
 
@@ -62,7 +62,7 @@ def handoff_details(escalation_id: str) -> dict:
         "session_id": session.session_id,
         "rep_name": settings.handoff_rep_name,
         "call_live": session.status != "ended",
-        "aria_on_call": session.agent_id is not None,
+        "zuno_on_call": session.agent_id is not None,
         "reason": record.reason,
         "trigger_source": record.trigger_source,
         "brief": record.brief.model_dump(mode="json"),
@@ -79,7 +79,7 @@ def handoff_details(escalation_id: str) -> dict:
 
 
 def _hand_over(session_id: str, agent_id: str, rep_name: str) -> None:
-    """Aria announces the handoff, then leaves. Backgrounded: the rep's
+    """Zuno announces the handoff, then leaves. Backgrounded: the rep's
     browser is waiting on the POST and must not sit through the sentence."""
     client = default_agora_client()
     try:
@@ -95,7 +95,7 @@ def _hand_over(session_id: str, agent_id: str, rep_name: str) -> None:
     if session is not None:
         session.agent_id = None
         session_store.save(session)
-    default_rtm_publisher().publish(session_id, "aria_left", {"rep_name": rep_name})
+    default_rtm_publisher().publish(session_id, "zuno_left", {"rep_name": rep_name})
 
 
 @router.post("/api/handoff/{escalation_id}/joined")
@@ -185,7 +185,7 @@ _PAGE = """<!doctype html>
   const lead = info.lead || {}, b = info.brief || {};
   $("#title").textContent = `${info.rep_name}, a customer is waiting`;
   $("#subtitle").innerHTML = info.call_live
-    ? `<span class="live"><i></i>Live now · Aria ${info.aria_on_call ? "is holding the line" : "has already left"}</span>`
+    ? `<span class="live"><i></i>Live now · Zuno ${info.zuno_on_call ? "is holding the line" : "has already left"}</span>`
     : "This call has ended.";
   $("#content").innerHTML = `
     <div class="card">
@@ -207,7 +207,7 @@ _PAGE = """<!doctype html>
     </div>
     <div class="card">
       <h3>Last few turns</h3>
-      ${(info.transcript || []).map(t => `<div class="turn"><b>${t.role === "user" ? "Customer" : "Aria"}</b>${esc(t.content)}</div>`).join("") || "<p style='margin:0;color:var(--ink3)'>Nothing yet.</p>"}
+      ${(info.transcript || []).map(t => `<div class="turn"><b>${t.role === "user" ? "Customer" : "Zuno"}</b>${esc(t.content)}</div>`).join("") || "<p style='margin:0;color:var(--ink3)'>Nothing yet.</p>"}
     </div>`;
 
   if (!info.call_live) { btn.hidden = true; return; }
@@ -235,7 +235,7 @@ _PAGE = """<!doctype html>
       await client.publish([mic]);
       const r = await fetch(`/api/handoff/${id}/joined`, { method: "POST" }).then(r => r.json());
       state.textContent = r.status === "handing_over"
-        ? "You're in. Aria is handing over to you, then leaving."
+        ? "You're in. Zuno is handing over to you, then leaving."
         : "You're in. You have the call.";
       btn.textContent = "Leave call"; btn.className = "end"; btn.disabled = false;
     } catch (e) {

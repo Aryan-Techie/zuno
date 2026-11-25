@@ -1,10 +1,10 @@
-# Aria Mobile
+# Zuno Mobile
 
 One Android app, two people.
 
-**The customer** opens it, presses one button, and talks to Aria. **Shipra** — the single
+**The customer** opens it, presses one button, and talks to Zuno. **Shipra** — the single
 human rep, `handoff_rep_name` in `backend/app/config.py:99` — reaches the same app through
-a code at the bottom of Settings, and when Aria escalates she joins the live call by voice.
+a code at the bottom of Settings, and when Zuno escalates she joins the live call by voice.
 
 The backend is unchanged. Every endpoint this app uses already existed for the web console
 or for `routes/rep.py`'s own join page.
@@ -45,7 +45,7 @@ Store, no bundle.
 ## The two paths
 
 **Customer.** Launch → rings, one caption, one button. Press Start and the rings go live:
-warm when you speak, cool when Aria does, cyan while a tool is running, grey on hold. The
+warm when you speak, cool when Zuno does, cyan while a tool is running, grey on hold. The
 transcript is not on screen — it peeks from the bottom and you drag it up if you want it.
 End the call and the outcome lands immediately, with the written headline a beat later.
 
@@ -53,9 +53,9 @@ End the call and the outcome lands immediately, with the written headline a beat
 `EXPO_PUBLIC_REP_CODE` says otherwise) → *Escalations* appears, and stays until switched
 off. While the app is open it polls `/api/inbox` every five seconds; a new handoff buzzes
 the phone and puts a banner on the call screen. Tap through, tap Join, and you are on the
-call — Aria says her handoff line and leaves about five seconds later.
+call — Zuno says her handoff line and leaves about five seconds later.
 
-There is no review step and no approve control. Discounts are settled by Aria's own ceiling
+There is no review step and no approve control. Discounts are settled by Zuno's own ceiling
 and the deal desk; a person is only ever wanted on the call itself.
 
 ---

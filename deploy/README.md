@@ -1,4 +1,4 @@
-# Deploying Aria
+# Deploying Zuno
 
 The laptop plus a cloudflared quick tunnel got a demo working, but the tunnel
 minted a new hostname on every `run.bat`, so nothing could be written down —
@@ -6,7 +6,7 @@ not a link to hand someone, and not a server address to bake into an APK.
 This puts the whole stack on one Oracle box behind a domain that does not
 move.
 
-**Target:** `aria-server`, VM.Standard.A1.Flex, Ubuntu 24.04 **aarch64**,
+**Target:** `zuno-server`, VM.Standard.A1.Flex, Ubuntu 24.04 **aarch64**,
 ap-mumbai-1.
 
 All four images the stack needs (`espocrm/espocrm`, `mariadb:11`, `caddy:2`,
@@ -30,7 +30,7 @@ break.
                    +---v---+
                    | Caddy |  automatic TLS, renews itself
                    +---+---+
-      aria.aroice.in   |   crm.aria.aroice.in
+      zuno.aroice.in   |   crm.zuno.aroice.in
         +--------------+--------------+
         |                             |
    /api  /agent  /rep  /healthz       +--> espocrm  (+ websocket, daemon)
@@ -71,20 +71,20 @@ You need, in this order:
 
 ### 1 · Assign the public IP
 
-Oracle console → **Compute → Instances → aria-server → Networking** tab →
+Oracle console → **Compute → Instances → zuno-server → Networking** tab →
 under *Primary VNIC*, click the subnet's **IPv4 addresses** → on the private
 IP row, **⋮ → Edit** → **Public IP: Ephemeral** (or *Reserved* if you want it
 to survive a stop/start) → **Update**.
 
 Then confirm the subnet is public: **Networking → Virtual Cloud Networks →
-aria-vcn → Subnets →** your subnet. If it says *Private*, no public IP can be
+zuno-vcn → Subnets →** your subnet. If it says *Private*, no public IP can be
 assigned to anything in it and the subnet has to be replaced.
 
 Write the IP down. Everything below uses it.
 
 ### 2 · Open the ports in the VCN
 
-**aria-vcn → Subnets →** your subnet **→ Security Lists →** the default list
+**zuno-vcn → Subnets →** your subnet **→ Security Lists →** the default list
 **→ Add Ingress Rules.** Two rules, both stateless **No**:
 
 | Source CIDR | IP Protocol | Destination Port |
@@ -101,8 +101,8 @@ Cloudflare dashboard → **aroice.in → DNS → Records → Add record**, twice
 
 | Type | Name       | IPv4 address     | Proxy status          | TTL  |
 |------|------------|------------------|-----------------------|------|
-| A    | `aria`     | *your public IP* | **DNS only** (grey)   | Auto |
-| A    | `crm.aria` | *your public IP* | **DNS only** (grey)   | Auto |
+| A    | `zuno`     | *your public IP* | **DNS only** (grey)   | Auto |
+| A    | `crm.zuno` | *your public IP* | **DNS only** (grey)   | Auto |
 
 **The proxy status must be DNS only — the grey cloud, not the orange one.**
 This is the setting that quietly breaks everything if it is wrong, and the
@@ -130,7 +130,7 @@ which needs a Cloudflare API token and a Caddy image built with the
 `caddy-dns/cloudflare` plugin. Do not do this before the stack is up and
 working — debugging two TLS terminators at once is miserable.
 
-Note that `crm.aria.aroice.in` is a second-level subdomain, which Cloudflare's
+Note that `crm.zuno.aroice.in` is a second-level subdomain, which Cloudflare's
 free universal certificate does **not** cover (it covers `*.aroice.in`, one
 level only). That costs nothing while the proxy is off, because Caddy issues
 its own certificate directly from Let's Encrypt. It only becomes a problem if
@@ -140,8 +140,8 @@ Check it resolves before going further. Caddy cannot get a certificate for a
 name that does not point here yet:
 
 ```bash
-dig +short aria.aroice.in
-dig +short crm.aria.aroice.in
+dig +short zuno.aroice.in
+dig +short crm.zuno.aroice.in
 ```
 
 Both must print your Oracle public IP. If they print Cloudflare addresses
@@ -154,16 +154,16 @@ Both must print your Oracle public IP. If they print Cloudflare addresses
 SSH in as `ubuntu`, then:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Aryan-Techie/aria/main/deploy/bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Aryan-Techie/zuno/main/deploy/bootstrap.sh | bash
 ```
 
 That installs Docker, opens 80/443 on the instance firewall, and clones the
-repo to `~/aria`. Log out and back in once, so the `docker` group applies.
+repo to `~/zuno`. Log out and back in once, so the `docker` group applies.
 
 Then fill in the environment — by hand, because it holds every secret:
 
 ```bash
-cd ~/aria
+cd ~/zuno
 cp deploy/.env.production.example deploy/.env.production
 nano deploy/.env.production
 ```
@@ -175,7 +175,7 @@ openssl rand -base64 24
 ```
 
 **`ESPOCRM_ADMIN_PASSWORD` must not be the local demo password.** That login
-is on the public internet the moment `crm.aria.aroice.in` resolves.
+is on the public internet the moment `crm.zuno.aroice.in` resolves.
 
 Copy the model, voice and Agora keys across from your local `backend/.env` —
 same names, same values. Leave `ESPOCRM_API_KEY` and
@@ -196,12 +196,12 @@ Run on the **host**, not in a container — it installs Espo layouts with
 `docker cp` and so needs the Docker socket:
 
 ```bash
-cd ~/aria
+cd ~/zuno
 set -a; . deploy/.env.production; set +a
 ESPOCRM_BASE_URL=http://localhost:8080 python3 scripts/provision_crm.py
 ```
 
-This creates the Lead custom fields, the `CAriaProduct` stock entity and its
+This creates the Lead custom fields, the `CZunoProduct` stock entity and its
 layouts, the role, the rep user and the API user — idempotently, so it is safe
 to re-run. It prints two values. Put both into `deploy/.env.production`:
 
@@ -222,11 +222,11 @@ docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env.producti
 ### Check it
 
 ```bash
-curl -fsS https://aria.aroice.in/healthz
+curl -fsS https://zuno.aroice.in/healthz
 ```
 
-Then open `https://aria.aroice.in` for the console and
-`https://crm.aria.aroice.in` for the CRM, and confirm **Products** lists
+Then open `https://zuno.aroice.in` for the console and
+`https://crm.zuno.aroice.in` for the CRM, and confirm **Products** lists
 four rows with stock, price and lead time.
 
 ---
@@ -234,10 +234,10 @@ four rows with stock, price and lead time.
 ## Updating
 
 ```bash
-cd ~/aria && git pull && bash deploy/up.sh
+cd ~/zuno && git pull && bash deploy/up.sh
 ```
 
-A change to `ARIA_DOMAIN` needs a **frontend rebuild**, not just a restart:
+A change to `ZUNO_DOMAIN` needs a **frontend rebuild**, not just a restart:
 `NEXT_PUBLIC_BACKEND_URL` is inlined into the client bundle at build time.
 `up.sh` always passes `--build`, so this is handled.
 
@@ -278,7 +278,7 @@ The instance is running 1 OCPU / 6 GB. Oracle's Always Free ARM allowance is
 are entitled to is sitting unused while EspoCRM, MariaDB, a PHP daemon, a
 websocket server, FastAPI and Next.js share a single core.
 
-Raising it costs nothing: **Instances → aria-server → Edit → Edit shape**,
+Raising it costs nothing: **Instances → zuno-server → Edit → Edit shape**,
 set OCPUs to 4 and memory to 24 GB. It needs a reboot, and builds and first
 page loads get dramatically faster.
 
@@ -290,7 +290,7 @@ Build it **after** the stack is live, not before. `EXPO_PUBLIC_API_BASE` is
 inlined into the JS bundle at build time, so an APK built against a dead
 hostname makes whoever installs it open Settings and paste a URL before
 anything works. `mobile/eas.json`'s `preview` profile already carries
-`https://aria.aroice.in`, so a build made now points at the real server and
+`https://zuno.aroice.in`, so a build made now points at the real server and
 works on first launch.
 
 ```bash
@@ -309,9 +309,9 @@ outright. Attach it to a **Release** instead, which is repo-hosted, gives a
 clean download link, and stays out of the history:
 
 ```bash
-gh release create v1.0.0 ./aria-1.0.0.apk \
-  --title "Aria 1.0.0" \
-  --notes "Android app. Points at https://aria.aroice.in by default; the server address can be changed in Settings."
+gh release create v1.0.0 ./zuno-1.0.0.apk \
+  --title "Zuno 1.0.0" \
+  --notes "Android app. Points at https://zuno.aroice.in by default; the server address can be changed in Settings."
 ```
 
 Without the `gh` CLI, do the same thing in the browser: **repo → Releases →

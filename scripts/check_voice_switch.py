@@ -72,7 +72,7 @@ def main() -> int:
             agent_id = running[-1].get("agent_id") or running[-1].get("id")
 
     if settings.tts_vendor == "sarvam":
-        original = resolve_sarvam_target(profile, role="aria")
+        original = resolve_sarvam_target(profile, role="zuno")
         target = (
             {"speaker": args.voice, "target_language_code": profile.sarvam_language_code}
             if args.voice

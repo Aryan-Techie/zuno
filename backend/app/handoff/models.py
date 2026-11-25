@@ -66,6 +66,6 @@ class CallSummary(BaseModel):
         lines += [
             "",
             f"Call length {self.duration_seconds // 60}m {self.duration_seconds % 60}s, "
-            f"{self.turn_count} turns, handled end to end by Aria.",
+            f"{self.turn_count} turns, handled end to end by Zuno.",
         ]
         return "\n".join(lines)

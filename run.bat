@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableDelayedExpansion
 REM ===========================================================================
-REM  Aria - one-command local startup (Windows)
+REM  Zuno - one-command local startup (Windows)
 REM
 REM  Brings up: EspoCRM (Docker) -> backend -> cloudflared tunnel -> frontend,
 REM  in that order, and writes the tunnel's new hostname into .env before the
@@ -20,7 +20,7 @@ if /i "%~1"=="stop" goto :stop
 
 echo.
 echo  ===============================================
-echo    Aria - real-time voice AI sales agent
+echo    Zuno - real-time voice AI sales agent
 echo  ===============================================
 echo.
 
@@ -28,9 +28,9 @@ REM A dev server left running from a previous session keeps port 3000/8000
 REM and the new one silently serves a broken build - seen live as a 500 from
 REM a page that had worked a minute earlier. Clear ours out first. Windows
 REM are matched by title, so this only touches servers this script started.
-taskkill /fi "WINDOWTITLE eq Aria backend*"  /t /f >nul 2>&1
-taskkill /fi "WINDOWTITLE eq Aria frontend*" /t /f >nul 2>&1
-taskkill /fi "WINDOWTITLE eq Aria tunnel*"   /t /f >nul 2>&1
+taskkill /fi "WINDOWTITLE eq Zuno backend*"  /t /f >nul 2>&1
+taskkill /fi "WINDOWTITLE eq Zuno frontend*" /t /f >nul 2>&1
+taskkill /fi "WINDOWTITLE eq Zuno tunnel*"   /t /f >nul 2>&1
 
 REM ------------------------------------------------------------- preflight
 echo  [1/7] Checking prerequisites...
@@ -159,7 +159,7 @@ echo        [!] EspoCRM did not answer in time. Continuing - the backend will
 echo            fall back to its in-memory CRM store, so the call still works.
 goto :crm_done
 :crm_ready
-echo        [OK] EspoCRM up at http://localhost:8080  ^(admin / aria-demo-admin^)
+echo        [OK] EspoCRM up at http://localhost:8080  ^(admin / zuno-demo-admin^)
 :crm_done
 
 REM ------------------------------------------------------------ provisioning
@@ -177,13 +177,13 @@ if errorlevel 1 (
 REM ----------------------------------------------------------------- backend
 echo.
 echo  [5/7] Starting backend on :8000...
-start "Aria backend" /min cmd /c "cd /d "%~dp0backend" && .venv\Scripts\python.exe -m uvicorn app.main:app --port 8000"
+start "Zuno backend" /min cmd /c "cd /d "%~dp0backend" && .venv\Scripts\python.exe -m uvicorn app.main:app --port 8000"
 
 for /l %%i in (1,1,30) do (
   curl -s -o nul -m 3 http://localhost:8000/healthz && goto :backend_ready
   call :sleep 2
 )
-echo        [X] Backend did not come up. Check the "Aria backend" window.
+echo        [X] Backend did not come up. Check the "Zuno backend" window.
 pause
 exit /b 1
 :backend_ready
@@ -192,8 +192,8 @@ echo        [OK] Backend healthy
 REM ------------------------------------------------------------------ tunnel
 echo.
 echo  [6/7] Starting tunnel and updating PUBLIC_BASE_URL...
-if exist "%TEMP%\aria-tunnel.log" del "%TEMP%\aria-tunnel.log"
-start "Aria tunnel" /min cmd /c "%CLOUDFLARED% tunnel --url http://localhost:8000 > "%TEMP%\aria-tunnel.log" 2>&1"
+if exist "%TEMP%\zuno-tunnel.log" del "%TEMP%\zuno-tunnel.log"
+start "Zuno tunnel" /min cmd /c "%CLOUDFLARED% tunnel --url http://localhost:8000 > "%TEMP%\zuno-tunnel.log" 2>&1"
 
 REM cloudflared prints the assigned hostname into its log a second or two
 REM after start. Poll for it rather than sleeping a fixed amount.
@@ -201,7 +201,7 @@ set TUNNEL_URL=
 for /l %%i in (1,1,30) do (
   if not defined TUNNEL_URL (
     call :sleep 2
-    for /f "usebackq tokens=*" %%u in (`powershell -NoProfile -Command "$m = Select-String -Path '%TEMP%\aria-tunnel.log' -Pattern 'https://[a-z0-9-]+\.trycloudflare\.com' -AllMatches -ErrorAction SilentlyContinue | Select-Object -First 1; if ($m) { $m.Matches[0].Value }"`) do set TUNNEL_URL=%%u
+    for /f "usebackq tokens=*" %%u in (`powershell -NoProfile -Command "$m = Select-String -Path '%TEMP%\zuno-tunnel.log' -Pattern 'https://[a-z0-9-]+\.trycloudflare\.com' -AllMatches -ErrorAction SilentlyContinue | Select-Object -First 1; if ($m) { $m.Matches[0].Value }"`) do set TUNNEL_URL=%%u
   )
 )
 
@@ -212,9 +212,9 @@ REM Write the new hostname, THEN restart the backend: settings are cached
 REM with lru_cache, so a running backend keeps serving the old (dead) URL.
 python scripts\set_tunnel_url.py "!TUNNEL_URL!"
 echo        [..] Restarting backend so it reads the new URL...
-taskkill /fi "WINDOWTITLE eq Aria backend*" /t /f >nul 2>&1
+taskkill /fi "WINDOWTITLE eq Zuno backend*" /t /f >nul 2>&1
 call :sleep 2
-start "Aria backend" /min cmd /c "cd /d "%~dp0backend" && .venv\Scripts\python.exe -m uvicorn app.main:app --port 8000"
+start "Zuno backend" /min cmd /c "cd /d "%~dp0backend" && .venv\Scripts\python.exe -m uvicorn app.main:app --port 8000"
 for /l %%i in (1,1,30) do (
   curl -s -o nul -m 3 http://localhost:8000/healthz && goto :backend_restarted
   call :sleep 2
@@ -232,13 +232,13 @@ echo            PUBLIC_BASE_URL in .env is set by hand and the backend restarted
 REM ---------------------------------------------------------------- frontend
 echo.
 echo  [7/7] Starting frontend on :3000...
-start "Aria frontend" /min cmd /c "cd /d "%~dp0frontend" && npm run dev"
+start "Zuno frontend" /min cmd /c "cd /d "%~dp0frontend" && npm run dev"
 
 for /l %%i in (1,1,45) do (
   curl -s -o nul -m 3 http://localhost:3000 && goto :frontend_ready
   call :sleep 2
 )
-echo        [!] Frontend slow to start - check the "Aria frontend" window.
+echo        [!] Frontend slow to start - check the "Zuno frontend" window.
 :frontend_ready
 echo        [OK] Frontend up
 
@@ -248,11 +248,11 @@ echo  ===============================================
 echo    Ready
 echo  ===============================================
 echo.
-echo    Console : http://localhost:3000     ^<- talk to Aria here
-echo    CRM     : http://localhost:8080     ^<- admin / aria-demo-admin
+echo    Console : http://localhost:3000     ^<- talk to Zuno here
+echo    CRM     : http://localhost:8080     ^<- admin / zuno-demo-admin
 echo.
 echo    Open a Lead in the CRM beside the console. It updates itself
-echo    while Aria talks - no refresh needed.
+echo    while Zuno talks - no refresh needed.
 echo.
 echo    Mic: pick "Microphone Array", NOT the device labelled
 echo    "Realtek HIGH Definition" ^(that one is a silent virtual cable^).
@@ -279,10 +279,10 @@ exit /b 0
 REM ======================================================================
 :stop
 echo.
-echo  Stopping Aria...
-taskkill /fi "WINDOWTITLE eq Aria backend*"  /t /f >nul 2>&1
-taskkill /fi "WINDOWTITLE eq Aria frontend*" /t /f >nul 2>&1
-taskkill /fi "WINDOWTITLE eq Aria tunnel*"   /t /f >nul 2>&1
+echo  Stopping Zuno...
+taskkill /fi "WINDOWTITLE eq Zuno backend*"  /t /f >nul 2>&1
+taskkill /fi "WINDOWTITLE eq Zuno frontend*" /t /f >nul 2>&1
+taskkill /fi "WINDOWTITLE eq Zuno tunnel*"   /t /f >nul 2>&1
 echo    [OK] Backend, frontend and tunnel stopped
 docker compose -f crm\docker-compose.yml stop >nul 2>&1
 echo    [OK] CRM containers stopped ^(data kept - "up" restores it^)

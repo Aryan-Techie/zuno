@@ -1,6 +1,6 @@
 """Layer 2: the deal desk agent.
 
-Aria is layer 1. She is optimised for a live conversation - short replies, one
+Zuno is layer 1. She is optimised for a live conversation - short replies, one
 question at a time, a voice that has to keep moving. Reasoning about margin is
 a different job with a different objective, and asking one prompt to do both
 is how you get an agent that is either a pushover on price or a robot in
@@ -15,7 +15,7 @@ proposal is past what layer 2 is allowed to sign.
 
 Two properties make this safe to put on a live call:
 
-  * it is off the customer's ear. The desk answers to Aria, not to the buyer,
+  * it is off the customer's ear. The desk answers to Zuno, not to the buyer,
     so a weak or strange proposal is clamped before a word of it is spoken.
   * it can fail. `heuristic_proposal` is a deterministic fallback, so a desk
     that times out or returns unparseable JSON costs one bridge line, not the
@@ -36,7 +36,7 @@ from pydantic import BaseModel, Field
 from app.deal.models import Commitment, Concession
 from app.deal.policy import DEFAULT_POLICY, DealPolicy
 
-logger = logging.getLogger("aria.deal")
+logger = logging.getLogger("zuno.deal")
 
 
 class DeskProposal(BaseModel):
@@ -77,12 +77,12 @@ class LLMDeskClient:
 
 
 def _system_prompt(policy: DealPolicy) -> str:
-    return f"""You are the deal desk for Apple's business sales team. A voice agent (Aria) is live on a call with a customer right now and has come to you because the customer is pushing on price. You do not talk to the customer and nothing you write is read out loud. You advise Aria.
+    return f"""You are the deal desk for Apple's business sales team. A voice agent (Zuno) is live on a call with a customer right now and has come to you because the customer is pushing on price. You do not talk to the customer and nothing you write is read out loud. You advise Zuno.
 
 Your job is to protect margin while keeping the deal alive. You are commercial, not generous: a discount is the last lever you reach for, never the first.
 
 What you are working with:
-- Aria can say yes to {policy.aria_max_discount_pct:g}% on her own, instantly.
+- Zuno can say yes to {policy.zuno_max_discount_pct:g}% on her own, instantly.
 - You can sign up to {policy.desk_max_discount_pct:g}%, and only ever in exchange for something.
 - Above {policy.desk_max_discount_pct:g}% a human sales manager has to approve it. Recommend that only when the deal genuinely turns on it.
 - Below {policy.walk_away_discount_pct:g}% off list there is no deal at all. Never recommend past it.
@@ -96,12 +96,12 @@ Levers that cost nothing and should carry most of your answers:
 
 Every discount above {policy.commitment_required_above_pct:g}% must be paid for. Ask for at least one of: a firmer device count, a decision date, a {policy.financing_months}-month term, a single purchase order, or a reference/case study.
 
-Concessions shrink. If Aria has already given ground this call, your next move is smaller than the last one, never larger.
+Concessions shrink. If Zuno has already given ground this call, your next move is smaller than the last one, never larger.
 
 Respond with ONLY a JSON object, no prose around it, with exactly these keys:
 "recommended_discount_pct": number - the negotiated discount off list you advise, on top of automatic volume pricing. 0 is a valid and often correct answer.
-"concessions": array of objects, each {{"kind": one of "discount"|"trade_in"|"financing"|"model_mix"|"bundle"|"term", "detail": one short sentence Aria can say, "value_usd": rough customer-side value as a number, 0 if unknown}}
-"commitments": array of objects, each {{"kind": one of "device_count_floor"|"decision_by"|"term_24_month"|"case_study"|"single_po"|"trade_in_fleet", "detail": what Aria should ask for, in one short sentence}}
+"concessions": array of objects, each {{"kind": one of "discount"|"trade_in"|"financing"|"model_mix"|"bundle"|"term", "detail": one short sentence Zuno can say, "value_usd": rough customer-side value as a number, 0 if unknown}}
+"commitments": array of objects, each {{"kind": one of "device_count_floor"|"decision_by"|"term_24_month"|"case_study"|"single_po"|"trade_in_fleet", "detail": what Zuno should ask for, in one short sentence}}
 "rationale": one sentence, for the internal record, on why this is the right shape
 "read": one sentence on what you think is ACTUALLY blocking this deal - the total number, the unit price, the timing of the spend, or a competing quote"""
 
@@ -161,10 +161,10 @@ def heuristic_proposal(
     """
     asked = max(0.0, float(requested_pct or 0.0))
 
-    if asked <= policy.aria_max_discount_pct:
+    if asked <= policy.zuno_max_discount_pct:
         return DeskProposal(
             recommended_discount_pct=max(asked, already_granted),
-            rationale="Inside what Aria can approve on her own; no commitment needed.",
+            rationale="Inside what Zuno can approve on her own; no commitment needed.",
             read="Testing whether there is any give at all.",
         )
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # One-time setup for a fresh Oracle Ubuntu 24.04 (aarch64) box.
 #
-#   curl -fsSL https://raw.githubusercontent.com/Aryan-Techie/aria/main/deploy/bootstrap.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/Aryan-Techie/zuno/main/deploy/bootstrap.sh | bash
 #
 # or, having cloned the repo already:  bash deploy/bootstrap.sh
 #
@@ -10,8 +10,8 @@
 # deploy/.env.production, which holds secrets and has to be written by hand.
 set -euo pipefail
 
-REPO_URL="${REPO_URL:-https://github.com/Aryan-Techie/aria.git}"
-CLONE_DIR="${CLONE_DIR:-$HOME/aria}"
+REPO_URL="${REPO_URL:-https://github.com/Aryan-Techie/zuno.git}"
+CLONE_DIR="${CLONE_DIR:-$HOME/zuno}"
 
 echo "==> Checking architecture"
 arch="$(uname -m)"

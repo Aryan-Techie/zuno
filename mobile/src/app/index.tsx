@@ -153,9 +153,9 @@ export default function CallScreen() {
   const phase: CallPhase =
     status === 'idle' ? 'idle' : status === 'connecting' ? 'connecting' : status === 'ended' ? 'ended' : 'live';
 
-  const ariaSpeaking = levels.remote > SPEAKING;
+  const zunoSpeaking = levels.remote > SPEAKING;
   const youSpeaking = levels.local > SPEAKING;
-  if (ariaSpeaking) lastSpeaker.current = 'aria';
+  if (zunoSpeaking) lastSpeaker.current = 'zuno';
   else if (youSpeaking) lastSpeaker.current = 'you';
 
   const ringState: RingState =
@@ -227,7 +227,7 @@ export default function CallScreen() {
               held,
               repOnCall: session.repOnCall,
               busyTool: session.busyTool,
-              ariaSpeaking,
+              zunoSpeaking,
               youSpeaking,
               endedFor: null,
             }}

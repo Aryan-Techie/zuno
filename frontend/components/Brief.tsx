@@ -128,7 +128,7 @@ export function Brief({
     ] as const) {
       if (items.length) lines.push("", `${title}:`, ...items.map((i) => `- ${i}`));
     }
-    lines.push("", `Call length ${Math.floor(duration / 60)}m ${duration % 60}s, ${turns} turns, handled end to end by Aria.`);
+    lines.push("", `Call length ${Math.floor(duration / 60)}m ${duration % 60}s, ${turns} turns, handled end to end by Zuno.`);
     try {
       await navigator.clipboard.writeText(lines.join("\n"));
       setCopied(true);
@@ -227,7 +227,7 @@ export function Brief({
       </div>
 
       <div className="sum-foot">
-        <span>Handled end to end by Aria.</span>
+        <span>Handled end to end by Zuno.</span>
         <span>{summary ? "Also in the CRM, Slack and the rep's inbox." : "The rep's copy is on its way."}</span>
         <button className="ghost" onClick={copy} disabled={!summary}>
           {copied ? "Copied" : "Copy brief"}

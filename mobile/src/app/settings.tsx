@@ -238,7 +238,7 @@ export default function SettingsScreen() {
                 accessibilityLabel="Staff access"
                 onPress={() => setCodeOpen(true)}
                 style={{ alignSelf: 'center', paddingVertical: 10 }}>
-                <Text style={[type.tiny, { color: t.ink3 }]}>Aria · version 1.0.0</Text>
+                <Text style={[type.tiny, { color: t.ink3 }]}>Zuno · version 1.0.0</Text>
               </Pressable>
             )}
           </View>

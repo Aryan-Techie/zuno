@@ -100,7 +100,7 @@ class Settings(BaseSettings):
     # app/inventory/store.py.
     inventory_timeout_seconds: float = 0.8
 
-    # The person a handoff goes to. Shown on the console, spoken by Aria as
+    # The person a handoff goes to. Shown on the console, spoken by Zuno as
     # she hands over, and printed on the rep's join page (routes/rep.py).
     handoff_rep_name: str = "Shipra"
     # Emailed the join link the moment a call escalates. Blank sends none;
@@ -131,7 +131,7 @@ class Settings(BaseSettings):
     # Most providers reject a From that is not the authenticated mailbox, so
     # this falls back to SMTP_USERNAME when blank.
     email_from: str = ""
-    email_from_name: str = "Aria - Apple Sales"
+    email_from_name: str = "Zuno - Apple Sales"
     email_reply_to: str = ""
     # Optional silent copy to the rep who owns the meeting.
     email_bcc: str = ""
@@ -242,7 +242,7 @@ class Settings(BaseSettings):
     minimax_emotion: str = "fluent"
     # Expands "$999", "M3", "24/7" etc. into spoken form instead of letting
     # the model mangle them mid-sentence. Relevant here because nearly every
-    # answer Aria gives contains a price.
+    # answer Zuno gives contains a price.
     # None takes the language profile's answer. MiniMax documents this
     # expansion pass as an English/Chinese feature, so it is off for Hindi -
     # leaving it on spends latency on a pass that does not apply.

@@ -20,7 +20,7 @@ function firstStringArg(args: Record<string, unknown> | undefined): string | nul
 }
 
 /**
- * A brief 3D card that pops up near the orb while Aria is looking up a
+ * A brief 3D card that pops up near the orb while Zuno is looking up a
  * product - makes the "she's actually checking, not making it up" moment
  * visible instead of just a latency gap. Purely decorative: reuses the
  * same tool-call data ActivityCard already renders, no backend change.

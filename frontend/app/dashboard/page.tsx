@@ -205,7 +205,7 @@ export default function DashboardPage() {
       <header className="top">
         <div className="brand">
           <Logo size={24} />
-          <span>Aria</span>
+          <span>Zuno</span>
           <span className="sub">Dashboard</span>
           <DoodleUnderline className="doodle faint" width={40} />
         </div>

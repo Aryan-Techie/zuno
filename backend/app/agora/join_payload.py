@@ -13,7 +13,7 @@ from app.config import Settings
 from app.language.profiles import LanguageProfile, get_profile, strip_speech_markup
 from app.tools.prompts import supports_speech_markup
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
 DEEPGRAM_WS_URL = "wss://api.deepgram.com/v1/listen"
 MINIMAX_WS_URL = "wss://api.minimax.io/ws/v1/t2a_v2"
@@ -209,7 +209,7 @@ def build_join_payload(
     failure_message = profile.failure_message if markup_ok else strip_speech_markup(profile.failure_message)
 
     return {
-        "name": f"aria-{session_id[:8]}",
+        "name": f"zuno-{session_id[:8]}",
         "properties": {
             "channel": channel_name,
             "token": agent_token,
@@ -256,7 +256,7 @@ def build_join_payload(
                 # tag - see SPEECH_STYLE_PROMPT in tools/prompts.py. Stripped
                 # above for any vendor that would speak that markup as literal
                 # text instead. Answered switchboard-style (org, location,
-                # name, offer) because a bare "Hi, I'm Aria" gives the caller
+                # name, offer) because a bare "Hi, I'm Zuno" gives the caller
                 # nothing to confirm they reached the right place. Comes from
                 # the language profile: this is the first thing the caller
                 # hears, so it decides which language they answer in.
@@ -295,7 +295,7 @@ def build_join_payload(
             # no output for response_wait_ms. run_turn_stream buffers every
             # tool hop and only yields on the concluding hop, so a RAG lookup
             # or a calendar booking is several seconds of silence otherwise -
-            # this is what makes Aria say "let me pull that up" while she is
+            # this is what makes Zuno say "let me pull that up" while she is
             # genuinely pulling it up. The phrases carry `<#x#>` pause markers
             # and speech-2.8 interjection tags for the same reason the rest of
             # her speech does.

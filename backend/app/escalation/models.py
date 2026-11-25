@@ -11,7 +11,7 @@ TriggerSource = Literal[
 ]
 
 # A handoff ends the call; an approval request does not. The customer stays
-# with Aria while a human answers one question about margin, so the two share
+# with Zuno while a human answers one question about margin, so the two share
 # the inbox and the brief but not the session lifecycle - see
 # tools/executor.py::_negotiate_deal.
 EscalationKind = Literal["handoff", "deal_approval"]

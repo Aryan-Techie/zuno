@@ -13,7 +13,7 @@ class LeadUpdate(BaseModel):
     """A manual edit typed into the console rather than said on the call.
 
     Every field optional - a partial edit (just the email, say) must not
-    clobber what Aria has already captured, same rule crm_upsert_lead
+    clobber what Zuno has already captured, same rule crm_upsert_lead
     follows for the voice path."""
 
     name: str | None = None
@@ -58,7 +58,7 @@ def update_lead_manually(session_id: str, body: LeadUpdate) -> dict:
     """The console's own "Edit details" affordance - typed in rather than
     said out loud. Written through the exact same crm_upsert_lead path the
     voice tools use, then mirrored onto the live session's LeftBrain so
-    Aria's next turn already has it and never asks again."""
+    Zuno's next turn already has it and never asks again."""
     session = session_store.get(session_id)
     if session is None:
         raise HTTPException(status_code=404, detail=f"No such session: {session_id}")

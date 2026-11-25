@@ -28,7 +28,7 @@ def _props(**overrides) -> dict:
     settings = Settings(agora_app_id="app123", **overrides)
     return build_join_payload(
         session_id="abcdef1234567890",
-        channel_name="aria-abcdef12",
+        channel_name="zuno-abcdef12",
         agent_rtc_uid=1,
         browser_rtc_uid=5551234,
         agent_token="fake-agent-token",

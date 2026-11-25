@@ -4,7 +4,7 @@ Two implementations behind one method (`all()`), chosen once at import the
 same way app/crm/store.py chooses its lead store:
 
 - MemoryProductStore - the fixtures. Default, and what pytest runs on.
-- EspoProductStore   - the live CAriaProduct rows, so a stock figure changed
+- EspoProductStore   - the live CZunoProduct rows, so a stock figure changed
                        in the browser is true for the next question asked.
 
 Timeout policy
@@ -20,8 +20,8 @@ that" instead of stalling.
 Field naming
 ------------
 Fields on a CUSTOM entity are NOT c-prefixed. The "c" prefix applies to custom
-fields added to a stock entity (Lead -> cAriaUserCount); a field created on
-CAriaProduct keeps the name it was given. Verified against this build: the
+fields added to a stock entity (Lead -> cZunoUserCount); a field created on
+CZunoProduct keeps the name it was given. Verified against this build: the
 Metadata tree lists `sku`, and filtering on `cSku` answers
 400 "Not existing attribute 'cSku' in where."
 """
@@ -32,11 +32,11 @@ import logging
 from app.inventory.fixtures import SEED_PRODUCTS
 from app.inventory.models import InventoryUnavailable, Product
 
-logger = logging.getLogger("aria")
+logger = logging.getLogger("zuno")
 
-# The Espo scope. Custom ENTITIES *are* prefixed - "AriaProduct" is addressed
-# as "CAriaProduct" - unlike the fields on them.
-ENTITY = "CAriaProduct"
+# The Espo scope. Custom ENTITIES *are* prefixed - "ZunoProduct" is addressed
+# as "CZunoProduct" - unlike the fields on them.
+ENTITY = "CZunoProduct"
 
 # Enough for a demo catalogue, and small enough that one round trip beats
 # per-product lookups: the whole list is fetched and matched in process.
@@ -71,13 +71,13 @@ class MemoryProductStore:
 
 
 class EspoProductStore:
-    """Live CAriaProduct rows. Read-only for the AGENT's own tool-calling
+    """Live CZunoProduct rows. Read-only for the AGENT's own tool-calling
     path (check_inventory never writes) - the API user's role otherwise
     grants read only, per scripts/provision_crm.py's ROLE_DATA. add() below
     is a distinct, explicit admin action (the new /api/products endpoint),
     not something the agent can reach mid-call; it will raise EspoCRMError
     if the provisioned role hasn't separately been granted create on
-    CAriaProduct - that's a real limitation to close in provision_crm.py,
+    CZunoProduct - that's a real limitation to close in provision_crm.py,
     not silently worked around here."""
 
     def __init__(self, client) -> None:
@@ -104,7 +104,7 @@ class EspoProductStore:
             payload["priceUsd"] = product.price_usd
         if product.lead_time_days is not None:
             payload["leadTimeDays"] = product.lead_time_days
-        # description/category aren't provisioned CAriaProduct fields today
+        # description/category aren't provisioned CZunoProduct fields today
         # (see scripts/provision_crm.py's INVENTORY_FIELDS) - they round-trip
         # fine on the in-memory store, which is what actually runs in dev.
         record = self._client.create(ENTITY, payload)

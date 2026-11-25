@@ -1,4 +1,4 @@
-"""Mint the API user Aria authenticates as, and print its key.
+"""Mint the API user Zuno authenticates as, and print its key.
 
 EspoCRM's documented path for this is clicking through Administration > API
 Users, which is no good for a stack that has to be reproducible on a strange
@@ -37,25 +37,25 @@ from base64 import b64encode
 # files in with `docker cp`, which needs a Docker socket.
 BASE_URL = os.environ.get("ESPOCRM_BASE_URL", "http://localhost:8080")
 ADMIN_USER = os.environ.get("ESPOCRM_ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.environ.get("ESPOCRM_ADMIN_PASSWORD", "aria-demo-admin")
+ADMIN_PASSWORD = os.environ.get("ESPOCRM_ADMIN_PASSWORD", "zuno-demo-admin")
 
-ROLE_NAME = "Aria Voice Agent"
-API_USER_NAME = "aria-agent"
+ROLE_NAME = "Zuno Voice Agent"
+API_USER_NAME = "zuno-agent"
 # A Meeting requires an assignedUser and an api-type user cannot BE one,
 # so bookings need a regular user to hang off. Also makes the calendar in
 # the CRM UI read as a real rep's diary rather than a service account's.
-REP_USER_NAME = "aria"
+REP_USER_NAME = "zuno"
 
 # Creating a custom field does NOT put it on any layout - the field exists and
 # holds data, but the Lead page simply does not show it, so a live demo of
-# "watch the CRM fill in" shows nothing. This layout adds an "Aria
+# "watch the CRM fill in" shows nothing. This layout adds an "Zuno
 # Qualification" panel carrying all seven.
 #
 # It is installed by copying the file into the container rather than over the
 # REST API: this EspoCRM build answers 405 on PUT Layout/{scope}/{name} and
 # parses PUT Admin/layout/... with "Admin" as the scope ("Admin is not
 # customizable"). The file path is the stable interface.
-CONTAINER = "aria-espocrm"
+CONTAINER = "zuno-espocrm"
 LAYOUT_ROOT = pathlib.Path(__file__).resolve().parent.parent / "crm" / "layouts"
 LAYOUT_DEST_ROOT = "/var/www/html/custom/Espo/Custom/Resources/layouts"
 
@@ -65,25 +65,25 @@ LAYOUT_DEST_ROOT = "/var/www/html/custom/Espo/Custom/Resources/layouts"
 # as real, typed fields on the Lead detail view.
 #
 # NOTE the name you write with is NOT the name you create with: EspoCRM
-# prefixes every custom field with "c", so creating "ariaUserCount" yields a
-# field addressed as "cAriaUserCount". Writing the unprefixed name is silently
+# prefixes every custom field with "c", so creating "zunoUserCount" yields a
+# field addressed as "cZunoUserCount". Writing the unprefixed name is silently
 # accepted and silently dropped - it does not error, the value just never
 # appears. Hence CUSTOM_FIELD_PREFIX and the mapping in crm/espo_store.py.
 CUSTOM_FIELDS = [
-    {"name": "ariaUserCount", "type": "int", "label": "Device Count", "min": 0, "max": 1000000},
-    {"name": "ariaBudgetRange", "type": "varchar", "label": "Budget Range", "maxLength": 100},
-    {"name": "ariaTimeline", "type": "varchar", "label": "Rollout Timeline", "maxLength": 100},
+    {"name": "zunoUserCount", "type": "int", "label": "Device Count", "min": 0, "max": 1000000},
+    {"name": "zunoBudgetRange", "type": "varchar", "label": "Budget Range", "maxLength": 100},
+    {"name": "zunoTimeline", "type": "varchar", "label": "Rollout Timeline", "maxLength": 100},
     {
-        "name": "ariaDecisionStage",
+        "name": "zunoDecisionStage",
         "type": "enum",
         "label": "Decision Stage",
         "options": ["", "discovery", "evaluating", "ready_to_buy", "not_a_fit"],
     },
-    {"name": "ariaPainPoints", "type": "text", "label": "Pain Points"},
-    {"name": "ariaOutcome", "type": "varchar", "label": "Call Outcome", "maxLength": 100},
+    {"name": "zunoPainPoints", "type": "text", "label": "Pain Points"},
+    {"name": "zunoOutcome", "type": "varchar", "label": "Call Outcome", "maxLength": 100},
     # The join key back to our own session state. Indexed lookups on it are
     # how a mid-call update finds the row it created two turns earlier.
-    {"name": "ariaSessionId", "type": "varchar", "label": "Aria Session", "maxLength": 64},
+    {"name": "zunoSessionId", "type": "varchar", "label": "Zuno Session", "maxLength": 64},
 ]
 
 # Live stock, as a real entity in the CRM rather than another document in the
@@ -97,18 +97,18 @@ CUSTOM_FIELDS = [
 # next question she is asked - no restart, no re-ingest.
 #
 # NOTE EspoCRM prefixes custom ENTITIES with "C" as well as custom fields, so
-# creating "AriaProduct" yields a scope addressed as "CAriaProduct". Confirmed
+# creating "ZunoProduct" yields a scope addressed as "CZunoProduct". Confirmed
 # against this build: the create call is POST EntityManager/action/createEntity
 # (Admin/entityManager/createEntity 404s here), and removeEntity wants the
 # prefixed name back or answers 403.
-INVENTORY_ENTITY = "AriaProduct"
-INVENTORY_SCOPE = "CAriaProduct"
+INVENTORY_ENTITY = "ZunoProduct"
+INVENTORY_SCOPE = "CZunoProduct"
 
 # `name` comes with every Base entity, so only the stock-specific columns are
 # created here. NOTE these are NOT c-prefixed: the "c" prefix applies to custom
 # fields added to a STOCK entity (Lead -> cStockQty), but a field created on a
 # custom entity keeps the name it was given. Verified against this build's
-# Metadata: entityDefs.CAriaProduct.fields has `sku`, not `cSku`. Filtering on
+# Metadata: entityDefs.CZunoProduct.fields has `sku`, not `cSku`. Filtering on
 # the prefixed name answers 400 "Not existing attribute 'cSku' in where."
 INVENTORY_FIELDS = [
     {"name": "sku", "type": "varchar", "label": "SKU", "maxLength": 40},
@@ -134,7 +134,7 @@ SEED_PRODUCTS = [
 ]
 
 # Only what the tool loop actually touches. Lead, Meeting and Task are the
-# entities Aria writes to; Account/Contact are readable so a lookup against an
+# entities Zuno writes to; Account/Contact are readable so a lookup against an
 # existing customer works, but she has no business deleting anything.
 ROLE_DATA = {
     "name": ROLE_NAME,
@@ -220,7 +220,7 @@ def _install_layout() -> None:
     A custom entity gets no layouts of its own: EspoCRM falls back to a default
     that shows `name` and nothing else, so the stock columns exist in the API
     and are invisible - and therefore uneditable - in the browser. Verified on
-    this build: before these files, CAriaProduct's detail view listed only
+    this build: before these files, CZunoProduct's detail view listed only
     Name / Assigned User / Teams / Created.
     """
     dirs = sorted(d for d in LAYOUT_ROOT.iterdir() if d.is_dir()) if LAYOUT_ROOT.exists() else []
@@ -356,7 +356,7 @@ def main() -> int:
     _ensure_inventory(metadata)
 
     # After _ensure_inventory: a role that lists a scope Espo does not know
-    # yet is rejected with "Bad data. Scope CAriaProduct is not allowed."
+    # yet is rejected with "Bad data. Scope CZunoProduct is not allowed."
     role = _find_one("Role", "name", ROLE_NAME)
     if role:
         # `name` is omitted - Espo answers 400 when it is sent back on a PUT.
@@ -376,11 +376,11 @@ def main() -> int:
             "User",
             {
                 "userName": REP_USER_NAME,
-                "firstName": "Aria",
+                "firstName": "Zuno",
                 "lastName": "Voice Agent",
                 "type": "regular",
                 "isActive": True,
-                "emailAddress": "aria@example.com",
+                "emailAddress": "zuno@example.com",
             },
         )
         print(f"rep user  : created {REP_USER_NAME} ({rep['id']})")

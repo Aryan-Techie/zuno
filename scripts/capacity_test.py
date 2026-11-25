@@ -1,4 +1,4 @@
-"""How many conversations does Aria actually hold at once?
+"""How many conversations does Zuno actually hold at once?
 
 Runs N simultaneous calls through the real turn loop and reports what it
 measured. Two modes, and the difference between them is the whole point:
@@ -225,7 +225,7 @@ def run_live_mode(base: str, sessions: int, turns: int, secret: str) -> dict:
                 try:
                     response = client.post(
                         f"{base}/agent/{session_id}/v1/chat/completions",
-                        json={"model": "aria", "messages": messages, "stream": True},
+                        json={"model": "zuno", "messages": messages, "stream": True},
                         headers=headers,
                     )
                     response.raise_for_status()

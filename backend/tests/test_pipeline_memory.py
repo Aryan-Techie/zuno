@@ -59,7 +59,7 @@ def test_no_recalled_memories_leaves_system_prompt_unmodified():
     # An untouched session adds no call-state or memory blocks - only the
     # date stamp build_system_prompt() always appends.
     system = llm_client.received_systems[0]
-    assert system.startswith(pipeline.ARIA_SYSTEM_PROMPT)
+    assert system.startswith(pipeline.ZUNO_SYSTEM_PROMPT)
     assert "Today is" in system
     assert "already established on this call" not in system
     assert "recalled from earlier" not in system

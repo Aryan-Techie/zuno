@@ -134,7 +134,7 @@ def test_espo_store_raises_rather_than_returning_an_empty_catalogue():
 
     class DeadClient:
         def list(self, *_args, **_kwargs):
-            raise EspoCRMError("GET /CAriaProduct -> timeout")
+            raise EspoCRMError("GET /CZunoProduct -> timeout")
 
     with pytest.raises(InventoryUnavailable):
         inventory_store.EspoProductStore(DeadClient()).all()

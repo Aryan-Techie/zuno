@@ -1,7 +1,7 @@
-# Real CRM behind Aria's crm_* and calendar_* tools.
+# Real CRM behind Zuno's crm_* and calendar_* tools.
 #
 # `espocrm-websocket` is what makes an open Lead page update ITSELF while
-# Aria is talking - EspoCRM pushes record changes to the browser over
+# Zuno is talking - EspoCRM pushes record changes to the browser over
 # ws://localhost:8081 instead of the tab having to be reloaded. Without it
 # the CRM is still correct, it just needs a manual refresh to show it, which
 # is a much weaker thing to demo.
@@ -10,17 +10,17 @@
 # cron job, but the websocket path is happier with it running and it is cheap.
 #
 # Start:  docker compose -f crm/docker-compose.yml up -d
-# Admin:  http://localhost:8080   (admin / aria-demo-admin)
+# Admin:  http://localhost:8080   (admin / zuno-demo-admin)
 # Then:   python scripts/provision_crm.py     <- mints the API key
 services:
   espocrm-db:
     image: mariadb:11
-    container_name: aria-espocrm-db
+    container_name: zuno-espocrm-db
     environment:
-      MARIADB_ROOT_PASSWORD: aria-root
+      MARIADB_ROOT_PASSWORD: zuno-root
       MARIADB_DATABASE: espocrm
       MARIADB_USER: espocrm
-      MARIADB_PASSWORD: aria-espocrm
+      MARIADB_PASSWORD: zuno-espocrm
     volumes:
       - espocrm-db:/var/lib/mysql
     restart: unless-stopped
@@ -33,14 +33,14 @@ services:
 
   espocrm:
     image: espocrm/espocrm:latest
-    container_name: aria-espocrm
+    container_name: zuno-espocrm
     environment:
       ESPOCRM_DATABASE_PLATFORM: Mysql
       ESPOCRM_DATABASE_HOST: espocrm-db
       ESPOCRM_DATABASE_USER: espocrm
-      ESPOCRM_DATABASE_PASSWORD: aria-espocrm
+      ESPOCRM_DATABASE_PASSWORD: zuno-espocrm
       ESPOCRM_ADMIN_USERNAME: admin
-      ESPOCRM_ADMIN_PASSWORD: aria-demo-admin
+      ESPOCRM_ADMIN_PASSWORD: zuno-demo-admin
       # Must match how the browser reaches it, or Espo builds broken links.
       ESPOCRM_SITE_URL: "http://localhost:8080"
       # The app container is the PUBLISHER: it pushes record-change events
@@ -69,7 +69,7 @@ services:
 
   espocrm-websocket:
     image: espocrm/espocrm:latest
-    container_name: aria-espocrm-ws
+    container_name: zuno-espocrm-ws
     environment:
       ESPOCRM_CONFIG_USE_WEB_SOCKET: "true"
       # What the BROWSER connects to, so it must be the host-visible address.
@@ -90,7 +90,7 @@ services:
 
   espocrm-daemon:
     image: espocrm/espocrm:latest
-    container_name: aria-espocrm-daemon
+    container_name: zuno-espocrm-daemon
     volumes:
       - espocrm-data:/var/www/html/data
       - espocrm-custom:/var/www/html/custom

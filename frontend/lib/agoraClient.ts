@@ -35,7 +35,7 @@ export interface TranscriptEvent {
  *      is for interim chunks (metadata is typed `T | null`).
  *
  * Reading a non-existent `turn.role` is what made EVERY turn fall through to
- * "assistant", so the console labelled the customer's own speech "Aria". */
+ * "assistant", so the console labelled the customer's own speech "Zuno". */
 function normalizeRole(turn: RawTranscriptTurn, localUid: string | null): "user" | "assistant" {
   const object = String(turn.metadata?.object ?? "").toLowerCase();
   if (object.startsWith("user.")) return "user";
@@ -50,7 +50,7 @@ function normalizeRole(turn: RawTranscriptTurn, localUid: string | null): "user"
   return "assistant";
 }
 
-/** Aria's spoken text carries MiniMax delivery markup - `<#0.3#>` pause
+/** Zuno's spoken text carries MiniMax delivery markup - `<#0.3#>` pause
  * markers and `(breath)` / `(sighs)` / `(laughs)` interjection tags (see
  * SPEECH_STYLE_PROMPT in the backend). The voice engine turns those into
  * audio, but the transcript Agora echoes back still contains them verbatim,
@@ -109,9 +109,9 @@ export class AgoraCallClient {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private api: any = null;
   /** The uid we joined RTC with, so transcript items published under it can
-   * be attributed to the customer rather than to Aria. */
+   * be attributed to the customer rather than to Zuno. */
   private localUid: string | null = null;
-  /** Every remote audio track currently playing, keyed by uid. Aria is the
+  /** Every remote audio track currently playing, keyed by uid. Zuno is the
    * only remote publisher on a call, but the map keeps a re-published track
    * (after a hold, or an agent restart) from leaking the old one. */
   private remoteTracks = new Map<string, IRemoteAudioTrack>();
@@ -193,7 +193,7 @@ export class AgoraCallClient {
     // still doesn't match.
     this.api.on(EConversationalAIAPIEvents.TRANSCRIPT_UPDATED, (...args: unknown[]) => {
       // eslint-disable-next-line no-console
-      console.debug("[Aria] TRANSCRIPT_UPDATED raw args:", args);
+      console.debug("[Zuno] TRANSCRIPT_UPDATED raw args:", args);
       const payload = args[args.length - 1];
       const turns: RawTranscriptTurn[] = Array.isArray(payload)
         ? (payload as RawTranscriptTurn[])
@@ -221,14 +221,14 @@ export class AgoraCallClient {
 
     this.api.on(EConversationalAIAPIEvents.AGENT_STATE_CHANGED, (...args: unknown[]) => {
       // eslint-disable-next-line no-console
-      console.debug("[Aria] AGENT_STATE_CHANGED raw args:", args);
+      console.debug("[Zuno] AGENT_STATE_CHANGED raw args:", args);
       const event = args[args.length - 1] as { state?: string } | undefined;
       callbacks.onAgentStateChanged?.(event?.state ?? "unknown");
     });
 
     this.api.on(EConversationalAIAPIEvents.AGENT_ERROR, (...args: unknown[]) => {
       // eslint-disable-next-line no-console
-      console.debug("[Aria] AGENT_ERROR raw args:", args);
+      console.debug("[Zuno] AGENT_ERROR raw args:", args);
       callbacks.onError?.(args[args.length - 1]);
     });
 
@@ -313,7 +313,7 @@ export class AgoraCallClient {
 
   /**
    * The raw remote audio, for the 3D avatar's lipsync - a real FFT of what
-   * Aria is actually saying, not the SDK's own single-number volume meter
+   * Zuno is actually saying, not the SDK's own single-number volume meter
    * getLevels() uses. Runs alongside the SDK's own playback (track.play(),
    * above), not instead of it - tapping the MediaStreamTrack does not stop
    * the SDK from playing it normally.
@@ -333,7 +333,7 @@ export class AgoraCallClient {
    * Hold is the console's "pause". The backend has no pause primitive (there
    * is no way to freeze a turn that is already generating), so hold is done
    * at the edges: the mic is muted so nothing new reaches the recogniser,
-   * and Aria's audio is stopped locally so the operator hears silence. She
+   * and Zuno's audio is stopped locally so the operator hears silence. She
    * may finish the sentence she was on; it is not played.
    */
   async setHold(hold: boolean): Promise<void> {

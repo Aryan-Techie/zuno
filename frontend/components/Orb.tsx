@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 
 export type Phase = "idle" | "live" | "ended";
-/** Who the orb is showing. `think` is Aria between turns with a tool in
+/** Who the orb is showing. `think` is Zuno between turns with a tool in
  * flight - the one state where the call is alive but nobody is speaking. */
-export type Speaker = "none" | "aria" | "you" | "think";
+export type Speaker = "none" | "zuno" | "you" | "think";
 
 const hex = (h: string): number[] => [
   parseInt(h.slice(1, 3), 16),
@@ -13,11 +13,11 @@ const hex = (h: string): number[] => [
   parseInt(h.slice(5, 7), 16),
 ];
 
-/** One palette per state. Aria is the cool half of the wheel, the customer
+/** One palette per state. Zuno is the cool half of the wheel, the customer
  * the warm half, so who is speaking reads from across a room. */
 const PALETTE: Record<string, string[]> = {
   idle: ["#a5b4fc", "#bae6fd", "#e9d5ff"],
-  aria: ["#5e5ce6", "#64d2ff", "#bf5af2"],
+  zuno: ["#5e5ce6", "#64d2ff", "#bf5af2"],
   you: ["#ff9f0a", "#ff375f", "#ffd60a"],
   think: ["#64d2ff", "#5e5ce6", "#a5b4fc"],
   ended: ["#34c759", "#64d2ff", "#a5b4fc"],
@@ -87,7 +87,7 @@ export function Orb({
       last = now;
       t += reduceMotion ? dt * 0.3 : dt;
       const { phase, speaker, hold, getLevel } = propsRef.current;
-      const talking = !hold && (speaker === "aria" || speaker === "you");
+      const talking = !hold && (speaker === "zuno" || speaker === "you");
 
       let target: number;
       if (talking) {

@@ -21,7 +21,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-logger = logging.getLogger("aria.persistence")
+logger = logging.getLogger("zuno.persistence")
 
 
 def _state_dir() -> Path | None:

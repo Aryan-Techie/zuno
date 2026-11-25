@@ -9,12 +9,12 @@
 #
 # Run it from the REPO ROOT, not from deploy/ - the build contexts below are
 # repo-relative so the Dockerfiles can reach backend/ and frontend/.
-name: aria
+name: zuno
 
 services:
   caddy:
     image: caddy:2
-    container_name: aria-caddy
+    container_name: zuno-caddy
     restart: unless-stopped
     # The only two ports open to the internet. Everything else talks over the
     # compose network and is unreachable from outside the box - the backend,
@@ -23,8 +23,8 @@ services:
       - "80:80"
       - "443:443"
     environment:
-      ARIA_DOMAIN: ${ARIA_DOMAIN:?set ARIA_DOMAIN in deploy/.env.production}
-      ARIA_CRM_DOMAIN: ${ARIA_CRM_DOMAIN:?set ARIA_CRM_DOMAIN in deploy/.env.production}
+      ZUNO_DOMAIN: ${ZUNO_DOMAIN:?set ZUNO_DOMAIN in deploy/.env.production}
+      ZUNO_CRM_DOMAIN: ${ZUNO_CRM_DOMAIN:?set ZUNO_CRM_DOMAIN in deploy/.env.production}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       # The issued certificates. Without this volume every restart asks Let's
@@ -39,7 +39,7 @@ services:
     build:
       context: ..
       dockerfile: deploy/Dockerfile.backend
-    container_name: aria-backend
+    container_name: zuno-backend
     restart: unless-stopped
     env_file:
       - .env.production
@@ -63,15 +63,15 @@ services:
         # Same origin as the page itself - see deploy/Caddyfile. Baked into
         # the client bundle at build time, which is why a domain change means
         # a frontend rebuild, not just a restart.
-        NEXT_PUBLIC_BACKEND_URL: https://${ARIA_DOMAIN}
-    container_name: aria-frontend
+        NEXT_PUBLIC_BACKEND_URL: https://${ZUNO_DOMAIN}
+    container_name: zuno-frontend
     restart: unless-stopped
     depends_on:
       - backend
 
   espocrm-db:
     image: mariadb:11
-    container_name: aria-espocrm-db
+    container_name: zuno-espocrm-db
     restart: unless-stopped
     environment:
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?set MARIADB_ROOT_PASSWORD}
@@ -89,7 +89,7 @@ services:
 
   espocrm:
     image: espocrm/espocrm:latest
-    container_name: aria-espocrm
+    container_name: zuno-espocrm
     restart: unless-stopped
     environment:
       ESPOCRM_DATABASE_PLATFORM: Mysql
@@ -101,11 +101,11 @@ services:
       ESPOCRM_ADMIN_PASSWORD: ${ESPOCRM_ADMIN_PASSWORD:?set ESPOCRM_ADMIN_PASSWORD}
       # Must match how the BROWSER reaches it or Espo builds broken links
       # into every page it renders.
-      ESPOCRM_SITE_URL: https://${ARIA_CRM_DOMAIN}
+      ESPOCRM_SITE_URL: https://${ZUNO_CRM_DOMAIN}
       ESPOCRM_CONFIG_USE_WEB_SOCKET: "true"
       # wss, not ws: the page is served over TLS and a browser refuses to open
       # an insecure socket from a secure page.
-      ESPOCRM_CONFIG_WEB_SOCKET_URL: wss://${ARIA_CRM_DOMAIN}
+      ESPOCRM_CONFIG_WEB_SOCKET_URL: wss://${ZUNO_CRM_DOMAIN}
       ESPOCRM_CONFIG_WEB_SOCKET_ZERO_M_Q_SUBMISSION_DSN: tcp://espocrm-websocket:7777
     # EspoCRM refuses to auto-install if /var/www/html is mounted whole - an
     # empty volume there shadows the shipped application and the entrypoint
@@ -129,11 +129,11 @@ services:
 
   espocrm-websocket:
     image: espocrm/espocrm:latest
-    container_name: aria-espocrm-ws
+    container_name: zuno-espocrm-ws
     restart: unless-stopped
     environment:
       ESPOCRM_CONFIG_USE_WEB_SOCKET: "true"
-      ESPOCRM_CONFIG_WEB_SOCKET_URL: wss://${ARIA_CRM_DOMAIN}
+      ESPOCRM_CONFIG_WEB_SOCKET_URL: wss://${ZUNO_CRM_DOMAIN}
       ESPOCRM_CONFIG_WEB_SOCKET_ZERO_M_Q_SUBSCRIBER_DSN: tcp://*:7777
       ESPOCRM_CONFIG_WEB_SOCKET_ZERO_M_Q_SUBMISSION_DSN: tcp://espocrm-websocket:7777
     volumes:
@@ -146,7 +146,7 @@ services:
 
   espocrm-daemon:
     image: espocrm/espocrm:latest
-    container_name: aria-espocrm-daemon
+    container_name: zuno-espocrm-daemon
     restart: unless-stopped
     volumes:
       - espocrm-data:/var/www/html/data

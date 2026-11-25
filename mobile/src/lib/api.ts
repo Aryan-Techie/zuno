@@ -1,5 +1,5 @@
 /**
- * Typed client for the Aria backend. Port of frontend/lib/api.ts, plus the two
+ * Typed client for the Zuno backend. Port of frontend/lib/api.ts, plus the two
  * rep endpoints the console never needed (it links out to routes/rep.py's own
  * HTML page instead).
  *
@@ -223,7 +223,7 @@ export interface EscalationRecord {
 /**
  * The whole inbox, every kind, oldest first, no cursor and no filter — see
  * routes/admin.py:28. Callers filter client-side; this app keeps only
- * `kind === "handoff"`, since discounts are settled by Aria's own ceiling and
+ * `kind === "handoff"`, since discounts are settled by Zuno's own ceiling and
  * the deal desk rather than by a person on a phone.
  */
 export function fetchInbox(): Promise<EscalationRecord[]> {
@@ -235,7 +235,7 @@ export interface HandoffDetails {
   session_id: string;
   rep_name: string;
   call_live: boolean;
-  aria_on_call: boolean;
+  zuno_on_call: boolean;
   reason: string;
   trigger_source: TriggerSource;
   brief: EscalationBrief;
@@ -248,7 +248,7 @@ export interface HandoffDetails {
 
 /**
  * Everything needed to join, in one call: the brief and a freshly minted RTC
- * token for the rep's fixed uid (2 — distinct from Aria's 1 and the customer's
+ * token for the rep's fixed uid (2 — distinct from Zuno's 1 and the customer's
  * random >= 100000).
  *
  * 404s once the call is over ("That call is no longer live", rep.py:53) — that
@@ -260,7 +260,7 @@ export function fetchHandoff(escalationId: string): Promise<HandoffDetails> {
 
 /**
  * Called only after the mic is actually publishing. The backend replies
- * `handing_over`, has Aria speak her closing line, waits five seconds, then
+ * `handing_over`, has Zuno speak her closing line, waits five seconds, then
  * removes her from the channel (rep.py:81-98). Calling it early would hand the
  * call to a rep who cannot yet be heard.
  */

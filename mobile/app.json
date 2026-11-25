@@ -1,22 +1,22 @@
 {
   "expo": {
-    "name": "Aria",
-    "slug": "aria-mobile",
+    "name": "Zuno",
+    "slug": "zuno-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "aria",
+    "scheme": "zuno",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.aria.mobile",
+      "bundleIdentifier": "com.zuno.mobile",
       "supportsTablet": false,
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "Aria needs your microphone so you can talk to her during a call."
+        "NSMicrophoneUsageDescription": "Zuno needs your microphone so you can talk to her during a call."
       }
     },
     "android": {
-      "package": "com.aria.mobile",
+      "package": "com.zuno.mobile",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -56,11 +56,7 @@
       "reactCompiler": true
     },
     "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "9c3d9351-89f7-4455-8ede-a1a53f3e53f2"
-      }
-    },
-    "owner": "rudrao2"
+      "router": {}
+    }
   }
 }
