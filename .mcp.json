@@ -2,6 +2,12 @@
   "mcpServers": {
     "agora-docs": {
       "url": "https://mcp.agora.io"
+    },
+    "graphify": {
+      "command": "graphify-mcp",
+      "args": [
+        "graphify-out/graph.json"
+      ]
     }
   }
 }

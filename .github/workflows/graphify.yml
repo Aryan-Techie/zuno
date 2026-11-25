@@ -1,0 +1,56 @@
+name: Graphify impact
+
+# Rebuilds ZUNO's code graph for every pull request (AST only: no API key,
+# nothing leaves the runner) and comments which parts of the system each
+# changed file reaches, so a reviewer sees the blast radius before reading
+# the diff.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  impact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install Graphify
+        run: uv tool install graphifyy
+
+      - name: Rebuild the graph from this branch
+        run: graphify update . --force
+
+      - name: Trace what each changed file affects
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          {
+            echo "### Graphify impact"
+            echo
+            echo "Graph rebuilt from this branch with \`graphify update .\`. For each changed source file, the code that imports or calls into it, two hops out:"
+            echo
+            git diff --name-only "$BASE"...HEAD -- '*.py' '*.ts' '*.tsx' | while read -r f; do
+              [ -f "$f" ] || continue
+              echo "<details><summary><code>$f</code></summary>"
+              echo
+              echo '```'
+              graphify affected "$f" --depth 2 | head -40 || echo "(not in the graph)"
+              echo '```'
+              echo "</details>"
+            done
+          } > impact.md
+          cat impact.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Comment on the pull request
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr comment ${{ github.event.pull_request.number }} --body-file impact.md --edit-last --create-if-none
