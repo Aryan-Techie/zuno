@@ -228,3 +228,14 @@ def test_meeting_booking_end_to_end(monkeypatch):
     assert "booked" in body["choices"][0]["message"]["content"].lower()
     session = session_store.get("sess-booking")
     assert session.outcome == "meeting_booked"
+
+
+def test_gemini_history_never_ends_on_a_model_turn():
+    from app.orchestrator.llm_client import _messages_to_gemini
+
+    contents = _messages_to_gemini([
+        {"role": "assistant", "content": "Hi, I am Zuno."},
+        {"role": "user", "content": "My name is Aryan."},
+        {"role": "assistant", "content": "Lovely to meet you, Ar-"},
+    ])
+    assert contents[-1].role == "user"

@@ -383,6 +383,18 @@ def _messages_to_gemini(messages: list[dict]):
         if parts:
             contents.append(types.Content(role=gemini_role, parts=parts))
 
+    # Gemini refuses a request whose last turn is the model's ("Requests
+    # ending with a model turn are not supported"). That happens live when a
+    # caller barges in: Agora's history can end on ZUNO's own cut-off reply,
+    # and every turn then failed into the "lost my train of thought"
+    # fallback. A trailing spoken reply carries nothing the next answer
+    # needs, so drop it; a trailing function call is kept because its result
+    # must follow it.
+    while contents and contents[-1].role == "model" and not any(
+        getattr(part, "function_call", None) for part in contents[-1].parts or []
+    ):
+        contents.pop()
+
     return contents
 
 
