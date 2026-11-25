@@ -35,7 +35,6 @@ IMAGE_CACHE_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "imag
 # Chrome without behaving like one, yet serve an honest non-browser agent.
 # Measured: Chrome UA -> 403, plain identifying UA -> 200.
 BROWSER_USER_AGENT = "ZUNO-demo/1.0 (+https://github.com/Aryan-Techie/zuno)"
-)
 CACHE_CONTROL = "public, max-age=86400"
 MAX_IMAGE_BYTES = 8 * 1024 * 1024
 IMAGE_FETCH_TIMEOUT_SECONDS = 10.0

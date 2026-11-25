@@ -137,7 +137,9 @@ def test_product_image_is_fetched_once_then_cached(perfume_catalog, tmp_path, mo
     assert (tmp_path / "images" / "dior-sauvage-eau-de-parfum.jpg").exists()
 
 
-def test_product_image_404s_without_an_image(perfume_catalog):
+def test_product_image_404s_without_an_image(perfume_catalog, monkeypatch, tmp_path):
+    # An empty cache: a seeded local cache must not mask a missing image_url.
+    monkeypatch.setattr(catalog_routes, "IMAGE_CACHE_DIR", tmp_path / "images")
     assert client.get("/api/catalog/dior-sauvage-elixir/image").status_code == 404
     assert client.get("/api/catalog/apple-ipad/image").status_code == 404
     assert client.get("/api/catalog/unknown/image").status_code == 404
@@ -169,7 +171,7 @@ def test_browser_like_user_agent_is_sent(monkeypatch):
 
     monkeypatch.setattr(catalog_routes.httpx, "get", fake_get)
     assert catalog_routes.fetch_image("https://x.test/a.webp") == (b"webp", "image/webp")
-    assert seen["User-Agent"].startswith("Mozilla/5.0")
+    assert seen["User-Agent"].startswith("ZUNO-demo/")
 
 
 def test_knowledge_graph_endpoint(tmp_path):
