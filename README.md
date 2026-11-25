@@ -4,19 +4,22 @@
 
 # ZUNO
 
-**A real-time voice AI that sells like a real salesperson — not a phone tree.**
+**The AI holds the call. A person makes the call.**
+
+A real-time voice sales agent built human-in-the-loop: Apple devices by default, a Dior beauty boutique on request ("Dior mode"), a live CRM mirrored into Notion, and Graphify as its knowledge layer.
 
 [![Built with Agora](https://img.shields.io/badge/built%20with-Agora%20Conversational%20AI-1E88E5)](https://www.agora.io/)
 [![Backend](https://img.shields.io/badge/backend-FastAPI-009688)](backend)
 [![Frontend](https://img.shields.io/badge/frontend-Next.js-000000)](frontend)
 [![Mobile](https://img.shields.io/badge/mobile-Expo-4630EB)](mobile)
+[![Graphify](https://img.shields.io/badge/knowledge%20graph-Graphify-e0115f)](#graphify-zunos-knowledge-layer)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](#contributing)
 
 *Part of the [AROICE](https://aroice.in) family of tools.*
 
 [Features](#features) • [Quick Start](#quick-start) • [Architecture](#architecture) • [Tech Stack](#tech-stack) • [Contributing](#contributing) • [Team](#team)
 
-**🔴 Live now:** [zuno.aroice.in](https://zuno.aroice.in) — console + ops dashboard · [crm.zuno.aroice.in](https://crm.zuno.aroice.in) — the real CRM, hosted on a real Oracle Cloud VPS behind Caddy and Let's Encrypt TLS, not a laptop and a tunnel.
+**🔴 Live now:** [zuno.141-148-201-8.sslip.io](https://zuno.141-148-201-8.sslip.io) — console, ops dashboard, story and Graphify views · [crm.zuno.141-148-201-8.sslip.io](https://crm.zuno.141-148-201-8.sslip.io) — the real CRM, on an Oracle Cloud VPS behind Caddy with Let's Encrypt TLS.
 
 </div>
 
@@ -32,6 +35,19 @@ written handoff brief — the moment she genuinely should.
 > the lead updates itself, with no refresh, while she is still speaking.
 
 ![Zuno console after the call ends — the AI-written brief, recommended next action, and handoff status](assets/screenshot-call-ended.png)
+
+
+## Two modes
+
+- **Apple (default).** Qualifies businesses buying Mac, iPhone and iPad fleets and individuals buying one device: pricing from the knowledge base, live stock, financing, AppleCare+, trade-in, meetings with a calendar invite.
+- **Perfume ("Dior mode").** Say *"Dior mode"*, *"perfume mode"* or *"fragrance mode"* mid-call, or flip the console toggle, and ZUNO becomes a beauty advisor for a boutique carrying Dior fragrance, makeup and skincare (78 products, HK$ prices, scraped by `scripts/scrape_dior.py`). Its persona, knowledge base, stock, voice and negotiation rules all switch: individuals get 0% and complimentary extras, corporate gifting of 10+ pieces can reach 5%, enforced in code. *"Apple mode"* switches back. Demo only, not affiliated with Apple or Dior.
+- **Product spotlight.** Whenever a product is named, by the caller or by ZUNO, it appears on the console with its image, price, note pyramid and a three.js model tinted to the product.
+
+## Graphify: ZUNO's knowledge layer
+
+1. **Product knowledge graphs** (`backend/app/knowledge/*.graph.json`): one per mode, built with Graphify. The solutions specialist cites their edges: `EXTRACTED` facts are stated in our documents and safe to promise; `INFERRED` ones are connections Graphify resolved, and they go to a human as open questions. Browse them at `/graph`.
+2. **The team's graph on getgraphify.com:** every lead, call, objection, meeting and product is mirrored into nine linked Notion databases (`backend/app/notion/`, `scripts/setup_notion.py`, see `docs/notion.md`). getgraphify.com renders that workspace as a live knowledge graph of the sales operation.
+3. **A graph of this codebase** (`graphify-out/`): Claude Code hooks route agents through `graphify query/path/explain` before they grep, `.mcp.json` serves it over MCP, and every pull request gets a Graphify impact comment (`.github/workflows/graphify.yml`).
 
 ## Contents
 
