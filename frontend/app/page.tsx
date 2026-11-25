@@ -558,7 +558,7 @@ export default function Home() {
       dropOtherModeSpotlight(next);
       try {
         await setSessionMode(sessionId, next);
-        showToast(`Switched to ${MODE_LABEL[next]}`, "Zuno changes on her next turn");
+        showToast(`Switched to ${MODE_LABEL[next]}`, "Zuno changes on its next turn");
       } catch (e) {
         consoleSwitchRef.current = null;
         adoptMode(previous);
@@ -591,7 +591,7 @@ export default function Home() {
         <em>{summary ? "Brief sent, CRM note written." : "Writing the brief for the rep…"}</em>
       </>
     );
-  else if (hold) caption = <>On hold <em>· Zuno can’t hear you and you can’t hear her</em></>;
+  else if (hold) caption = <>On hold <em>· Zuno can’t hear you and you can’t hear it</em></>;
   else if (repOnCall && agentState === "left") caption = <>{repOnCall} has the call <em>· Zuno has left</em></>;
   else if (repOnCall) caption = <>{repOnCall} is on the line <em>· Zuno is handing over</em></>;
   else if (toolInFlight) caption = `${toolBusy(toolInFlight.tool)}…`;

@@ -89,7 +89,7 @@ export const TRIGGER_LABEL: Record<string, string> = {
   llm: "Zuno asked for a person",
   frustration_streak: "Two turns in a row sounded frustrated",
   objection_retry: "An objection came back a third time",
-  low_confidence: "She could not find a confident answer",
+  low_confidence: "Zuno could not find a confident answer",
 };
 
 /** app/crm/models.py::DecisionStage, in buying order. `not_a_fit` is a

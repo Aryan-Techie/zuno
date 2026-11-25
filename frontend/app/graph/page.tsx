@@ -12,7 +12,7 @@ const VIEWS: { key: View; label: string; src: string; blurb: string }[] = [
     key: "apple",
     label: "Apple knowledge",
     src: "/graphify/knowledge-apple.html",
-    blurb: "What Zuno knows when she sells Apple: pricing, FAQs, competitor notes and policies, as one graph.",
+    blurb: "What Zuno knows when it sells Apple: pricing, FAQs, competitor notes and policies, as one graph.",
   },
   {
     key: "perfume",

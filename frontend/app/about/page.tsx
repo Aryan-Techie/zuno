@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Logo } from "@/components/Logo";
+import { NavLinks } from "@/components/NavLinks";
 import { StoryOrb } from "@/components/StoryOrb";
 import {
   GeminiMark,
@@ -7,7 +8,6 @@ import {
   MiniMaxMark,
   NextJsMark,
   FastApiMark,
-  DockerMark,
   OracleMark,
   CaddyMark,
   ExpoMark,
@@ -24,9 +24,9 @@ import {
 } from "@/components/Doodles";
 
 export const metadata: Metadata = {
-  title: "Zuno — a voice AI that sells like a person",
+  title: "Zuno — the voice agent that keeps the thread",
   description:
-    "A real-time voice sales agent built on Agora's Conversational AI Engine — she negotiates, updates a real CRM mid-call, and knows when to bring in a human.",
+    "A real-time voice sales agent built human-in-the-loop: Zuno holds the call, answers from a grounded knowledge base and writes the CRM; a human decides money and exceptions.",
 };
 
 const AGORA_LOGO = "/agora-logo.png";
@@ -42,9 +42,7 @@ export default function AboutPage() {
           <span className="sub">Story</span>
         </div>
         <div className="actions">
-          <a href="/" className="ghost">
-            Open console
-          </a>
+          <NavLinks current="/about" />
         </div>
       </header>
 
@@ -58,19 +56,20 @@ export default function AboutPage() {
             <span>Powered by</span>
             <img src={AGORA_LOGO} alt="Agora" />
           </div>
-          <h1 className="headline">She doesn&apos;t wait for you to finish.</h1>
+          <h1 className="headline">The AI holds the call. A person makes the call.</h1>
           <DoodleUnderline className="doodle" style={{ margin: "-6px auto 0", display: "block" }} />
           <p className="story-sub">
-            A real-time voice sales agent, built on Agora&apos;s Conversational AI Engine. Interrupt
-            her mid-sentence and she stops instantly — that&apos;s Agora&apos;s own barge-in detection,
-            native to the call, not something scripted after the fact.
+            Zuno is a real-time voice sales agent. It talks to the caller, answers from a knowledge
+            base it can point to, and fills in the CRM while the caller is still speaking. Discounts,
+            exceptions and anything it isn&apos;t sure of go to a human, with the context already
+            written up.
           </p>
           <div className="story-cta-row">
             <a href="/" className="primary">
               Talk to Zuno
             </a>
-            <a href="#brain" className="ghost">
-              See how she thinks
+            <a href="#journey" className="ghost">
+              Follow one call
             </a>
           </div>
         </section>
@@ -78,534 +77,367 @@ export default function AboutPage() {
         {/* ---------- the problem ---------- */}
         <section className="story-section">
           <div className="story-section-head">
-            <p className="story-eyebrow">The problem <DoodleSpark className="doodle faint" size={13} style={{ verticalAlign: "middle" }} /></p>
-            <h2>Scripts break the moment a real customer shows up.</h2>
-            <p>
-              A scripted voice bot holds together right up until someone interrupts mid-sentence,
-              changes a number they already gave, or asks something out of order — then it restarts
-              the flow, or hands off blind. A real salesperson doesn&apos;t do that. They listen, adapt,
-              and keep the thread. That&apos;s the gap Zuno is built for.
+            <p className="story-eyebrow">
+              The problem <DoodleSpark className="doodle faint" size={13} style={{ verticalAlign: "middle" }} />
             </p>
+            <h2>Scripted bots break. Zuno keeps the thread.</h2>
+            <p>
+              A scripted voice bot works until the caller interrupts, changes a number they already
+              gave, or asks things out of order. Then it restarts the flow or hands off with nothing
+              attached. Zuno decides each turn from what has been said so far, so a correction
+              updates the record instead of starting over.
+            </p>
+          </div>
+          <div className="story-grid">
+            <div className="card">
+              <h3>Interruptions stop it</h3>
+              <p>
+                Talk over Zuno and it stops speaking. Barge-in and turn-taking come from Agora&apos;s
+                Conversational AI Engine, inside the call itself.
+              </p>
+            </div>
+            <div className="card">
+              <h3>Corrections overwrite</h3>
+              <p>
+                &ldquo;Actually, make it 50, not 25.&rdquo; The same lead record gets one field
+                changed. No second lead, no repeated questions.
+              </p>
+            </div>
+            <div className="card">
+              <h3>Any order works</h3>
+              <p>
+                There is no flow chart. A tool loop picks the next step each turn: search the
+                catalog, update the lead, book a meeting, negotiate, or hand off.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* ---------- powered by agora ---------- */}
-        <section className="story-section" id="agora">
-          <div className="story-agora-lockup">
-            <p className="story-eyebrow" style={{ margin: 0 }}>
-              Powered by
-            </p>
-            <img src={AGORA_LOGO} alt="Agora" />
-            <h2 style={{ margin: 0, fontSize: 27, fontWeight: 600, letterSpacing: "-0.02em" }}>
-              Agora is the phone system. This backend is the person.{" "}
-              <DoodleWave className="doodle" width={26} style={{ verticalAlign: "middle" }} />
+        {/* ---------- HITL ---------- */}
+        <section className="story-section" id="hitl">
+          <div className="story-section-head">
+            <p className="story-eyebrow">Human in the loop</p>
+            <h2>
+              Who decides what.{" "}
+              <DoodleCircle className="doodle faint" size={20} style={{ verticalAlign: "middle" }} />
             </h2>
             <p>
-              Every hard problem in real-time voice — hearing the customer, catching the exact
-              instant they start talking over Zuno, turning her reply into speech that sounds
-              spoken rather than read — is Agora&apos;s Conversational AI Engine, not code this team
-              wrote. Under <code>credential_mode: managed</code>, Agora holds the real Deepgram and
-              MiniMax connections and injects its own vendor keys server-side, so this team never
-              opened a separate speech-to-text or text-to-speech account at all — it&apos;s bundled
-              straight into what they already pay Agora.
+              The split is fixed in code, not left to the model&apos;s judgement on the day.
             </p>
           </div>
-          <div className="story-pill-row" style={{ marginTop: 28 }}>
-            <span className="pill info">Streaming ASR — Deepgram</span>
-            <span className="pill info">Streaming TTS — MiniMax</span>
-            <span className="pill info">Native barge-in</span>
-            <span className="pill info">Turn-taking &amp; VAD</span>
-            <span className="pill info">Managed vendor credentials</span>
-            <span className="pill info">Runtime voice switching</span>
+          <div className="story-grid">
+            <div className="card">
+              <h3>
+                Zuno decides{" "}
+                <DoodleCheck className="doodle" size={14} style={{ verticalAlign: "middle" }} />
+              </h3>
+              <p>
+                Answers that are stated in our documents, qualification questions, CRM updates,
+                meeting bookings and follow-ups, and a discount of up to 3%.
+              </p>
+            </div>
+            <div className="card">
+              <h3>The deal desk decides</h3>
+              <p>
+                A separate deal-desk agent can go to 10%, and only against a commitment such as
+                volume or term. An 18% floor is enforced in code: any higher recommendation is
+                clamped and the clamp is logged to the CRM.
+              </p>
+            </div>
+            <div className="card">
+              <h3>
+                A human decides{" "}
+                <DoodleCheck className="doodle warm" size={14} style={{ verticalAlign: "middle" }} />
+              </h3>
+              <p>
+                Anything beyond that, plus exceptions and open questions. The rep approves or
+                declines from the dashboard inbox or the Expo rep app while the call stays open.
+              </p>
+            </div>
           </div>
           <p className="story-callout">
-            And Agora calls <strong>us</strong> — not the other way around. Once
-            per turn, at a URL minted per session, shaped exactly like an OpenAI chat completion.
-            Agora never sees the sales conversation happening inside it; it just carries the call.
+            Guardrails force a <strong>warm transfer</strong> when the caller is frustrated more than
+            once, when the same objection comes up three times without being resolved, or when Zuno
+            would have to answer with low confidence. The human picks up with a written brief: who
+            is calling, what they want, what was offered, and what is blocking.
           </p>
         </section>
 
-        {/* ---------- built with ---------- */}
-        <section className="story-section">
+        {/* ---------- a call's journey ---------- */}
+        <section className="story-section" id="journey">
           <div className="story-section-head">
-            <p className="story-eyebrow">Built with</p>
+            <p className="story-eyebrow">
+              A call&apos;s journey <DoodleWave className="doodle faint" width={22} style={{ verticalAlign: "middle" }} />
+            </p>
+            <h2>One call, start to finish.</h2>
+            <p>What happens on a typical fleet enquiry, in order.</p>
+          </div>
+
+          <div className="story-flow">
+            <p className="story-flow-label">1. The caller speaks</p>
+            <div className="story-flow-row">
+              <span className="story-flow-node">🎙️ Caller</span>
+              <span className="story-flow-arrow">⇄</span>
+              <span className="story-flow-node">
+                <img src={AGORA_LOGO} alt="" /> Agora audio
+              </span>
+              <span className="story-flow-arrow">→</span>
+              <span className="story-flow-node">
+                <DeepgramMark size={13} /> Deepgram transcript
+              </span>
+            </div>
+
+            <div className="story-flow-connector">↓</div>
+
+            <p className="story-flow-label">2. Zuno decides the turn</p>
+            <div className="story-flow-row">
+              <span className="story-flow-node">
+                <FastApiMark size={13} /> Tool loop
+              </span>
+              <span className="story-flow-arrow">⇉</span>
+              <span className="story-flow-node">Knowledge graph</span>
+              <span className="story-flow-node">
+                <img src={ESPOCRM_LOGO} alt="" /> CRM write
+              </span>
+              <span className="story-flow-node">Product spotlight</span>
+              <span className="story-flow-node">Calendar</span>
+            </div>
+
+            <div className="story-flow-connector">↓</div>
+
+            <p className="story-flow-label">3. Money or doubt goes to a person</p>
+            <div className="story-flow-row">
+              <span className="story-flow-node">Deal desk</span>
+              <span className="story-flow-arrow">→</span>
+              <span className="story-flow-node">Dashboard inbox</span>
+              <span className="story-flow-node">
+                <ExpoMark size={13} /> Rep app
+              </span>
+            </div>
+
+            <div className="story-flow-connector">↓</div>
+
+            <p className="story-flow-label">4. Zuno answers</p>
+            <div className="story-flow-row">
+              <span className="story-flow-node">
+                <MiniMaxMark size={13} /> MiniMax voice
+              </span>
+              <span className="story-flow-arrow">→</span>
+              <span className="story-flow-node">🔊 Caller</span>
+            </div>
+          </div>
+
+          <div className="list agreed" style={{ maxWidth: 680, margin: "28px auto 0" }}>
+            <ul>
+              <li>
+                <DoodleCheck className="doodle" size={13} style={{ verticalAlign: "middle", marginRight: 4 }} />
+                The caller names a MacBook Pro. It appears on screen as a 3D model while Zuno
+                describes it.
+              </li>
+              <li>
+                <DoodleCheck className="doodle warm" size={13} style={{ verticalAlign: "middle", marginRight: 4 }} />
+                Company, headcount and budget land in EspoCRM as they are said. The console shows
+                the lead card filling in.
+              </li>
+              <li>
+                The caller asks for 12% off 40 laptops. Zuno can give 3%, so it asks the deal desk,
+                which offers 10% against a two-year commitment. The rest goes to the inbox.
+              </li>
+              <li>
+                A rep approves from their phone. Zuno confirms the terms, books a follow-up, and the
+                meeting and invite are written to the CRM.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ---------- two modes ---------- */}
+        <section className="story-section" id="modes">
+          <div className="story-section-head">
+            <p className="story-eyebrow">
+              Two modes <DoodleLoop className="doodle faint" size={18} style={{ verticalAlign: "middle" }} />
+            </p>
+            <h2>Same agent, two shops.</h2>
+            <p>
+              Each mode has its own catalog, knowledge graph, voice, discount rules and console
+              theme. The caller can switch mid-call by saying &ldquo;Dior mode&rdquo;, or the operator
+              can use the console toggle.
+            </p>
+          </div>
+          <div className="story-grid">
+            <div className="card">
+              <h3>Apple devices</h3>
+              <p>
+                The default. Sells to businesses buying fleets and to individuals buying one device.
+                For a solo buyer Zuno skips company and headcount questions. Financing, AppleCare+
+                and trade-in work the same either way. Discounts follow the 3% / 10% / 18% ladder
+                above.
+              </p>
+            </div>
+            <div className="card" data-mode="perfume">
+              <h3>Dior beauty</h3>
+              <p>
+                A boutique advisor for fragrance, makeup and skincare, from a 78-product catalog
+                priced in HK$. Individuals get 0% off and complimentary extras such as samples or
+                engraving. Corporate gifting orders of 10 or more can reach 5%.
+              </p>
+            </div>
+          </div>
+          <p className="story-note">
+            In both modes, a named product is shown on screen with a 3D model, so the caller and the
+            operator are looking at the same thing.
+          </p>
+        </section>
+
+        {/* ---------- graphify ---------- */}
+        <section className="story-section" id="graphify">
+          <div className="story-section-head">
+            <p className="story-eyebrow">
+              Knowledge layer <DoodleSpark className="doodle warm" size={13} style={{ verticalAlign: "middle" }} />
+            </p>
+            <h2>Graphify, used three ways.</h2>
+            <p>One tool for what Zuno knows, what the team knows, and how the code fits together.</p>
+          </div>
+          <div className="story-grid">
+            <div className="card">
+              <h3>Product knowledge graphs</h3>
+              <p>
+                One graph per mode, built from our product documents. Each fact is tagged.{" "}
+                <code>EXTRACTED</code> means it is stated in our docs, so Zuno can promise it.{" "}
+                <code>INFERRED</code> means Graphify resolved it, so it goes to a human as an open
+                question instead of being said as fact.
+              </p>
+            </div>
+            <div className="card">
+              <h3>The CRM, mirrored to Notion</h3>
+              <p>
+                Leads, meetings, offers, escalations and the rest are mirrored into 9 linked Notion
+                databases. getgraphify.com draws them as the team&apos;s knowledge graph, so a rep can
+                see how a deal connects to people, products and past calls.
+              </p>
+            </div>
+            <div className="card">
+              <h3>A map of the codebase</h3>
+              <p>
+                The repository itself is a Graphify graph. Coding agents query it through hooks and
+                an MCP server before reading source, so changes start from how the system is
+                actually wired.
+              </p>
+            </div>
+          </div>
+          <p className="story-callout">
+            The rule behind all three: Zuno only commits to what is written down. Anything it had to
+            work out becomes a question for a person, not a promise to the caller.
+          </p>
+        </section>
+
+        {/* ---------- stack ---------- */}
+        <section className="story-section" id="stack">
+          <div className="story-section-head">
+            <p className="story-eyebrow">Stack</p>
             <h2>
-              Real vendors, wired in — not simulated.{" "}
+              What it runs on.{" "}
               <DoodleCircle className="doodle faint" size={20} style={{ verticalAlign: "middle" }} />
             </h2>
-            <p>Everything below is actually running, not a slide of logos.</p>
+            <p>Every piece below is in the live deployment.</p>
           </div>
-          <div className="story-pill-row" style={{ maxWidth: 700 }}>
+          <div className="story-pill-row" style={{ maxWidth: 720 }}>
             <span className="pill info">
-              <GeminiMark size={14} /> Gemini
+              <img src={AGORA_LOGO} alt="" height={13} /> Agora Conversational AI
             </span>
             <span className="pill info">
               <DeepgramMark size={14} /> Deepgram
             </span>
             <span className="pill info">
-              <MiniMaxMark size={14} /> MiniMax
+              <MiniMaxMark size={14} /> MiniMax voices
             </span>
             <span className="pill info">
-              <img src={ESPOCRM_LOGO} alt="" height={13} />
-              EspoCRM
-            </span>
-            <span className="pill info">
-              <NextJsMark size={14} /> Next.js
+              <GeminiMark size={14} /> Gemini / Groq / Claude
             </span>
             <span className="pill info">
               <FastApiMark size={14} /> FastAPI
             </span>
             <span className="pill info">
-              <DockerMark size={14} /> Docker
+              <NextJsMark size={14} /> Next.js + three.js
             </span>
+            <span className="pill info">
+              <ExpoMark size={14} /> Expo
+            </span>
+            <span className="pill info">
+              <img src={ESPOCRM_LOGO} alt="" height={13} />
+              EspoCRM
+            </span>
+            <span className="pill info">Notion</span>
+            <span className="pill info">Graphify</span>
             <span className="pill info">
               <OracleMark size={14} /> Oracle Cloud
             </span>
             <span className="pill info">
               <CaddyMark size={14} /> Caddy
             </span>
-            <span className="pill info">
-              <ExpoMark size={14} /> Expo
-            </span>
           </div>
-          <p className="story-note">
-            Provider-agnostic where it counts: the reasoning loop runs on Gemini today, with Groq
-            and Anthropic wired in as real, benchmarked, swappable alternates — see{" "}
-            <a href="#brain" className="strong">
-              the brain
-            </a>
-            .
-          </p>
-        </section>
-
-        {/* ---------- the brain we built ---------- */}
-        <section className="story-section" id="brain">
-          <div className="story-section-head">
-            <p className="story-eyebrow">The brain <DoodleSpark className="doodle warm" size={13} style={{ verticalAlign: "middle" }} /></p>
-            <h2>Ten tools, one decision at a time.</h2>
-            <p>
-              What Agora hands us each turn is a transcript. What we do with it is the actual
-              product.
-            </p>
-          </div>
-          <div className="story-grid">
+          <div className="story-grid" style={{ marginTop: 28 }}>
             <div className="card">
-              <h3>
-                Not a decision tree{" "}
-                <DoodleCheck className="doodle" size={14} style={{ verticalAlign: "middle" }} />
-              </h3>
+              <h3>Voice</h3>
               <p>
-                Every turn, a tool-calling loop decides — live — whether to search the product
-                knowledge base, update the lead, check the calendar, log an objection, or hand off
-                to a human: <code>search_pricing_rag</code>, <code>crm_upsert_lead</code>,{" "}
-                <code>calendar_book_meeting</code>, <code>negotiate_deal</code>,{" "}
-                <code>escalate_to_human</code>, and five more.
+                Agora carries the audio and handles barge-in and turn-taking. Deepgram transcribes,
+                MiniMax speaks. Agora calls our backend once per turn.
               </p>
             </div>
             <div className="card">
-              <h3>Three layers of negotiation</h3>
+              <h3>Reasoning</h3>
               <p>
-                A discount request is the most ordinary thing on a sales call, and the most
-                dangerous thing to hand an LLM outright. Zuno can concede 3% herself, instantly. Past
-                that, a separate deal-desk agent can go to 10% — only against a real commitment. Past
-                that, a human is asked, without ending the call.
+                An LLM tool loop. Gemini, Groq and Claude share one interface; the model for a turn
+                is chosen by measured latency on the real prompt and tools, checked for correct tool
+                calls.
               </p>
             </div>
             <div className="card">
-              <h3>
-                The clamp is code, not a prompt{" "}
-                <DoodleCheck className="doodle warm" size={14} style={{ verticalAlign: "middle" }} />
-              </h3>
+              <h3>Surfaces</h3>
               <p>
-                An 18% walk-away floor is enforced in <code>engine.authorise</code>, deterministically.
-                Feed the desk a 40% recommendation and what comes back out is a capped offer, a
-                <code>clamped</code> flag, and a reason — every round written to the CRM as an audit
-                line.
-              </p>
-            </div>
-            <div className="card">
-              <h3>Grounded, not guessed</h3>
-              <p>
-                Every price, spec, and comparison Zuno states comes from a live knowledge-base
-                search — she says she&apos;s not sure rather than invent a number. A technical question
-                goes to a second specialist agent that is required to state exactly what it{" "}
-                <em>doesn&apos;t</em> know, not just what it does.
-              </p>
-            </div>
-            <div className="card">
-              <h3>
-                Benchmarked, not vendor-locked{" "}
-                <DoodleCheck className="doodle faint" size={14} style={{ verticalAlign: "middle" }} />
-              </h3>
-              <p>
-                The model behind the tool-calling loop is provider-agnostic on purpose — Groq,
-                Anthropic, and Gemini all plug into the same interface. Which one serves a turn is
-                picked by running real candidates against the real system prompt and the real tool
-                schemas, and checking whether a fast model still made the right tool call, not just
-                how fast it replied.
+                A Next.js console with three.js product models, a dashboard with the approval inbox,
+                and an Expo app for reps. EspoCRM is the system of record.
               </p>
             </div>
           </div>
-        </section>
-
-        {/* ---------- how it's shaped ---------- */}
-        <section className="story-section">
-          <div className="story-section-head">
-            <p className="story-eyebrow">Architecture</p>
-            <h2>
-              Three layers. Agora owns the first two.{" "}
-              <DoodleWave className="doodle faint" width={26} style={{ verticalAlign: "middle" }} />
-            </h2>
-            <p>
-              Not a diagram of ambition — this is the actual request path a single turn takes,
-              start to finish.
-            </p>
-          </div>
-
-          <div className="story-flow">
-            <p className="story-flow-label">1. Caller ↔ Agora</p>
-            <div className="story-flow-row">
-              <span className="story-flow-node">🎙️ Caller&apos;s mic &amp; speaker</span>
-              <span className="story-flow-arrow">⇄</span>
-              <span className="story-flow-node">
-                <img src={AGORA_LOGO} alt="" /> RTC audio + RTM signaling
-              </span>
-            </div>
-
-            <div className="story-flow-connector">↓</div>
-
-            <p className="story-flow-label">2. Agora ↔ backend</p>
-            <div className="story-flow-row">
-              <span className="story-flow-node">
-                <img src={AGORA_LOGO} alt="" /> Conversational AI Engine
-              </span>
-              <span className="story-flow-arrow">→</span>
-              <span className="story-flow-node">
-                <code>POST /api/llm/…</code> — one call per turn
-              </span>
-            </div>
-
-            <div className="story-flow-connector">↓</div>
-
-            <p className="story-flow-label">3. Backend fan-out</p>
-            <div className="story-flow-row">
-              <span className="story-flow-node">
-                <FastApiMark size={13} /> Tool-calling loop
-              </span>
-              <span className="story-flow-arrow">⇉</span>
-              <span className="story-flow-node">EspoCRM</span>
-              <span className="story-flow-node">Calendar</span>
-              <span className="story-flow-node">RAG catalog</span>
-              <span className="story-flow-node">Deal desk</span>
-              <span className="story-flow-node">Slack handoff</span>
-              <span className="story-flow-node" style={{ opacity: 0.55 }}>
-                mem0 (off)
-              </span>
-            </div>
-          </div>
-
-          <p className="story-callout">
-            Every hard real-time problem — hearing the caller, catching barge-in, speaking back —
-            stays inside rows 1 and 2, on Agora&apos;s infrastructure. Row 3 is the only part this
-            team wrote: one tool-calling loop instead of a rigid flow chart, so a call can take any
-            order a real conversation takes. Why that loop and not a script, and why the negotiation
-            clamp underneath it is code rather than a prompt — see{" "}
-            <a href="#brain" className="strong">
-              the brain
-            </a>
-            .
-          </p>
-        </section>
-
-        {/* ---------- she adapts to you ---------- */}
-        <section className="story-section">
-          <div className="story-section-head">
-            <p className="story-eyebrow">Multilingual &amp; memory <DoodleCircle className="doodle faint" size={13} style={{ verticalAlign: "middle" }} /></p>
-            <h2>One call, and she never stops noticing.</h2>
-          </div>
-          <div className="story-grid">
-            <div className="card">
-              <h3>Hindi, English, or both mid-sentence</h3>
-              <p>
-                One setting and Zuno takes the call in Hinglish — Deepgram&apos;s <code>multi</code>{" "}
-                ASR mode and MiniMax&apos;s <code>language_boost: auto</code> follow a buyer who
-                switches languages mid-thought. Hindi renders in Devanagari, never romanised —
-                &ldquo;ek second&rdquo; spelled in Latin letters gets read out as English words.
-              </p>
-            </div>
-            <div className="card">
-              <h3>A different voice, because a different agent answered</h3>
-              <p>
-                When the deal desk or the solutions engineer genuinely takes a question, the
-                customer hears a different voice — because a different agent actually did answer.
-                Both run on Agora&apos;s own runtime <code>update</code> endpoint, dispatched in the
-                background so it never blocks a reply.
-              </p>
-            </div>
-            <div className="card">
-              <h3>Memory without a memory service</h3>
-              <p>
-                Change a number twenty turns into the call and she doesn&apos;t ask again — the
-                qualification record a tool wrote earlier is re-rendered into her system prompt
-                every turn, at zero network cost. That&apos;s what carries every call today. A
-                longer-range layer, built on mem0 with Voyage AI embeddings, is coded and tested
-                for recalling detail beyond that window — currently switched off pending a
-                provider-SDK compatibility fix.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------- it's real ---------- */}
-        <section className="story-section">
-          <div className="story-section-head">
-            <p className="story-eyebrow">Not a mock</p>
-            <h2>The CRM updates while she&apos;s still talking.</h2>
-          </div>
-          <div className="list agreed" style={{ maxWidth: 680, margin: "0 auto" }}>
-            <ul>
-              <li>
-                <DoodleCheck className="doodle" size={13} style={{ verticalAlign: "middle", marginRight: 4 }} />
-                A customer corrects 25 devices to 50 mid-call, and it&apos;s the same Lead record with
-                one field overwritten — not a second lead, not a restart.
-              </li>
-              <li>
-                <DoodleCheck className="doodle warm" size={13} style={{ verticalAlign: "middle", marginRight: 4 }} />
-                Booking a meeting writes a real Meeting in EspoCRM and sends a real{" "}
-                <code>.ics</code> calendar invite over SMTP — accept it and it lands in the
-                customer&apos;s actual calendar.
-              </li>
-              <li>
-                A handoff posts a real Slack message with an AI-written brief — issue, blocker,
-                sentiment, recommended action — not a row in a table nobody opens.
-              </li>
-              <li>
-                <ExpoMark size={13} /> A rep can take an escalation on a real mobile app — a linked
-                EAS project, not a placeholder — and join the live call from their phone.
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* ---------- it scales ---------- */}
-        <section className="story-section">
-          <div className="story-section-head">
-            <p className="story-eyebrow">Proven, not claimed</p>
-            <h2>
-              256 concurrent calls. Zero failed turns.{" "}
-              <DoodleSpark className="doodle" size={18} style={{ verticalAlign: "middle" }} />
-            </h2>
-          </div>
-          <div className="stats" style={{ maxWidth: 680, margin: "0 auto 18px" }}>
-            <div className="stat">
-              <div className="k">Concurrent calls</div>
-              <div className="v">256</div>
-            </div>
-            <div className="stat">
-              <div className="k">Turns handled</div>
-              <div className="v">
-                1,536 <small>in 1.91s</small>
-              </div>
-            </div>
-            <div className="stat">
-              <div className="k">p95 latency</div>
-              <div className="v">0.30s</div>
-            </div>
-            <div className="stat">
-              <div className="k">Failed turns</div>
-              <div className="v">
-                0 <DoodleCheck className="doodle warm" size={13} style={{ verticalAlign: "middle" }} />
-              </div>
-            </div>
-          </div>
-          <p className="story-note" style={{ maxWidth: 680 }}>
-            At 512 concurrent calls: <strong>3,072 turns in 6.34s</strong> (485/s), p95 1.04s, still 0
-            failed. These numbers come from <code>scripts/capacity_test.py</code> running the real
-            six-beat call script — CRM writes, deal-desk consult, RAG search, calendar lookup — through
-            the real turn loop. Only the model itself is stubbed. It found a genuine concurrency bug
-            on its first serious run, before that bug ever reached a live call.
-          </p>
-        </section>
-
-        {/* ---------- what she does beyond the call ---------- */}
-        <section className="story-section">
-          <div className="story-section-head">
-            <p className="story-eyebrow">Beyond the call <DoodleWave className="doodle faint" width={22} style={{ verticalAlign: "middle" }} /></p>
-            <h2>The work doesn&apos;t end when she hangs up.</h2>
-            <p>
-              A call is one turn loop. Everything below is what happens around it — before, during,
-              and after — built this same sprint.
-            </p>
-          </div>
-          <div className="story-grid">
-            <div className="card">
-              <h3>
-                A dashboard for every call, not just this one{" "}
-                <DoodleSpark className="doodle" size={13} style={{ verticalAlign: "middle" }} />
-              </h3>
-              <p>
-                <code>/dashboard</code> lists every lead and session the backend has ever seen,
-                live capacity stats, open escalations, and the product catalog — polling the same
-                backend every five seconds. Open two tabs, start two calls, and both show up here
-                together — proof concurrency is real, not a claim.
-              </p>
-            </div>
-            <div className="card">
-              <h3>Buys for one person or a fleet</h3>
-              <p>
-                Zuno reads the phrasing — &ldquo;my team&rdquo; versus &ldquo;I need a new
-                phone&rdquo; — and skips the company, role, and headcount questions entirely for a
-                solo buyer. Financing, AppleCare+, and trade-in work exactly the same either way.
-              </p>
-            </div>
-            <div className="card">
-              <h3>A catalog a rep can extend live</h3>
-              <p>
-                <code>POST /api/products</code> writes new stock and appends it to the RAG corpus,
-                then calls <code>retriever.reset_index()</code>. A product added mid-shift is
-                answerable by Zuno on the very next question asked — no restart, no redeploy.
-              </p>
-            </div>
-            <div className="card">
-              <h3>Reschedule and cancel, not just book</h3>
-              <p>
-                <code>calendar_reschedule_meeting</code> and <code>calendar_cancel_meeting</code>{" "}
-                sit alongside booking. A reschedule is cancel-then-rebook in one step, so two
-                callers can never collide on the same slot.
-              </p>
-            </div>
-            <div className="card">
-              <h3>
-                When it isn&apos;t ready to be a meeting yet{" "}
-                <DoodleCheck className="doodle warm" size={13} style={{ verticalAlign: "middle" }} />
-              </h3>
-              <p>
-                <code>schedule_followup</code> writes a real Task into EspoCRM — not a line in a
-                transcript — so a rep has something to work later, even when the call ends short of
-                a booking.
-              </p>
-            </div>
-            <div className="card">
-              <h3>Type it in, she never asks again</h3>
-              <p>
-                The console&apos;s lead card can edit a field by hand through{" "}
-                <code>PATCH /api/session/&#123;id&#125;/lead</code> — the same{" "}
-                <code>crm_upsert_lead</code> path the voice tools use. A typed correction is
-                indistinguishable from a spoken one.
-              </p>
-            </div>
-            <div className="card">
-              <h3>She does the currency math</h3>
-              <p>
-                ₹, rupees, lakh, crore — Zuno recognises all of them, converts at an approximate
-                stated rate, and keeps negotiating in USD, since the deal engine and the catalog
-                only ever speak one currency.
-              </p>
-            </div>
-            <div className="card">
-              <h3>
-                A face, not just a voice{" "}
-                <DoodleLoop className="doodle faint" size={20} style={{ verticalAlign: "middle" }} />
-              </h3>
-              <p>
-                An optional 3D avatar, built in plain Three.js rather than react-three-fiber — a
-                deliberate call for React/Next version compatibility — lip-syncing off the live
-                remote audio track via morph targets. Toggled per call; the 2D orb stays the proven
-                default.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------- we found this by running it ---------- */}
-        <section className="story-section">
-          <div className="story-section-head">
-            <p className="story-eyebrow">Engineering, not a demo script</p>
-            <h2>Real bugs only a live call could find.</h2>
-          </div>
-          <div className="list risk" style={{ maxWidth: 680, margin: "0 auto" }}>
-            <ul>
-              <li>
-                A CORS/error-handling bug that turned every backend failure into an opaque browser
-                error — invisible until a real call actually hit it.
-              </li>
-              <li>
-                A missing RTM auth token that broke the live event panel in total silence while the
-                voice call itself kept working — caught from Agora&apos;s own error code, not a stack
-                trace.
-              </li>
-              <li>
-                Agora occasionally sends a turn with an empty transcript slot, which the model API
-                flatly rejects — a shape no scripted test conversation would ever produce.{" "}
-                <DoodleSpark className="doodle faint" size={11} style={{ verticalAlign: "middle" }} />
-              </li>
-            </ul>
-          </div>
-          <p className="story-note">
-            <strong>292 automated tests</strong>, zero network calls, about five seconds — enough to
-            change code with confidence between two live calls, not instead of them.
-          </p>
         </section>
 
         {/* ---------- faq ---------- */}
         <section className="story-section">
           <div className="story-section-head">
-            <p className="story-eyebrow">Questions <DoodleSpark className="doodle" size={13} style={{ verticalAlign: "middle" }} /></p>
-            <h2>Answered straight, same as she would.</h2>
+            <p className="story-eyebrow">
+              Questions <DoodleSpark className="doodle" size={13} style={{ verticalAlign: "middle" }} />
+            </p>
+            <h2>Short answers.</h2>
           </div>
           <div className="story-faq">
             <details>
-              <summary>Is any of this actually live, or is it a demo build?</summary>
-              <p>
-                Live. The console, the dashboard, and this page all run against the same real
-                backend on a real Oracle Cloud VPS — no mock mode, no scripted call. The&nbsp;
-                &ldquo;we found this by running it&rdquo; section above is the honest evidence: bugs a
-                scripted demo would never have surfaced.
-              </p>
-            </details>
-            <details>
               <summary>What happens when Zuno doesn&apos;t know something?</summary>
               <p>
-                She says so. Every price or spec comes from a live knowledge-base search — no
-                answer, no guess. Technical questions beyond that go to a specialist agent required
-                to state what it doesn&apos;t know, and anything past pricing authority goes to a
-                human without ending the call. See{" "}
-                <a href="#brain" className="strong">
-                  the brain
-                </a>
-                .
+                It says so. If the answer isn&apos;t stated in the knowledge graph, it is logged as an
+                open question for a human, and a low-confidence answer triggers a warm transfer.
               </p>
             </details>
             <details>
-              <summary>Can I use my existing IT/MDM tooling, or does this need new software?</summary>
+              <summary>Can the AI give away a large discount?</summary>
               <p>
-                No new tooling required. Apple Business Manager integrates with Jamf, Kandji, and
-                Microsoft Intune, so IT keeps whatever device-management stack it already runs.
+                No. Zuno stops at 3%, the deal desk at 10% against a commitment, and the 18% floor is
+                a hard limit in code. Anything beyond the AI&apos;s limit needs a person to approve it.
               </p>
             </details>
             <DoodleDivider className="doodle faint" style={{ display: "block", margin: "2px auto" }} />
             <details>
-              <summary>What if I&apos;m buying one device for myself, not a fleet?</summary>
+              <summary>Does the human have to listen to the whole call?</summary>
               <p>
-                Zuno reads that from how you talk about it and skips the company/headcount
-                questions entirely. Financing, AppleCare+, and trade-in credit all work the same
-                for one device as for fifty.
+                No. The handoff comes with a written brief and the lead record already filled in, so
+                the rep can decide from the inbox or join the call already knowing the situation.
               </p>
             </details>
             <details>
-              <summary>Is there a security or compliance review before we&apos;d sign anything?</summary>
+              <summary>How does the caller switch to the Dior advisor?</summary>
               <p>
-                Yes — that&apos;s a human step by design. Zuno can walk through the standard
-                documentation on the call, but a formal security/compliance review is routed to a
-                specialist rather than closed out by an AI.
-              </p>
-            </details>
-            <details>
-              <summary>How is a live call different from a chatbot with a voice bolted on?</summary>
-              <p>
-                No script tree. Every turn re-decides, live, whether to search pricing, update the
-                lead, check the calendar, or negotiate — and Agora&apos;s own barge-in detection
-                means interrupting her mid-sentence actually stops her, not queues you.
+                By saying &ldquo;Dior mode&rdquo; during the call. The catalog, voice, discount
+                rules and console theme change together.
               </p>
             </details>
           </div>
@@ -614,7 +446,7 @@ export default function AboutPage() {
         {/* ---------- closing ---------- */}
         <section className="story-section" style={{ textAlign: "center" }}>
           <h2 style={{ fontSize: 27, fontWeight: 600, letterSpacing: "-0.02em", margin: "0 0 20px" }}>
-            Start a call. See what she does with it.
+            Start a call and watch the record fill in.
           </h2>
           <div className="story-cta-row" style={{ position: "relative" }}>
             <a href="/" className="primary">
@@ -626,8 +458,7 @@ export default function AboutPage() {
             />
           </div>
           <p className="story-fineprint" style={{ marginTop: 18 }}>
-            Live on a real Oracle Cloud VPS behind Caddy and real Let&apos;s Encrypt TLS — not a
-            laptop and a tunnel.
+            Running on Oracle Cloud behind Caddy with Let&apos;s Encrypt TLS.
           </p>
         </section>
       </main>
@@ -636,8 +467,9 @@ export default function AboutPage() {
         <div className="story-footer-links">
           <a href="/">Talk to Zuno</a>
           <a href="/dashboard">Dashboard</a>
-          <a href="#brain">The brain</a>
-          <a href="#agora">Powered by Agora</a>
+          <a href="/graph">Graph</a>
+          <a href="#hitl">Who decides</a>
+          <a href="#graphify">Graphify</a>
           <a href="https://github.com/Aryan-Techie/zuno" target="_blank" rel="noreferrer">
             GitHub
           </a>

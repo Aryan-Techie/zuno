@@ -110,7 +110,7 @@ export function HandoffCard({
             value={ragScore != null && ragScore < LOW_CONFIDENCE_THRESHOLD ? 1 : 0}
             max={1}
           />
-          <p className="meta">Zuno can also ask for a person herself. Any of these ends the call with a written brief.</p>
+          <p className="meta">Zuno can also ask for a person on its own. Any of these ends the call with a written brief.</p>
         </div>
       )}
     </section>

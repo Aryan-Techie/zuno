@@ -199,7 +199,7 @@ export function DealCard({
         <div className="approval done">
           <div>
             <b>{approvedPct}% signed off</b>
-            <span>by {approvedBy ?? "a manager"}, mid-call. Zuno offers it on her next turn.</span>
+            <span>by {approvedBy ?? "a manager"}, mid-call. Zuno offers it on its next turn.</span>
           </div>
         </div>
       )}
